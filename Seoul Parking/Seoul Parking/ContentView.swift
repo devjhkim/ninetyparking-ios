@@ -12,7 +12,7 @@ import GoogleMaps
 
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager()
-    
+    @State var rect: CGRect = CGRect()
     
     var profileButton: some View {
         Button(action: {}){
@@ -26,34 +26,71 @@ struct ContentView: View {
     var currLng : String { return("\(locationManager.location?.longitude ?? 0)")}
     var currLat: String { return("\(locationManager.location?.latitude ?? 0)")}
     var body: some View {
-        NavigationView{
-            VStack{
-                GoogleMapsView(location: .constant(locationManager.location!))
+        
+        GeometryReader(){  reader in
+            
+            HStack {
+                MenuView()
+                    .offset(x: 0, y: 0)
+                    .frame(width: reader.size.width, height: reader.size.height)
+                    .background(Color.red)
                 
-                    .edgesIgnoringSafeArea([.leading, .trailing, .bottom])
-                
-            }
-        .navigationBarTitle(Text("서울 주차장"))
-            .navigationBarItems(leading:
-                HStack {
-                    Button("Menu") {
-                        print("Hours tapped!")
-                    }
-                }, trailing:
-                HStack {
-                    Button("Favorites") {
-                        print("Favorites tapped!")
-                    }
+                NavigationView{
+                    GoogleMapsView(location: .constant(self.locationManager.location!))
+                    
+                        
 
-                    Button("Specials") {
-                        print("Specials tapped!")
-                    }
+                    .edgesIgnoringSafeArea(.bottom)
+
+                    .navigationBarTitle(Text("서울 주차장"))
+                    .navigationBarItems(leading:
+                        HStack {
+                            Button("Menu") {
+                                print("Hours tapped!")
+                            }
+                        }, trailing:
+                        HStack {
+                            Button("Favorites") {
+                                print("Favorites tapped!")
+                            }
+
+                            Button("Specials") {
+                                print("Specials tapped!")
+                            }
+                        }
+                    )
                 }
-            )
-                
+                .offset(x: reader.size.width, y: 0)
+                .frame(width: reader.size.width, height: reader.size.height)
+                .background(Color.yellow)
+            }
+            .offset(x:-reader.size.width, y: 0)
+            .frame(width: reader.size.width * 2, height: reader.size.height)
+            
+            
         }
         
         
+        
+        
+        
+        
+        
+        
+    }
+    
+    func makeView(_ geometry: GeometryProxy) -> some View {
+        
+        print(rect.size.width, rect.size.height)
+        
+
+        
+        var stack: some View {
+            Text("fff")
+        }
+            
+        
+        return stack
     }
 }
 

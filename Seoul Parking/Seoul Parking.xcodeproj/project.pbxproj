@@ -19,6 +19,7 @@
 		16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299024B6F39800836C81 /* GoogleMapsView.swift */; };
 		16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299224B7FAAC00836C81 /* LocationManager.swift */; };
 		16AF299524B8236400836C81 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299424B8236400836C81 /* MenuView.swift */; };
+		16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299624B8319400836C81 /* GeometryGetter.swift */; };
 		3A368593D7FD0FF8369361DB /* Pods_Seoul_Parking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676625A09812499F7FE9FB26 /* Pods_Seoul_Parking.framework */; };
 		BBA9BB48584ABF28770DD9F4 /* Pods_Seoul_ParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB56E7A91FC1050F564ECA1 /* Pods_Seoul_ParkingTests.framework */; };
 		F1524676652EBFAAB6DBBB1C /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528A2170D7922AD44C0163CE /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */; };
@@ -60,6 +61,7 @@
 		16AF299024B6F39800836C81 /* GoogleMapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsView.swift; sourceTree = "<group>"; };
 		16AF299224B7FAAC00836C81 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		16AF299424B8236400836C81 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		16AF299624B8319400836C81 /* GeometryGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryGetter.swift; sourceTree = "<group>"; };
 		1D316DEEC4D217E35C59EBCF /* Pods-Seoul ParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Seoul ParkingTests.release.xcconfig"; path = "Target Support Files/Pods-Seoul ParkingTests/Pods-Seoul ParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		341B80576921923B53A697FF /* Pods-Seoul Parking-Seoul ParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Seoul Parking-Seoul ParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-Seoul Parking-Seoul ParkingUITests/Pods-Seoul Parking-Seoul ParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		528A2170D7922AD44C0163CE /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking_Seoul_ParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				16AF296B24B6E47400836C81 /* Info.plist */,
 				16AF296524B6E47400836C81 /* Preview Content */,
 				16AF299424B8236400836C81 /* MenuView.swift */,
+				16AF299624B8319400836C81 /* GeometryGetter.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,
 				16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */,
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,
+				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16AF298F24B6F1C000836C81 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
