@@ -28,45 +28,42 @@ struct ContentView: View {
     var body: some View {
         
         GeometryReader(){  reader in
-            
-            HStack {
+            HStack{
                 MenuView()
-                    .offset(x: 0, y: 0)
-                    .frame(width: reader.size.width, height: reader.size.height)
-                    .background(Color.red)
+                   .frame(width: reader.size.width, height: reader.size.height)
+                   .background(Color.red)
                 
                 NavigationView{
                     GoogleMapsView(location: .constant(self.locationManager.location!))
-                    
-                        
+                        .edgesIgnoringSafeArea(.bottom)
+                        .navigationBarTitle(Text("서울 주차장"))
+                        .navigationBarItems(leading:
+                            HStack {
+                                Button("Menu") {
+                                    print("Hours tapped!")
+                                }
+                            }, trailing:
+                            HStack {
+                                Button("Favorites") {
+                                    print("Favorites tapped!")
+                                }
 
-                    .edgesIgnoringSafeArea(.bottom)
-
-                    .navigationBarTitle(Text("서울 주차장"))
-                    .navigationBarItems(leading:
-                        HStack {
-                            Button("Menu") {
-                                print("Hours tapped!")
+                                Button("Specials") {
+                                    print("Specials tapped!")
+                                }
                             }
-                        }, trailing:
-                        HStack {
-                            Button("Favorites") {
-                                print("Favorites tapped!")
-                            }
-
-                            Button("Specials") {
-                                print("Specials tapped!")
-                            }
-                        }
-                    )
+                        )
+                                        
                 }
-                .offset(x: reader.size.width, y: 0)
                 .frame(width: reader.size.width, height: reader.size.height)
                 .background(Color.yellow)
+                
+                
+                MenuView()
+                    .frame(width: reader.size.width, height: reader.size.height)
+                    .background(Color.blue)
             }
-            .offset(x:-reader.size.width, y: 0)
-            .frame(width: reader.size.width * 2, height: reader.size.height)
-            
+            .frame(width: reader.size.width * 3, height: reader.size.height)
             
         }
         
