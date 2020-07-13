@@ -13,6 +13,7 @@ import GoogleMaps
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager()
     @State var rect: CGRect = CGRect()
+    @State private var showMenu = false
     
     var profileButton: some View {
         Button(action: {}){
@@ -27,44 +28,74 @@ struct ContentView: View {
     var currLat: String { return("\(locationManager.location?.latitude ?? 0)")}
     var body: some View {
         
-        GeometryReader(){  reader in
-            HStack{
-                MenuView()
-                   .frame(width: reader.size.width, height: reader.size.height)
-                   .background(Color.red)
+        let drag = DragGesture()
+            .onEnded {
+                if $0.translation.width < -100 {
+                    withAnimation {
+                        self.showMenu = false
+                    }
+                }
+        }
+        
+        let tap = TapGesture()
+            .onEnded{ _ in
+                withAnimation {
+                    self.showMenu = false
+                }
                 
-                NavigationView{
+        }
+        
+        
+        return NavigationView {
+            GeometryReader(){  reader in
+                
+                ZStack(alignment: .leading) {
                     GoogleMapsView(location: .constant(self.locationManager.location!))
                         .edgesIgnoringSafeArea(.bottom)
-                        .navigationBarTitle(Text("서울 주차장"))
-                        .navigationBarItems(leading:
-                            HStack {
-                                Button("Menu") {
-                                    print("Hours tapped!")
-                                }
-                            }, trailing:
-                            HStack {
-                                Button("Favorites") {
-                                    print("Favorites tapped!")
-                                }
+                        
+                    if self.showMenu {
+                        HStack{
+                            MenuView()
+                            
+                            .frame(width: reader.size.width / 2, alignment: .leading)
+                            
+                            .transition(.move(edge: .leading))
+                            
+                            Spacer()
+                            Spacer()
 
-                                Button("Specials") {
-                                    print("Specials tapped!")
-                                }
-                            }
-                        )
-                                        
+                        }
+                        .frame(width: reader.size.width)
+                        
+                    .gesture(tap)
+                    }
+                    
                 }
-                .frame(width: reader.size.width, height: reader.size.height)
-                .background(Color.yellow)
+                .gesture(drag)
                 
-                
-                MenuView()
-                    .frame(width: reader.size.width, height: reader.size.height)
-                    .background(Color.blue)
             }
-            .frame(width: reader.size.width * 3, height: reader.size.height)
-            
+            .navigationBarTitle("서울 주차장", displayMode: .inline)
+            .navigationBarItems(leading:
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            self.showMenu.toggle()
+                        }
+                    }) {
+                        Image(systemName: "line.horizontal.3")
+                        .imageScale(.large)
+                    }
+                }, trailing:
+                HStack {
+                    Button("Favorites") {
+                        print("Favorites tapped!")
+                    }
+
+                    Button("Specials") {
+                        print("Specials tapped!")
+                    }
+                }
+            )
         }
         
         
