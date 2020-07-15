@@ -12,8 +12,13 @@ import GoogleMaps
 
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager()
-    @State var rect: CGRect = CGRect()
+    
+    
+    @EnvironmentObject var lot: ParkingLot
+    
+    
     @State private var showMenu = false
+    
     
     var profileButton: some View {
         Button(action: {}){
@@ -50,8 +55,12 @@ struct ContentView: View {
             GeometryReader(){  reader in
                 
                 ZStack(alignment: .leading) {
-                    GoogleMapsView(location: .constant(self.locationManager.location!))
+                    
+                    
+                    GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
                         .edgesIgnoringSafeArea(.bottom)
+                        .environmentObject(self.lot)
+                        
                         
                     if self.showMenu {
                         HStack{
@@ -96,6 +105,7 @@ struct ContentView: View {
                     }
                 }
             )
+            .onAppear(perform: loadData)
         }
         
         
@@ -107,18 +117,33 @@ struct ContentView: View {
         
     }
     
-    func makeView(_ geometry: GeometryProxy) -> some View {
+    func loadData() {
         
-        print(rect.size.width, rect.size.height)
-        
-
-        
-        var stack: some View {
-            Text("fff")
+        guard let url = URL(string: REST_API.SPACE.FETCH) else {
+            return
         }
-            
-        
-        return stack
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request){(data, response, error) in
+            if data == nil {
+                return
+            }
+
+            do{
+                if let rawData = data {
+                    let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
+
+                    
+
+                    DispatchQueue.main.async {
+                        self.lot.spaces = parkingSpaces
+                    }
+
+                }
+
+            }catch{
+                fatalError(error.localizedDescription)
+            }
+        }.resume()
     }
 }
 

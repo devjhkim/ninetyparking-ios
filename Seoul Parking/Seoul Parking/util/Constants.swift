@@ -10,8 +10,14 @@ import SwiftUI
 
 public let GOOGLE_MAPS_API_KEY = "AIzaSyBlalpyrjUftPgmWiQhWeEIxlbvv2JxqDg"
 
-struct Constants {
-    
+struct APP_SERVER {
+    public static let HOST = "http://10.3.7.224:49090"
+}
+
+struct REST_API {
+    struct SPACE {
+        public static let FETCH = APP_SERVER.HOST + "/api/space/fetch"
+    }
 }
 
 
