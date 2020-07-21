@@ -11,12 +11,11 @@ import GoogleMaps
 import GooglePlaces
 import NaverThirdPartyLogin
 import KakaoOpenSDK
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_MAPS_API_KEY)
@@ -32,11 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.consumerSecret = kConsumerSecret
         instance?.appName = kServiceAppName
         
-     
-        
+        //Facebook Login
+        ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions )
         
         return true
     }
+    
+    
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
@@ -44,7 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if KOSession.isKakaoAccountLoginCallback(url.absoluteURL){
             return KOSession.handleOpen(url)
         }
-        
+
+        //Facebook Login
+        ApplicationDelegate.shared.application( app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] )
+
         return true
     }
 

@@ -10,6 +10,11 @@ import SwiftUI
 import UIKit
 import KakaoOpenSDK
 import NaverThirdPartyLogin
+import FBSDKLoginKit
+import FBSDKCoreKit
+
+// Swift // // Add this to the header of your file, e.g. in ViewController.swift import FBSDKLoginKit // Add this to the body class ViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() let loginButton = FBLoginButton() loginButton.center = view.center view.addSubview(loginButton) } }
+
 
 struct LoginView: View {
     
@@ -27,7 +32,9 @@ struct LoginView: View {
                 .frame(width: 200, height: 30)
                 .padding(.top, 30)
             
-            
+            FacebookLoginButton()
+                .frame(width: 200, height: 30)
+                .padding(.top, 30)
         }
     }
 }
@@ -155,6 +162,7 @@ struct NaverLoginButton: UIViewRepresentable {
         }
         
         @objc func login(_ sender: UIButton){
+            self.button.loginInstance?.requestDeleteToken()
             self.button.loginInstance?.delegate = self
             self.button.loginInstance?.requestThirdPartyLogin()
         }
@@ -169,29 +177,43 @@ struct NaverLoginButton: UIViewRepresentable {
             guard let tokenType = self.button.loginInstance?.tokenType else { return }
             guard let accessToken = self.button.loginInstance?.accessToken else { return }
             
-            
-            print(tokenType)
-            print(accessToken)
-            
-            
             let urlStr = "https://openapi.naver.com/v1/nid/me"
             let url = URL(string: urlStr)!
            
-           let authorization = "\(tokenType) \(accessToken)"
+            let authorization = "\(tokenType) \(accessToken)"
+            
+            let headers = ["Authorization": authorization]
+
+            var request = URLRequest(url: url)
+            
+            for (key, value) in headers {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if data == nil {
+                    return
+                }
+
+                do{
+                    if let rawData = data {
+                        let json = try JSONSerialization.jsonObject(with: rawData, options: []) as? [String:Any]
+                        
+                        if let json = json {
+                            guard let obj = json["response"] as? [String:Any] else { return }
+                            guard let naverId = obj["id"] as? String else { return }
+                            
+                            print(naverId)
+                            
+                        }
+                    }
+
+                }catch{
+                    fatalError(error.localizedDescription)
+                }
+                
+            }.resume()
            
-//           let req = Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
-//
-//           req.responseJSON { response in
-//             guard let result = response.result.value as? [String: Any] else { return }
-//             guard let object = result["response"] as? [String: Any] else { return }
-//             guard let name = object["name"] as? String else { return }
-//             guard let email = object["email"] as? String else { return }
-//             guard let nickname = object["nickname"] as? String else { return }
-//
-//             self.nameLabel.text = "\(name)"
-//             self.emailLabel.text = "\(email)"
-//             self.nicknameLabel.text = "\(nickname)"
-//           }
          }
 
         
@@ -204,7 +226,7 @@ struct NaverLoginButton: UIViewRepresentable {
         }
        
         func oauth20ConnectionDidFinishDeleteToken() {
-           
+           self.button.loginInstance?.requestThirdPartyLogin()
         }
        
         func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
@@ -212,8 +234,51 @@ struct NaverLoginButton: UIViewRepresentable {
         }
                
     }
+
+}
+
+struct FacebookLoginButton: UIViewRepresentable {
     
     
+    typealias UIViewType = FBButton
     
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
     
+    func makeUIView(context: Context) -> FBButton {
+        let facebookLoginButton = FBLoginButton()
+        facebookLoginButton.permissions = ["public_profile", "email"]
+        facebookLoginButton.delegate = context.coordinator
+        
+        return facebookLoginButton
+    }
+    
+    func updateUIView(_ uiView: FBButton, context: Context) {
+        
+    }
+    
+    class Coordinator: NSObject, LoginButtonDelegate {
+        
+        
+        var button: FacebookLoginButton
+        
+        init(_ button: FacebookLoginButton){
+            self.button = button
+        }
+        
+        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+            if error != nil {
+               // print(error?.localizedDescription)
+               return
+            }
+            
+            let facebookId = AccessToken.current?.userID
+            print(facebookId)
+        }
+        
+        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+            
+        }
+    }
 }

@@ -10,6 +10,8 @@ import UIKit
 import SwiftUI
 import NaverThirdPartyLogin
 import KakaoOpenSDK
+import FBSDKCoreKit
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -39,6 +41,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url {
             KOSession.handleOpen(url)
         }
+        
+        //Facebook Login
+        guard let url = URLContexts.first?.url else {
+            return
+        }
+        
+        ApplicationDelegate.shared.application( UIApplication.shared, open: url, sourceApplication: nil, annotation: [UIApplication.OpenURLOptionsKey.annotation] )
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
