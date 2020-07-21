@@ -21,6 +21,12 @@
 		16AF299524B8236400836C81 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299424B8236400836C81 /* MenuView.swift */; };
 		16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299624B8319400836C81 /* GeometryGetter.swift */; };
 		16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DC741A24BD67970036734F /* ParkingSpace.swift */; };
+		16DC743124C004AE0036734F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DC743024C004AE0036734F /* LoginView.swift */; };
+		16FB34AA24C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 in Resources */ = {isa = PBXBuildFile; fileRef = 16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */; };
+		16FB34AC24C54C3F007A05F9 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; };
+		16FB34AD24C54C3F007A05F9 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		16FB34B024C54C43007A05F9 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */; };
+		16FB34B124C54C43007A05F9 /* KakaoCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2985E8F7D900143FEDF2BEAF /* Pods_Seoul_ParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1B5600818D5D8428C1C6B7 /* Pods_Seoul_ParkingTests.framework */; };
 		4E7E64CD6DAECF9814F0E5FE /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E882CCC71B7348256E1520 /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */; };
 		AFBE4732AFC3DCC5B54841BB /* Pods_Seoul_Parking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */; };
@@ -43,9 +49,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		16FB34AE24C54C40007A05F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				16FB34AD24C54C3F007A05F9 /* KakaoOpenSDK.framework in Embed Frameworks */,
+				16FB34B124C54C43007A05F9 /* KakaoCommon.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		16AF295A24B6E47100836C81 /* Seoul Parking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seoul Parking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16AF295A24B6E47100836C81 /* 나인티 파킹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "나인티 파킹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AF295D24B6E47100836C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16AF295F24B6E47100836C81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		16AF296124B6E47100836C81 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,6 +86,11 @@
 		16AF299424B8236400836C81 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		16AF299624B8319400836C81 /* GeometryGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryGetter.swift; sourceTree = "<group>"; };
 		16DC741A24BD67970036734F /* ParkingSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpace.swift; sourceTree = "<group>"; };
+		16DC742F24C004380036734F /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		16DC743024C004AE0036734F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "KakaoOpenSDK-1.23.3"; sourceTree = "<group>"; };
+		16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = "KakaoOpenSDK-1.23.3/KakaoOpenSDK.framework"; sourceTree = "<group>"; };
+		16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoCommon.framework; path = "KakaoOpenSDK-1.23.3/KakaoCommon.framework"; sourceTree = "<group>"; };
 		28E882CCC71B7348256E1520 /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking_Seoul_ParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1B5600818D5D8428C1C6B7 /* Pods_Seoul_ParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_ParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F5B20F0409F3F1DF7822DC /* Pods-Seoul Parking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Seoul Parking.release.xcconfig"; path = "Target Support Files/Pods-Seoul Parking/Pods-Seoul Parking.release.xcconfig"; sourceTree = "<group>"; };
@@ -81,6 +107,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFBE4732AFC3DCC5B54841BB /* Pods_Seoul_Parking.framework in Frameworks */,
+				16FB34B024C54C43007A05F9 /* KakaoCommon.framework in Frameworks */,
+				16FB34AC24C54C3F007A05F9 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +146,7 @@
 		16AF295B24B6E47100836C81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				16AF295A24B6E47100836C81 /* Seoul Parking.app */,
+				16AF295A24B6E47100836C81 /* 나인티 파킹.app */,
 				16AF297024B6E47400836C81 /* Seoul ParkingTests.xctest */,
 				16AF297B24B6E47500836C81 /* Seoul ParkingUITests.xctest */,
 			);
@@ -141,6 +169,8 @@
 				16AF296524B6E47400836C81 /* Preview Content */,
 				16AF299424B8236400836C81 /* MenuView.swift */,
 				16AF299624B8319400836C81 /* GeometryGetter.swift */,
+				16DC742F24C004380036734F /* Bridge-Header.h */,
+				16DC743024C004AE0036734F /* LoginView.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -203,6 +233,9 @@
 		6D3DDA96D3B0F167D73EFFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */,
+				16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */,
+				16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */,
 				0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */,
 				28E882CCC71B7348256E1520 /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */,
 				2F1B5600818D5D8428C1C6B7 /* Pods_Seoul_ParkingTests.framework */,
@@ -223,6 +256,7 @@
 				16AF295824B6E47100836C81 /* Resources */,
 				ABF670645C80BD151FCA333E /* [CP] Copy Pods Resources */,
 				ACAF0A1566D7DF2EDB5B1285 /* [CP] Embed Pods Frameworks */,
+				16FB34AE24C54C40007A05F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,7 +264,7 @@
 			);
 			name = "Seoul Parking";
 			productName = "Seoul Parking";
-			productReference = 16AF295A24B6E47100836C81 /* Seoul Parking.app */;
+			productReference = 16AF295A24B6E47100836C81 /* 나인티 파킹.app */;
 			productType = "com.apple.product-type.application";
 		};
 		16AF296F24B6E47400836C81 /* Seoul ParkingTests */ = {
@@ -321,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16FB34AA24C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 in Resources */,
 				16AF296A24B6E47400836C81 /* LaunchScreen.storyboard in Resources */,
 				16AF296724B6E47400836C81 /* Preview Assets.xcassets in Resources */,
 				16AF296424B6E47400836C81 /* Assets.xcassets in Resources */,
@@ -493,6 +528,7 @@
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */,
+				16DC743124C004AE0036734F /* LoginView.swift in Sources */,
 				16AF298F24B6F1C000836C81 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,13 +699,69 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Seoul Parking/Preview Content\"";
 				DEVELOPMENT_TEAM = 58G8BCN36Z;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KakaoOpenSDK-1.23.3",
+				);
 				INFOPLIST_FILE = "Seoul Parking/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreImage\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"GoogleMapsBase\"",
+					"-framework",
+					"\"GoogleMapsCore\"",
+					"-framework",
+					"\"GooglePlaces\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Metal\"",
+					"-framework",
+					"\"NaverThirdPartyLogin\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "seoul.parking.lot.Seoul-Parking";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "나인티 파킹";
+				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -684,13 +776,69 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Seoul Parking/Preview Content\"";
 				DEVELOPMENT_TEAM = 58G8BCN36Z;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KakaoOpenSDK-1.23.3",
+				);
 				INFOPLIST_FILE = "Seoul Parking/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreImage\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"GoogleMapsBase\"",
+					"-framework",
+					"\"GoogleMapsCore\"",
+					"-framework",
+					"\"GooglePlaces\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Metal\"",
+					"-framework",
+					"\"NaverThirdPartyLogin\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "seoul.parking.lot.Seoul-Parking";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "나인티 파킹";
+				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

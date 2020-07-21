@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import NaverThirdPartyLogin
+import KakaoOpenSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,9 +21,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_MAPS_API_KEY)
         GMSPlacesClient.provideAPIKey(GOOGLE_MAPS_API_KEY)
+        
+        //Naver Login
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        instance?.isNaverAppOauthEnable = true
+        instance?.isInAppOauthEnable = true
+        instance?.isOnlyPortraitSupportedInIphone()
+        instance?.serviceUrlScheme = kServiceAppUrlScheme
+        instance?.consumerKey = kConsumerKey
+        instance?.consumerSecret = kConsumerSecret
+        instance?.appName = kServiceAppName
+        
+     
+        
+        
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
+        
+        if KOSession.isKakaoAccountLoginCallback(url.absoluteURL){
+            return KOSession.handleOpen(url)
+        }
+        
         return true
     }
 
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if KOSession.isKakaoAccountLoginCallback(url.absoluteURL) {
+            return KOSession.handleOpen(url)
+        }
+        return true
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

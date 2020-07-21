@@ -12,11 +12,7 @@ import GoogleMaps
 
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager()
-    
-    
     @EnvironmentObject var lot: ParkingLot
-    
-    
     @State private var showMenu = false
     
     
@@ -94,16 +90,17 @@ struct ContentView: View {
                         Image(systemName: "line.horizontal.3")
                         .imageScale(.large)
                     }
-                }, trailing:
-                HStack {
-                    Button("Favorites") {
-                        print("Favorites tapped!")
-                    }
-
-                    Button("Specials") {
-                        print("Specials tapped!")
-                    }
                 }
+//                , trailing:
+//                HStack {
+//                    Button("Favorites") {
+//                        print("Favorites tapped!")
+//                    }
+//
+//                    Button("Specials") {
+//                        print("Specials tapped!")
+//                    }
+//                }
             )
             .onAppear(perform: loadData)
         }
@@ -128,6 +125,8 @@ struct ContentView: View {
                 return
             }
 
+            
+            
             do{
                 if let rawData = data {
                     let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)

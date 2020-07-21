@@ -7,12 +7,36 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MenuView: View {
+    
+    @State var loginText = "로그인"
+    @State var showLonginView = false
+    
     var body: some View {
         
         GeometryReader{ proxy in
             VStack(alignment: .leading) {
+                HStack {
+                    Image(systemName: "person")
+                        .imageScale(.large)
+                        .foregroundColor(.gray)
+                    Text(self.loginText)
+                        .foregroundColor(.gray)
+                        .font(.headline)
+                    
+                    
+
+                }
+                .padding(.top, 100)
+                .onTapGesture(perform: {
+                    self.showLonginView = true
+                })
+                .sheet(isPresented: self.$showLonginView){
+                    LoginView()
+                }
+                
                 HStack {
                     Image(systemName: "person")
                         .foregroundColor(.gray)
@@ -21,7 +45,7 @@ struct MenuView: View {
                         .foregroundColor(.gray)
                         .font(.headline)
                 }
-                .padding(.top, 100)
+                .padding(.top, 30)
                 HStack {
                     Image(systemName: "envelope")
                         .foregroundColor(.gray)

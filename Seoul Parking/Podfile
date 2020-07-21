@@ -5,10 +5,22 @@ target 'Seoul Parking' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   
+ 
+  
+  # Pods for Seoul Parking
+  
+  #Google Maps
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   
-  # Pods for Seoul Parking
+  #Naver Login
+  pod 'naveridlogin-sdk-ios'
+  
+  #Kakao Login
+  
+  
+  #Facebook Login
+  
 
   target 'Seoul ParkingTests' do
     inherit! :search_paths

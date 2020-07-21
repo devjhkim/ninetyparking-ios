@@ -45,11 +45,6 @@ struct GoogleMapsView: UIViewRepresentable {
         
     }
     
-    func addParkingSpaces() {
-        
-    }
-    
-    
 }
 
 struct GoogleMapsView_Previews: PreviewProvider {
