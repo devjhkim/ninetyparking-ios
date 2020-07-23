@@ -19,6 +19,7 @@ import FBSDKCoreKit
 struct LoginView: View {
     @State var showEmailLoginView = false
     @State var kakaoId: String = ""
+    @State var showAlert = false
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -42,6 +43,7 @@ struct LoginView: View {
                 NaverLoginButton()
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
+                    
                 
                 FacebookLoginButton()
                     .frame(width: 200, height: 30)
@@ -53,6 +55,11 @@ struct LoginView: View {
             }){
                 Text("닫기")
             } )
+            .alert(isPresented: self.$showAlert){
+                Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회워 가입을 해야 합니다."), primaryButton: .cancel(Text("취소"), action: {}), secondaryButton: .default(Text("확인"), action: {
+                    
+                }))
+            }
         
         }
 
@@ -284,6 +291,28 @@ struct NaverLoginButton: UIViewRepresentable {
                             
                             requestLogIn(params: params, finished: { result in
                                 print(result)
+                                
+                                if result.statusCode == "200" {
+                                    
+                                }
+                                
+                                switch result.statusCode {
+                                case "200" :
+                                    
+                                    break
+                                    
+                                    
+                                case "201" :
+                                    
+                                    break
+                                    
+                                case "202" :
+                                    
+                                    break
+                                    
+                                default:
+                                    break
+                                }
                             })
                             
                         }
