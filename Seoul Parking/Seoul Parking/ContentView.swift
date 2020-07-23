@@ -9,12 +9,23 @@
 import SwiftUI
 import GoogleMaps
 
+struct AuxLoginViewType {
+    var viewType: Category = .none
+    var showLoginView: Bool = false
+    enum Category: Int {
+        case none = 0
+        case login = 1
+        case loginWithEmail = 2
+        case sigup = 3
+    }
+}
 
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager()
     @EnvironmentObject var lot: ParkingLot
-    @State private var showMenu = false
-    
+    @State var showMenu = false
+    @State var auxLoginViewType: AuxLoginViewType = AuxLoginViewType()
+    @State var showLoginView = false
     
     var profileButton: some View {
         Button(action: {}){
@@ -29,25 +40,27 @@ struct ContentView: View {
     var currLat: String { return("\(locationManager.location?.latitude ?? 0)")}
     var body: some View {
         
-        let drag = DragGesture()
-            .onEnded {
-                if $0.translation.width < -100 {
-                    withAnimation {
-                        self.showMenu = false
-                    }
-                }
-        }
+//        let drag = DragGesture()
+//            .onEnded {
+//                if $0.translation.width < -100 {
+//                    withAnimation {
+//                        self.showMenu = false
+//                    }
+//                }
+//        }
+//
+//        let tap = TapGesture()
+//            .onEnded{ _ in
+//                withAnimation {
+//                    self.showMenu = false
+//                }
+//
+//
+//
+//        }
         
-        let tap = TapGesture()
-            .onEnded{ _ in
-                withAnimation {
-                    self.showMenu = false
-                }
-                
-        }
         
-        
-        return NavigationView {
+        NavigationView {
             GeometryReader(){  reader in
                 
                 ZStack(alignment: .leading) {
@@ -60,7 +73,7 @@ struct ContentView: View {
                         
                     if self.showMenu {
                         HStack{
-                            MenuView()
+                            MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType)
                             
                             .frame(width: reader.size.width / 2, alignment: .leading)
                             
@@ -72,46 +85,41 @@ struct ContentView: View {
                         }
                         .frame(width: reader.size.width)
                         
-                    .gesture(tap)
+                        //.gesture(tap)
                     }
                     
                 }
-                .gesture(drag)
+                //.gesture(drag)
+                .sheet(isPresented:self.$auxLoginViewType.showLoginView){
+                    LoginView()
+                }
                 
             }
             .navigationBarTitle("서울 주차장", displayMode: .inline)
             .navigationBarItems(leading:
-                HStack {
-                    Button(action: {
-                        withAnimation {
-                            self.showMenu.toggle()
-                        }
-                    }) {
-                        Image(systemName: "line.horizontal.3")
-                        .imageScale(.large)
+                Button(action: {
+                    withAnimation {
+                        self.showMenu.toggle()
                     }
+                }){
+                    Image(systemName: "line.horizontal.3")
+                    .imageScale(.large)
                 }
-//                , trailing:
-//                HStack {
-//                    Button("Favorites") {
-//                        print("Favorites tapped!")
-//                    }
-//
-//                    Button("Specials") {
-//                        print("Specials tapped!")
+                
+//                NavigationLink(destination: EmailLoginView(), isActive: self.$showLoginView){
+//                    Button(action: {
+//                        self.showLoginView = !self.showLoginView
+//                    }){
+//                        Image(systemName: "line.horizontal.3")
+//                            .imageScale(.large)
 //                    }
 //                }
+                
+
             )
             .onAppear(perform: loadData)
         }
-        
-        
-        
-        
-        
-        
-        
-        
+    
     }
     
     func loadData() {

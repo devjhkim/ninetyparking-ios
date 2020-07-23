@@ -17,25 +17,45 @@ import FBSDKCoreKit
 
 
 struct LoginView: View {
-    
-   @State var kakaoId: String = ""
+    @State var showEmailLoginView = false
+    @State var kakaoId: String = ""
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
+        NavigationView {
+            VStack {
+                
+                //NavigationLink(destination: EmailLoginView(), isActive: self.$showEmailLoginView){
+                NavigationLink(destination: SignupView(), isActive: self.$showEmailLoginView){
+                    Button(action: {
+                        self.showEmailLoginView.toggle()
+                    }){
+                        Text("Log in with Email")
+                    }
+                }
+                
+                
+                KakaoLoginButton(kakaoId: self.$kakaoId)
+                    .frame(width: 200, height: 30)
+                    .padding(.top, 30)
+                
+                NaverLoginButton()
+                    .frame(width: 200, height: 30)
+                    .padding(.top, 30)
+                
+                FacebookLoginButton()
+                    .frame(width: 200, height: 30)
+                    .padding(.top, 30)
+            }
+            .navigationBarTitle("로그인", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }){
+                Text("닫기")
+            } )
         
-        VStack {
-            
-            
-            KakaoLoginButton(kakaoId: self.$kakaoId)
-                .frame(width: 200, height: 30)
-            
-            NaverLoginButton()
-                .frame(width: 200, height: 30)
-                .padding(.top, 30)
-            
-            FacebookLoginButton()
-                .frame(width: 200, height: 30)
-                .padding(.top, 30)
         }
+
     }
 }
 
@@ -110,9 +130,58 @@ struct KakaoLoginButton: UIViewRepresentable {
                                 
                                 if let myKakaoId = myinfo.id {
                                     self.button.kakaoId = myKakaoId.description
+                                    
+                                    let params = [
+                                        "id" : myKakaoId.description,
+                                        "idType" : "KAKAO",
+                                        "email": nil,
+                                        "password": nil
+                                    ]
+                                    
+                                    do{
+                                        let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+                                        if let url = URL(string: REST_API.USER.LOG_IN) {
+                                            var request = URLRequest(url: url)
+                                            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                                            request.httpMethod = "POST"
+                                            request.httpBody = jsonParams
+                                            
+                                            URLSession(configuration: .default).dataTask(with: request){ (data, response, error) in
+                                                if data == nil {
+                                                    return
+                                                }
+                                                
+                                                do{
+                                                    if let rawData = data {
+                                                        let login = try JSONDecoder().decode(LoginData.self, from: rawData)
+                                                        
+                                                        
+                                                        
+                                                        DispatchQueue.main.async {
+                                                           
+                                                        
+                                                            
+
+                                                            print(login)
+
+                                                        }
+
+                                                   }
+
+                                               }catch{
+                                                   fatalError(error.localizedDescription)
+                                               }
+                                            }.resume()
+                                        }
+                                        
+                                    }catch{
+                                        
+                                    }
+
                                 }
                                 
                                 print(self.button.kakaoId)
+                                
                                 
                                 
                             }
@@ -204,6 +273,18 @@ struct NaverLoginButton: UIViewRepresentable {
                             guard let naverId = obj["id"] as? String else { return }
                             
                             print(naverId)
+                            
+                            
+                            let params = [
+                                "id" : naverId,
+                                "idType" : "NAVER",
+                                "email": nil,
+                                "password": nil
+                            ] 
+                            
+                            requestLogIn(params: params, finished: { result in
+                                print(result)
+                            })
                             
                         }
                     }

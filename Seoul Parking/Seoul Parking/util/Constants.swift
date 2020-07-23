@@ -12,13 +12,54 @@ public let GOOGLE_MAPS_API_KEY = "AIzaSyBlalpyrjUftPgmWiQhWeEIxlbvv2JxqDg"
 public let KAKAO_API_KEY = "32a105c88ee033a2d479e9f8fa9a920a"
 
 struct APP_SERVER {
-    public static let HOST = "http://10.3.7.224:49090"
+    public static let HOST = "http://10.3.1.136:49090"
 }
 
 struct REST_API {
     struct SPACE {
         public static let FETCH = APP_SERVER.HOST + "/api/space/fetch"
     }
+    
+    struct USER {
+        public static let LOG_IN = APP_SERVER.HOST + "/api/user/login"
+    }
 }
 
+func requestLogIn(params: [String: String?], finished: @escaping ((_ data: LoginData) -> Void)){
+    do{
+        let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+        if let url = URL(string: REST_API.USER.LOG_IN) {
+            var request = URLRequest(url: url)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
+            
+            URLSession(configuration: .default).dataTask(with: request){ (data, response, error) in
+                if data == nil {
+                    return
+                }
+                
+                do{
+                    if let rawData = data {
+                        let login = try JSONDecoder().decode(LoginData.self, from: rawData)
+                        
+                        
+                        
+                        DispatchQueue.main.async {
 
+                            finished(login)
+                            
+                        }
+
+                   }
+
+               }catch{
+                   fatalError(error.localizedDescription)
+               }
+            }.resume()
+        }
+        
+    }catch{
+        
+    }
+}

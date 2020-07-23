@@ -27,6 +27,9 @@
 		16FB34AD24C54C3F007A05F9 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		16FB34B024C54C43007A05F9 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */; };
 		16FB34B124C54C43007A05F9 /* KakaoCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		16FB34B324C6C5E9007A05F9 /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */; };
+		16FB34B524C6C868007A05F9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB34B424C6C868007A05F9 /* SignupView.swift */; };
+		16FB34B724C82493007A05F9 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB34B624C82493007A05F9 /* Login.swift */; };
 		2985E8F7D900143FEDF2BEAF /* Pods_Seoul_ParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1B5600818D5D8428C1C6B7 /* Pods_Seoul_ParkingTests.framework */; };
 		4E7E64CD6DAECF9814F0E5FE /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E882CCC71B7348256E1520 /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */; };
 		AFBE4732AFC3DCC5B54841BB /* Pods_Seoul_Parking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */; };
@@ -91,6 +94,9 @@
 		16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "KakaoOpenSDK-1.23.3"; sourceTree = "<group>"; };
 		16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = "KakaoOpenSDK-1.23.3/KakaoOpenSDK.framework"; sourceTree = "<group>"; };
 		16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoCommon.framework; path = "KakaoOpenSDK-1.23.3/KakaoCommon.framework"; sourceTree = "<group>"; };
+		16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
+		16FB34B424C6C868007A05F9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		16FB34B624C82493007A05F9 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		28E882CCC71B7348256E1520 /* Pods_Seoul_Parking_Seoul_ParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking_Seoul_ParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1B5600818D5D8428C1C6B7 /* Pods_Seoul_ParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_ParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F5B20F0409F3F1DF7822DC /* Pods-Seoul Parking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Seoul Parking.release.xcconfig"; path = "Target Support Files/Pods-Seoul Parking/Pods-Seoul Parking.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 				16DC741724BD67570036734F /* Models */,
 				16AF298D24B6F19D00836C81 /* util */,
 				16AF295D24B6E47100836C81 /* AppDelegate.swift */,
+				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
+				16FB34B424C6C868007A05F9 /* SignupView.swift */,
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16AF295F24B6E47100836C81 /* SceneDelegate.swift */,
 				16AF299024B6F39800836C81 /* GoogleMapsView.swift */,
@@ -213,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				16DC741A24BD67970036734F /* ParkingSpace.swift */,
+				16FB34B624C82493007A05F9 /* Login.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -520,11 +529,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16FB34B524C6C868007A05F9 /* SignupView.swift in Sources */,
 				16AF299524B8236400836C81 /* MenuView.swift in Sources */,
+				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
 				16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */,
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,
 				16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */,
+				16FB34B324C6C5E9007A05F9 /* EmailLoginView.swift in Sources */,
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */,

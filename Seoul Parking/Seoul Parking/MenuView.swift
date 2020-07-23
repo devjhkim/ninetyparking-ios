@@ -14,6 +14,9 @@ struct MenuView: View {
     @State var loginText = "로그인"
     @State var showLonginView = false
     
+    @Binding var showMenu : Bool
+    @Binding var auxLoginView: AuxLoginViewType
+    
     var body: some View {
         
         GeometryReader{ proxy in
@@ -31,7 +34,10 @@ struct MenuView: View {
                 }
                 .padding(.top, 100)
                 .onTapGesture(perform: {
-                    self.showLonginView = true
+                    
+                    self.showLonginView = false
+                    self.auxLoginView.showLoginView = true
+                    
                 })
                 .sheet(isPresented: self.$showLonginView){
                     LoginView()
@@ -82,6 +88,6 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView(showMenu: .constant(false), auxLoginView: .constant(AuxLoginViewType()))
     }
 }
