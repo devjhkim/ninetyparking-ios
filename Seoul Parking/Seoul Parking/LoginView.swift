@@ -18,16 +18,16 @@ import FBSDKCoreKit
 
 struct LoginView: View {
     @State var showEmailLoginView = false
-    @State var kakaoId: String = ""
-    @State var showAlert = false
+    @State var showSignupView = false
+    
+    @State var loginResult = LoginResult()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             VStack {
                 
-                //NavigationLink(destination: EmailLoginView(), isActive: self.$showEmailLoginView){
-                NavigationLink(destination: SignupView(), isActive: self.$showEmailLoginView){
+                NavigationLink(destination: EmailLoginView(), isActive: self.$showEmailLoginView){
                     Button(action: {
                         self.showEmailLoginView.toggle()
                     }){
@@ -36,16 +36,25 @@ struct LoginView: View {
                 }
                 
                 
-                KakaoLoginButton(kakaoId: self.$kakaoId)
+                NavigationLink(destination: SignupView(loginResult: self.$loginResult), isActive: self.$showSignupView){
+                    Button(action: {
+                        self.showSignupView.toggle()
+                    }){
+                        EmptyView()
+                    }
+                }.hidden()
+                
+                
+                KakaoLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                 
-                NaverLoginButton()
+                NaverLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                     
                 
-                FacebookLoginButton()
+                FacebookLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
             }
@@ -55,9 +64,11 @@ struct LoginView: View {
             }){
                 Text("닫기")
             } )
-            .alert(isPresented: self.$showAlert){
-                Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회워 가입을 해야 합니다."), primaryButton: .cancel(Text("취소"), action: {}), secondaryButton: .default(Text("확인"), action: {
-                    
+            .alert(isPresented: self.$loginResult.showAlert){
+                Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회워 가입을 해야 합니다."),
+                      primaryButton: .cancel(Text("취소"), action: {}),
+                      secondaryButton: .default(Text("회원가입"), action: {
+                        self.showSignupView = true
                 }))
             }
         
@@ -68,7 +79,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(kakaoId: "")
+        LoginView()
     }
 }
 
@@ -77,7 +88,7 @@ struct KakaoLoginButton: UIViewRepresentable {
 
     
     
-    @Binding var kakaoId: String
+    @Binding var loginResult: LoginResult
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -136,7 +147,7 @@ struct KakaoLoginButton: UIViewRepresentable {
                                 print(myinfo.id as Any)
                                 
                                 if let myKakaoId = myinfo.id {
-                                    self.button.kakaoId = myKakaoId.description
+                                    self.button.loginResult.kakaoId = myKakaoId.description
                                     
                                     let params = [
                                         "id" : myKakaoId.description,
@@ -145,52 +156,34 @@ struct KakaoLoginButton: UIViewRepresentable {
                                         "password": nil
                                     ]
                                     
-                                    do{
-                                        let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
-                                        if let url = URL(string: REST_API.USER.LOG_IN) {
-                                            var request = URLRequest(url: url)
-                                            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                                            request.httpMethod = "POST"
-                                            request.httpBody = jsonParams
-                                            
-                                            URLSession(configuration: .default).dataTask(with: request){ (data, response, error) in
-                                                if data == nil {
-                                                    return
-                                                }
+                                    DispatchQueue.main.async {
+                                            requestLogIn(params: params, finished: { result in
                                                 
-                                                do{
-                                                    if let rawData = data {
-                                                        let login = try JSONDecoder().decode(LoginData.self, from: rawData)
-                                                        
-                                                        
-                                                        
-                                                        DispatchQueue.main.async {
-                                                           
-                                                        
-                                                            
-
-                                                            print(login)
-
-                                                        }
-
-                                                   }
-
-                                               }catch{
-                                                   fatalError(error.localizedDescription)
-                                               }
-                                            }.resume()
-                                        }
+                                                
                                         
-                                    }catch{
-                                        
+                                                switch result.statusCode {
+                                                case "200" :
+                                                    self.button.loginResult.showAlert = false
+                                                    
+                                                    break
+                                                    
+                                                    
+                                                case "201" :
+                                                    self.button.loginResult.showAlert = true
+                                                    break
+                                                    
+                                                case "202" :
+                                                    self.button.loginResult.showAlert = true
+                                                    break
+                                                    
+                                                default:
+                                                    break
+                                                }
+                                                self.button.loginResult.kakaoId = myKakaoId
+                                                self.button.loginResult.statusCode = result.statusCode
+                                            })
                                     }
-
                                 }
-                                
-                                print(self.button.kakaoId)
-                                
-                                
-                                
                             }
                         }
                     })
@@ -204,6 +197,8 @@ struct KakaoLoginButton: UIViewRepresentable {
 
 
 struct NaverLoginButton: UIViewRepresentable {
+    
+    @Binding var loginResult: LoginResult
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
@@ -279,7 +274,7 @@ struct NaverLoginButton: UIViewRepresentable {
                             guard let obj = json["response"] as? [String:Any] else { return }
                             guard let naverId = obj["id"] as? String else { return }
                             
-                            print(naverId)
+                            
                             
                             
                             let params = [
@@ -289,32 +284,33 @@ struct NaverLoginButton: UIViewRepresentable {
                                 "password": nil
                             ] 
                             
-                            requestLogIn(params: params, finished: { result in
-                                print(result)
+                            DispatchQueue.main.async {
+                                    requestLogIn(params: params, finished: { result in
+                                        print(result)
+                                        
                                 
-                                if result.statusCode == "200" {
-                                    
-                                }
-                                
-                                switch result.statusCode {
-                                case "200" :
-                                    
-                                    break
-                                    
-                                    
-                                case "201" :
-                                    
-                                    break
-                                    
-                                case "202" :
-                                    
-                                    break
-                                    
-                                default:
-                                    break
-                                }
-                            })
-                            
+                                        switch result.statusCode {
+                                        case "200" :
+                                            self.button.loginResult.showAlert = false
+                                            
+                                            break
+                                            
+                                            
+                                        case "201" :
+                                            self.button.loginResult.showAlert = true
+                                            break
+                                            
+                                        case "202" :
+                                            self.button.loginResult.showAlert = true
+                                            break
+                                            
+                                        default:
+                                            break
+                                        }
+                                        self.button.loginResult.naverId = naverId
+                                        self.button.loginResult.statusCode = result.statusCode
+                                    })
+                            }
                         }
                     }
 
@@ -349,6 +345,7 @@ struct NaverLoginButton: UIViewRepresentable {
 
 struct FacebookLoginButton: UIViewRepresentable {
     
+    @Binding var loginResult: LoginResult
     
     typealias UIViewType = FBButton
     
@@ -379,12 +376,53 @@ struct FacebookLoginButton: UIViewRepresentable {
         
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
             if error != nil {
-               // print(error?.localizedDescription)
+            
                return
             }
             
-            let facebookId = AccessToken.current?.userID
-            print(facebookId)
+            
+            
+            
+            if let facebookId = AccessToken.current?.userID {
+                
+                let params = [
+                    "id" : facebookId,
+                    "idType" : "FACEBOOK",
+                    "email": nil,
+                    "password": nil
+                ]
+                
+                DispatchQueue.main.async {
+                        requestLogIn(params: params, finished: { result in
+                            
+                            
+                    
+                            switch result.statusCode {
+                            case "200" :
+                                self.button.loginResult.showAlert = false
+                                
+                                break
+                                
+                                
+                            case "201" :
+                                self.button.loginResult.showAlert = true
+                                break
+                                
+                            case "202" :
+                                self.button.loginResult.showAlert = true
+                                break
+                                
+                            default:
+                                break
+                            }
+                            self.button.loginResult.facebookId = facebookId
+                            self.button.loginResult.statusCode = result.statusCode
+                        })
+                }
+                
+            }
+            
+            
         }
         
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {

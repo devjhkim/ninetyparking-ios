@@ -12,3 +12,12 @@ struct LoginData: Hashable, Codable {
     var userUniqueId: String
     var statusCode: String
 }
+
+struct LoginResult {
+    var showAlert: Bool = false
+    var statusCode: String = ""
+    var kakaoId  = ""
+    var facebookId = ""
+    var naverId = ""
+    
+}

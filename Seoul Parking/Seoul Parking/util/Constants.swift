@@ -12,7 +12,7 @@ public let GOOGLE_MAPS_API_KEY = "AIzaSyBlalpyrjUftPgmWiQhWeEIxlbvv2JxqDg"
 public let KAKAO_API_KEY = "32a105c88ee033a2d479e9f8fa9a920a"
 
 struct APP_SERVER {
-    public static let HOST = "http://10.3.1.136:49090"
+    public static let HOST = "http://10.3.2.138:49090"
 }
 
 struct REST_API {
@@ -22,7 +22,17 @@ struct REST_API {
     
     struct USER {
         public static let LOG_IN = APP_SERVER.HOST + "/api/user/login"
+        public static let SIGN_UP = APP_SERVER.HOST + "/api/user/signup"
     }
+}
+
+struct PASSWORD_LENGTH {
+    public static let MIN = 4
+    public static let MAX = 8
+}
+
+struct NAME_LENGTH {
+    public static let MIN = 2
 }
 
 func requestLogIn(params: [String: String?], finished: @escaping ((_ data: LoginData) -> Void)){
