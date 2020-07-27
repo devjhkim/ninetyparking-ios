@@ -14,64 +14,227 @@ struct SignupView: View {
     @State var email = ""
     @State var password = ""
     @State var confirmPassword = ""
+    @State var showPassword = false
+    @State var showConfirmPassword = false
     @State var showNameMinAlert = false
+    @State var showEmailAlert = false
     @State var showPasswordLengthAlert = false
     @State var showPasswordNotMatchingAlert = false
     
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        NavigationView{
-            VStack {
-                TextField("이름", text: self.$name)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .alert(isPresented: self.$showNameMinAlert){
-                        Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert.toggle()}))
-                    }
-                
-                TextField("이메일 주소", text: self.$email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.emailAddress)
-                    .padding(.top, 30)
-                
-                SecureField("비밀번호", text: self.$password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.top, 30)
-                    .alert(isPresented: self.$showPasswordLengthAlert){
-                        Alert(title: Text(""), message: Text("비밀번호 길이는 4 ~ 8글자 입니다."), dismissButton: .default(Text("확인")))
-                    }
-                
-                SecureField("비밀번호 확인", text: self.$confirmPassword)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.top, 30)
-                    .alert(isPresented: self.$showPasswordNotMatchingAlert){
-                        Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인")))
-                    }
-                
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }){
-                        Text("취소")
-                    }
-
-                    Button(action: {
-                        self.signUp()
-                    }){
-                        Text("회원가입")
-                    }
-                }
-                
-                Spacer()
-            }
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
-            .navigationBarTitle("회원가입", displayMode: .inline)
-           
-
-        }
+//        NavigationView{
+//
+//
+//            VStack {
+//
+//                HStack {
+//                    Color.yellow
+//                    Image(systemName: "person")
+//                        .foregroundColor(.primary)
+//                    TextField("Username",
+//                              text: $name)
+//                }
+//
+//            .padding()
+//                .background(Capsule().fill(Color.white).border(Color.gray))
+//
+//
+//                TextField("이름", text: self.$name)
+//
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//
+//                   // .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.black, lineWidth: 1))
+////                    .background(RoundedRectangle(cornerRadius: 5)
+////                        .size(width: 100, height: 50)
+////                        .stroke(Color.black, lineWidth: 1)
+////                        .foregroundColor(Color.white))
+//                    .alert(isPresented: self.$showNameMinAlert){
+//                        Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert = false}))
+//                    }
+//                    .padding([.top, .leading, .trailing], 50)
+//
+//
+//                TextField("이메일 주소", text: self.$email)
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .keyboardType(.emailAddress)
+//                    .padding(.top, 30)
+//                    .padding([.leading, .trailing], 50)
+//                    .alert(isPresented: self.$showEmailAlert){
+//                        Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
+//                    }
+//
+//                SecureField("비밀번호", text: self.$password)
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .padding(.top, 30)
+//                    .padding([.leading, .trailing], 50)
+//                    .alert(isPresented: self.$showPasswordLengthAlert){
+//                        Alert(title: Text(""), message: Text("비밀번호 길이는 4 ~ 8글자 입니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordLengthAlert = false}))
+//                    }
+//
+//                SecureField("비밀번호 확인", text: self.$confirmPassword)
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .padding(.top, 30)
+//                    .padding([.leading, .trailing], 50)
+//                    .alert(isPresented: self.$showPasswordNotMatchingAlert){
+//                        Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
+//                    }
+//
+//                HStack {
+//                    Button(action: {
+//                        self.presentationMode.wrappedValue.dismiss()
+//                    }){
+//                        Text("취소")
+//                    }
+//
+//
+//
+//                    Button(action: {
+//                        self.signUp()
+//                    }){
+//                        Text("회원가입")
+//                    }
+//                    .padding(.leading, 50)
+//                }
+//                .padding(.top, 30)
+//
+//                Spacer()
+//            }
+//            .onTapGesture {
+//                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//            }
+//            .navigationBarTitle("회원가입", displayMode: .inline)
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//           .background(Color.white)
+//           .background(NavigationConfigurator {nc in
+//               nc.navigationBar.barTintColor = .white
+//               nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+//           })
+//
+//        }
         
+        
+        ZStack {
+            Color.white
+                VStack {
+                    HStack {
+                        Text("이름")
+                            .foregroundColor(Color.black)
+                        TextField("", text: $name)
+                            .foregroundColor(.black)
+                            .alert(isPresented: self.$showNameMinAlert){
+                                Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert = false}))
+                            }
+                        }
+                        .padding()
+                        .background(Capsule().stroke(Color.black, lineWidth: 2))
+                        
+                    HStack{
+                        Text("이메일 주소")
+                            .foregroundColor(Color.black)
+                        TextField("", text: self.$email)
+                            .foregroundColor(.black)
+                            .keyboardType(.emailAddress)
+                            
+                            .alert(isPresented: self.$showEmailAlert){
+                                Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
+                            }
+                        
+                    }
+                    .padding()
+                    .background(Capsule().stroke(Color.black, lineWidth: 2))
+                    
+                    HStack {
+                        Text("비밀번호")
+                            .foregroundColor(Color.black)
+//                        if showPassword {
+//                            TextField("", text: $password)
+//                                .foregroundColor(.black)
+//                        } else {
+//                            SecureField("", text: $password)
+//                                .textContentType(.newPassword)
+//                                .foregroundColor(.black)
+//                        }
+                        
+                        SecureField("", text: $password)
+                        .textContentType(.newPassword)
+                        .foregroundColor(.black)
+                        
+                        Button(action: {self.showPassword.toggle()}) {
+
+                            Image(systemName: "eye")
+                                .renderingMode(.template)
+                                .foregroundColor(Color.black)
+                            
+                        }
+                    }
+                    .padding()
+                    .background(Capsule().stroke(Color.black, lineWidth: 2))
+                    .alert(isPresented: self.$showPasswordLengthAlert){
+                        Alert(title: Text(""), message: Text("비밀번호 길이는 4 ~ 8글자 입니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordLengthAlert = false}))
+                    }
+                    
+                    HStack{
+                        Text("비밀번호 확인")
+                            .foregroundColor(.black)
+//                        if showConfirmPassword {
+//                           TextField("", text: $confirmPassword)
+//                               .foregroundColor(.black)
+//                       } else {
+//                           SecureField("", text: $confirmPassword)
+//                                .textContentType(.newPassword)
+//                               .foregroundColor(.black)
+//                       }
+//
+                        
+                        SecureField("", text: $confirmPassword)
+                                                       .textContentType(.newPassword)
+                                                      .foregroundColor(.black)
+                        
+                       Button(action: {self.showConfirmPassword.toggle()}) {
+
+                           Image(systemName: "eye")
+                               .renderingMode(.template)
+                               .foregroundColor(Color.black)
+                           
+                       }
+                    }
+                    .padding()
+                    .background(Capsule().stroke(Color.black, lineWidth: 2))
+                    .alert(isPresented: self.$showPasswordNotMatchingAlert){
+                        Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
+                    }
+
+                    HStack {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }){
+                            Text("취소")
+                        }
+    
+                        Button(action: {
+                            self.signUp()
+                        }){
+                            Text("회원가입")
+                        }
+                        .padding(.leading, 50)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                }
+                .padding()
+            }
+        
+        
+    }
+    
+    func isValidEmail(email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
     
     private func signUp(){
@@ -80,31 +243,40 @@ struct SignupView: View {
             return
         }
         
-        if self.password.count < PASSWORD_LENGTH.MIN && self.password.count > PASSWORD_LENGTH.MAX {
-            self.showPasswordLengthAlert = true
+        if !isValidEmail(email: self.email){
+            self.showEmailAlert.toggle()
+            return
+        }
+        
+        if self.password.count < PASSWORD_LENGTH.MIN || self.password.count > PASSWORD_LENGTH.MAX {
+            self.showPasswordLengthAlert.toggle()
             return
         }
         
         if self.password != self.confirmPassword {
-            self.showPasswordNotMatchingAlert = true
+            self.showPasswordNotMatchingAlert.toggle()
             return
         }
         
+        let name = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        print(name)
+        
         let params = [
-            "name" : self.name,
+            "name" : name,
             "kakaoId": self.loginResult.kakaoId.count > 0 ? self.loginResult.kakaoId : nil,
             "naverId": self.loginResult.naverId.count > 0 ? self.loginResult.naverId : nil,
             "facebookId": self.loginResult.facebookId.count > 0 ? self.loginResult.facebookId : nil,
             "email": self.email,
             "password": self.password,
-            "phoneNumberr": ""
+            "phoneNumber": ""
         ]
         
         do{
             let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
             if let url = URL(string: REST_API.USER.SIGN_UP) {
                 var request = URLRequest(url: url)
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
                 request.httpMethod = "POST"
                 request.httpBody = jsonParams
                 
@@ -123,16 +295,17 @@ struct SignupView: View {
                             if let json = json {
                                 print(json)
                                 
-//                                guard let obj = json["response"] as? [String:Any] else { return }
-//                                guard let naverId = obj["id"] as? String else { return }
-//
-                                
-                                
+                                guard let userUniqueId = json["userUniqueId"] as? String else {return}
                     
                                 
+                                
                                 DispatchQueue.main.async {
-                                    UserDefaults.standard.set("", forKey: "isLoggedIn")
-                                    UserDefaults.standard.set("", forKey: "userUniqueId")
+                                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                                    UserDefaults.standard.set(userUniqueId, forKey: "userUniqueId")
+                                    UserDefaults.standard.set(name, forKey: "userName")
+                                    print(UserDefaults.standard.value(forKey: "userUniqueId"))
+                                    
+                                    self.presentationMode.wrappedValue.dismiss()
                                 }
                             }
                         }

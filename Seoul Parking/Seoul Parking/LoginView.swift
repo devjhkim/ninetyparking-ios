@@ -58,23 +58,33 @@ struct LoginView: View {
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarTitle("로그인", displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }){
                 Text("닫기")
             } )
+                .background(Color.white)
+                .background(NavigationConfigurator {nc in
+                    nc.navigationBar.barTintColor = .white
+                    nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+                })
+                
             .alert(isPresented: self.$loginResult.showAlert){
-                Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회워 가입을 해야 합니다."),
+                Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회원 가입을 해야 합니다."),
                       primaryButton: .cancel(Text("취소"), action: {}),
                       secondaryButton: .default(Text("회원가입"), action: {
                         self.showSignupView = true
                 }))
             }
+            
+            
         
         }
-
+        
     }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

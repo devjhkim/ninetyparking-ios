@@ -95,7 +95,7 @@ struct ContentView: View {
                 }
                 
             }
-            .navigationBarTitle("서울 주차장", displayMode: .inline)
+            .navigationBarTitle(Text(APP_TITLE), displayMode: .inline)
             .navigationBarItems(leading:
                 Button(action: {
                     withAnimation {
@@ -103,23 +103,20 @@ struct ContentView: View {
                     }
                 }){
                     Image(systemName: "line.horizontal.3")
-                    .imageScale(.large)
+                        .renderingMode(.template)
+                        .foregroundColor(.black)
+                         .imageScale(.large)
+                    .padding()
                 }
-                
-//                NavigationLink(destination: EmailLoginView(), isActive: self.$showLoginView){
-//                    Button(action: {
-//                        self.showLoginView = !self.showLoginView
-//                    }){
-//                        Image(systemName: "line.horizontal.3")
-//                            .imageScale(.large)
-//                    }
-//                }
-                
-
             )
+                .background(NavigationConfigurator {nc in
+                    nc.navigationBar.barTintColor = .white
+                    nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+                })
             .onAppear(perform: loadData)
         }
-    
+    .navigationViewStyle(StackNavigationViewStyle())
+    .preferredColorScheme(.dark)
     }
     
     func loadData() {

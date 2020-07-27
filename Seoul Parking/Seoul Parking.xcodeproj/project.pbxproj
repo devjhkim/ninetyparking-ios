@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
+		161CB84524CEA1C10006DC0D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84424CEA1C10006DC0D /* CustomTextField.swift */; };
 		16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF295D24B6E47100836C81 /* AppDelegate.swift */; };
 		16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF295F24B6E47100836C81 /* SceneDelegate.swift */; };
 		16AF296224B6E47100836C81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF296124B6E47100836C81 /* ContentView.swift */; };
@@ -69,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
+		161CB84424CEA1C10006DC0D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		16AF295A24B6E47100836C81 /* 나인티 파킹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "나인티 파킹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AF295D24B6E47100836C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16AF295F24B6E47100836C81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		161CB84324CEA1A70006DC0D /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */,
+				161CB84424CEA1C10006DC0D /* CustomTextField.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		16AF295124B6E47100836C81 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +175,7 @@
 		16AF295C24B6E47100836C81 /* Seoul Parking */ = {
 			isa = PBXGroup;
 			children = (
+				161CB84324CEA1A70006DC0D /* CustomViews */,
 				16DC741724BD67570036734F /* Models */,
 				16AF298D24B6F19D00836C81 /* util */,
 				16AF295D24B6E47100836C81 /* AppDelegate.swift */,
@@ -541,7 +555,9 @@
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */,
 				16DC743124C004AE0036734F /* LoginView.swift in Sources */,
+				161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */,
 				16AF298F24B6F1C000836C81 /* Constants.swift in Sources */,
+				161CB84524CEA1C10006DC0D /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

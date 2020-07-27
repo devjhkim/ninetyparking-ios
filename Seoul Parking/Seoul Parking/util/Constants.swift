@@ -10,9 +10,12 @@ import SwiftUI
 
 public let GOOGLE_MAPS_API_KEY = "AIzaSyBlalpyrjUftPgmWiQhWeEIxlbvv2JxqDg"
 public let KAKAO_API_KEY = "32a105c88ee033a2d479e9f8fa9a920a"
+public let SERVER_IP = "10.3.4.60"
+public let APP_TITLE = "나인티 파킹"
 
 struct APP_SERVER {
-    public static let HOST = "http://10.3.2.138:49090"
+    
+    public static let HOST = "http://" + SERVER_IP + ":49090"
 }
 
 struct REST_API {
