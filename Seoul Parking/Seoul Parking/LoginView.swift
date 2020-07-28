@@ -48,11 +48,13 @@ struct LoginView: View {
                 KakaoLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
+                    .aspectRatio(contentMode: ContentMode.fit)
                 
                 NaverLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
+                    .aspectRatio(contentMode: .fit)
                     .padding(.top, 30)
-                    
+                    .aspectRatio(contentMode: ContentMode.fit)
                 
                 FacebookLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
@@ -224,7 +226,11 @@ struct NaverLoginButton: UIViewRepresentable {
         let naverLoginButton = UIButton()
             
         naverLoginButton.addTarget(context.coordinator, action: #selector(Coordinator.login(_:)), for: .touchUpInside)
+        
+        
         naverLoginButton.setImage(UIImage(named: "naverLogin"), for: .normal)
+        
+        
         return naverLoginButton
     }
     

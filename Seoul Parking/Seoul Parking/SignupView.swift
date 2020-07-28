@@ -20,100 +20,12 @@ struct SignupView: View {
     @State var showEmailAlert = false
     @State var showPasswordLengthAlert = false
     @State var showPasswordNotMatchingAlert = false
+    @State var showAlert = false
+    @State var alertType = ""
     
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-//        NavigationView{
-//
-//
-//            VStack {
-//
-//                HStack {
-//                    Color.yellow
-//                    Image(systemName: "person")
-//                        .foregroundColor(.primary)
-//                    TextField("Username",
-//                              text: $name)
-//                }
-//
-//            .padding()
-//                .background(Capsule().fill(Color.white).border(Color.gray))
-//
-//
-//                TextField("이름", text: self.$name)
-//
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//
-//                   // .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.black, lineWidth: 1))
-////                    .background(RoundedRectangle(cornerRadius: 5)
-////                        .size(width: 100, height: 50)
-////                        .stroke(Color.black, lineWidth: 1)
-////                        .foregroundColor(Color.white))
-//                    .alert(isPresented: self.$showNameMinAlert){
-//                        Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert = false}))
-//                    }
-//                    .padding([.top, .leading, .trailing], 50)
-//
-//
-//                TextField("이메일 주소", text: self.$email)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .keyboardType(.emailAddress)
-//                    .padding(.top, 30)
-//                    .padding([.leading, .trailing], 50)
-//                    .alert(isPresented: self.$showEmailAlert){
-//                        Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
-//                    }
-//
-//                SecureField("비밀번호", text: self.$password)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .padding(.top, 30)
-//                    .padding([.leading, .trailing], 50)
-//                    .alert(isPresented: self.$showPasswordLengthAlert){
-//                        Alert(title: Text(""), message: Text("비밀번호 길이는 4 ~ 8글자 입니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordLengthAlert = false}))
-//                    }
-//
-//                SecureField("비밀번호 확인", text: self.$confirmPassword)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .padding(.top, 30)
-//                    .padding([.leading, .trailing], 50)
-//                    .alert(isPresented: self.$showPasswordNotMatchingAlert){
-//                        Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
-//                    }
-//
-//                HStack {
-//                    Button(action: {
-//                        self.presentationMode.wrappedValue.dismiss()
-//                    }){
-//                        Text("취소")
-//                    }
-//
-//
-//
-//                    Button(action: {
-//                        self.signUp()
-//                    }){
-//                        Text("회원가입")
-//                    }
-//                    .padding(.leading, 50)
-//                }
-//                .padding(.top, 30)
-//
-//                Spacer()
-//            }
-//            .onTapGesture {
-//                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//            }
-//            .navigationBarTitle("회원가입", displayMode: .inline)
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//           .background(Color.white)
-//           .background(NavigationConfigurator {nc in
-//               nc.navigationBar.barTintColor = .white
-//               nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-//           })
-//
-//        }
-        
         
         ZStack {
             Color.white
@@ -221,6 +133,30 @@ struct SignupView: View {
                         .padding(.leading, 50)
                     }
                     .padding()
+                    .alert(isPresented: self.$showAlert){
+                        var message = ""
+                        
+                        switch self.alertType {
+                        case "201":
+                            message = "회원 가입에 실패하였습니다."
+                            break
+                            
+                        case "202":
+                            message = "이미 가입된 사용자입니다."
+                            break
+                            
+                            
+                        case "500":
+                            message = "서버에러"
+                            break
+                            
+                        default:
+                            
+                            break
+                        }
+                        
+                        return Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("확인"), action: {self.showAlert = false}))
+                    }
                     
                     Spacer()
                 }
@@ -294,19 +230,48 @@ struct SignupView: View {
                             
                             if let json = json {
                                 print(json)
+                                guard let statusCode = json["statusCode"] as? String else {return}
+                                self.alertType = statusCode
                                 
-                                guard let userUniqueId = json["userUniqueId"] as? String else {return}
-                    
-                                
-                                
-                                DispatchQueue.main.async {
-                                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                                    UserDefaults.standard.set(userUniqueId, forKey: "userUniqueId")
-                                    UserDefaults.standard.set(name, forKey: "userName")
-                                    print(UserDefaults.standard.value(forKey: "userUniqueId"))
+                                switch statusCode {
+                                case "200":
+                                    guard let userUniqueId = json["userUniqueId"] as? String else {return}
                                     
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    DispatchQueue.main.async {
+                                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                                        UserDefaults.standard.set(userUniqueId, forKey: "userUniqueId")
+                                        UserDefaults.standard.set(name, forKey: "userName")
+                                        
+                                        UserInfo.getInstance.uniqueId = userUniqueId
+                                        UserInfo.getInstance.name = name
+                                        UserInfo.getInstance.isLoggedIn = true
+                                        
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                    
+                                    break
+                                    
+                                case "201":
+                                    self.showAlert = true
+                                    break
+                                    
+                                case "202":
+                                    self.showAlert = true
+                                    break
+                                    
+                                case "500":
+                                    
+                                    self.showAlert = true
+                                    
+                                    break
+                                    
+                                    
+                                    
+                                default:
+                                    break
                                 }
+                                
+                                
                             }
                         }
                         

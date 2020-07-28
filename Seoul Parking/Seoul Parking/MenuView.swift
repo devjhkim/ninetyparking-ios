@@ -25,9 +25,28 @@ struct MenuView: View {
                     Image(systemName: "person")
                         .imageScale(.large)
                         .foregroundColor(.gray)
-                    Text(self.loginText)
+                    
+                    if UserInfo.getInstance.isLoggedIn {
+                        HStack{
+                            Text(UserInfo.getInstance.name)
+                                .foregroundColor(Color.gray)
+                                .font(.headline)
+                            
+                            Text("로그아웃")
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 10))
+                                .underline()
+                                
+                            
+                        }
+                        
+                    } else {
+                        Text("로그인 하세요")
                         .foregroundColor(.gray)
                         .font(.headline)
+                    }
+                    
+                    
                     
                     
 
@@ -43,15 +62,7 @@ struct MenuView: View {
                     LoginView()
                 }
                 
-                HStack {
-                    Image(systemName: "person")
-                        .foregroundColor(.gray)
-                        .imageScale(.large)
-                    Text("Profile")
-                        .foregroundColor(.gray)
-                        .font(.headline)
-                }
-                .padding(.top, 30)
+               
                 HStack {
                     Image(systemName: "envelope")
                         .foregroundColor(.gray)

@@ -75,9 +75,9 @@ struct ContentView: View {
                         HStack{
                             MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType)
                             
-                            .frame(width: reader.size.width / 2, alignment: .leading)
+                                .frame(width: reader.size.width * 0.7, alignment: .leading)
                             
-                            .transition(.move(edge: .leading))
+                                .transition(.move(edge: .leading))
                             
                             Spacer()
                             Spacer()
@@ -117,7 +117,19 @@ struct ContentView: View {
         }
     .navigationViewStyle(StackNavigationViewStyle())
     .preferredColorScheme(.dark)
+    .onAppear(perform: {
+        if let isLoggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
+            if isLoggedIn {
+                UserInfo.getInstance.isLoggedIn = true
+                if let name = UserDefaults.standard.value(forKey: "userName") as? String, let userUniqueId = UserDefaults.standard.value(forKey: "userUniqueId") as? String {
+                    UserInfo.getInstance.name = name
+                    UserInfo.getInstance.uniqueId = userUniqueId
+                }
+            }
+        }
+    })
     }
+
     
     func loadData() {
         

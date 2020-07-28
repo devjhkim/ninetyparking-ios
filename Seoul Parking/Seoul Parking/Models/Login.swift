@@ -11,6 +11,7 @@ import Foundation
 struct LoginData: Hashable, Codable {
     var userUniqueId: String
     var statusCode: String
+    var name: String
 }
 
 struct LoginResult {
