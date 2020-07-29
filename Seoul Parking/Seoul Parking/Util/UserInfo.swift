@@ -32,3 +32,13 @@ class UserInfo {
         set(i) {_isLoggedIn = i}
     }
 }
+
+func handleLogInResult(_ data: LoginData){
+    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    UserDefaults.standard.set(data.name, forKey: "userName")
+    UserDefaults.standard.set(data.userUniqueId, forKey: "userUniqueId")
+    
+    UserInfo.getInstance.name = data.name
+    UserInfo.getInstance.uniqueId = data.userUniqueId
+    UserInfo.getInstance.isLoggedIn = true
+}

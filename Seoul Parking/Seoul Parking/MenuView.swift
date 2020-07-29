@@ -17,6 +17,8 @@ struct MenuView: View {
     @Binding var showMenu : Bool
     @Binding var auxLoginView: AuxLoginViewType
     
+    @State var isLoggedIn = false
+    
     var body: some View {
         
         GeometryReader{ proxy in
@@ -26,7 +28,7 @@ struct MenuView: View {
                         .imageScale(.large)
                         .foregroundColor(.gray)
                     
-                    if UserInfo.getInstance.isLoggedIn {
+                    if self.isLoggedIn {
                         HStack{
                             Text(UserInfo.getInstance.name)
                                 .foregroundColor(Color.gray)
@@ -36,6 +38,9 @@ struct MenuView: View {
                                 .foregroundColor(Color.gray)
                                 .font(.system(size: 10))
                                 .underline()
+                                .onTapGesture {
+                                    self.logout()
+                            }
                                 
                             
                         }
@@ -44,6 +49,12 @@ struct MenuView: View {
                         Text("로그인 하세요")
                         .foregroundColor(.gray)
                         .font(.headline)
+                        .onTapGesture(perform: {
+                                           
+                           self.showLonginView = false
+                           self.auxLoginView.showLoginView = true
+                           
+                       })
                     }
                     
                     
@@ -52,12 +63,7 @@ struct MenuView: View {
 
                 }
                 .padding(.top, 100)
-                .onTapGesture(perform: {
-                    
-                    self.showLonginView = false
-                    self.auxLoginView.showLoginView = true
-                    
-                })
+               
                 .sheet(isPresented: self.$showLonginView){
                     LoginView()
                 }
@@ -92,8 +98,18 @@ struct MenuView: View {
                 .background(Color.white)
                 .edgesIgnoringSafeArea(.all)
         }
+        .onAppear(perform: {
+            self.isLoggedIn = UserInfo.getInstance.isLoggedIn
+        })
         
         
+    }
+    
+    func logout() {
+        UserDefaults.standard.removeObject(forKey: "userName")
+        UserDefaults.standard.removeObject(forKey: "userUniqueId")
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        self.isLoggedIn = false
     }
 
 }

@@ -92,6 +92,7 @@ struct ContentView: View {
                 //.gesture(drag)
                 .sheet(isPresented:self.$auxLoginViewType.showLoginView){
                     LoginView()
+                        .environment(\.showLoginView, self.$auxLoginViewType.showLoginView)
                 }
                 
             }
@@ -166,5 +167,16 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct ShowingLoginViewKey: EnvironmentKey {
+    static let defaultValue: Binding<Bool>? = nil
+}
+
+extension EnvironmentValues {
+    var showLoginView: Binding<Bool>? {
+        get {self[ShowingLoginViewKey.self]}
+        set {self[ShowingLoginViewKey.self] = newValue}
     }
 }

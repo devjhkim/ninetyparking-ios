@@ -13,7 +13,6 @@ import NaverThirdPartyLogin
 import FBSDKLoginKit
 import FBSDKCoreKit
 
-// Swift // // Add this to the header of your file, e.g. in ViewController.swift import FBSDKLoginKit // Add this to the body class ViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() let loginButton = FBLoginButton() loginButton.center = view.center view.addSubview(loginButton) } }
 
 
 struct LoginView: View {
@@ -82,6 +81,7 @@ struct LoginView: View {
             }
             
             
+            
         
         }
         
@@ -99,7 +99,7 @@ struct LoginView_Previews: PreviewProvider {
 struct KakaoLoginButton: UIViewRepresentable {
 
     
-    
+    @Environment(\.showLoginView) var showLoginView
     @Binding var loginResult: LoginResult
     
     func makeCoordinator() -> Coordinator {
@@ -176,6 +176,8 @@ struct KakaoLoginButton: UIViewRepresentable {
                                                 switch result.statusCode {
                                                 case "200" :
                                                     self.button.loginResult.showAlert = false
+                                                    handleLogInResult(result)
+                                                    self.button.showLoginView?.wrappedValue = false
                                                     
                                                     break
                                                     
@@ -211,6 +213,7 @@ struct KakaoLoginButton: UIViewRepresentable {
 struct NaverLoginButton: UIViewRepresentable {
     
     @Binding var loginResult: LoginResult
+    @Environment(\.showLoginView) var showLoginView
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
@@ -308,7 +311,8 @@ struct NaverLoginButton: UIViewRepresentable {
                                         switch result.statusCode {
                                         case "200" :
                                             self.button.loginResult.showAlert = false
-                                            
+                                            handleLogInResult(result)
+                                            self.button.showLoginView?.wrappedValue = false
                                             break
                                             
                                             
@@ -362,6 +366,7 @@ struct NaverLoginButton: UIViewRepresentable {
 struct FacebookLoginButton: UIViewRepresentable {
     
     @Binding var loginResult: LoginResult
+    @Environment(\.showLoginView) var showLoginView
     
     typealias UIViewType = FBButton
     
@@ -416,6 +421,8 @@ struct FacebookLoginButton: UIViewRepresentable {
                             switch result.statusCode {
                             case "200" :
                                 self.button.loginResult.showAlert = false
+                                handleLogInResult(result)
+                                self.button.showLoginView?.wrappedValue = false
                                 
                                 break
                                 
