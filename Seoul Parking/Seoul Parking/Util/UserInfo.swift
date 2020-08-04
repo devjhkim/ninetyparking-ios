@@ -42,3 +42,13 @@ func handleLogInResult(_ data: LoginData){
     UserInfo.getInstance.uniqueId = data.userUniqueId
     UserInfo.getInstance.isLoggedIn = true
 }
+
+func handleLogout(){
+    UserDefaults.standard.set(false, forKey: "isLoggedIn")
+    UserDefaults.standard.removeObject(forKey: "userName")
+    UserDefaults.standard.removeObject(forKey: "userUniqueId")
+    
+    UserInfo.getInstance.name = ""
+    UserInfo.getInstance.uniqueId = ""
+    UserInfo.getInstance.isLoggedIn = false
+}

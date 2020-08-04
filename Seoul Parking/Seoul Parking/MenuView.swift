@@ -19,6 +19,8 @@ struct MenuView: View {
     
     @State var isLoggedIn = false
     
+    
+    
     var body: some View {
         
         GeometryReader{ proxy in
@@ -51,8 +53,9 @@ struct MenuView: View {
                         .font(.headline)
                         .onTapGesture(perform: {
                                            
-                           self.showLonginView = false
-                           self.auxLoginView.showLoginView = true
+                            self.showLonginView = false
+                            self.auxLoginView.showLoginView = true
+                            self.showMenu = false
                            
                        })
                     }
@@ -106,9 +109,7 @@ struct MenuView: View {
     }
     
     func logout() {
-        UserDefaults.standard.removeObject(forKey: "userName")
-        UserDefaults.standard.removeObject(forKey: "userUniqueId")
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        handleLogout()
         self.isLoggedIn = false
     }
 
