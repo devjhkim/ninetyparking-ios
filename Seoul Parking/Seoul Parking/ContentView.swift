@@ -40,27 +40,19 @@ struct ContentView: View {
     var currLat: String { return("\(locationManager.location?.latitude ?? 0)")}
     var body: some View {
         
-//        let drag = DragGesture()
-//            .onEnded {
-//                if $0.translation.width < -100 {
-//                    withAnimation {
-//                        self.showMenu = false
-//                    }
-//                }
-//        }
-//
-//        let tap = TapGesture()
-//            .onEnded{ _ in
-//                withAnimation {
-//                    self.showMenu = false
-//                }
-//
-//
-//
-//        }
+        let drag = DragGesture()
+            .onEnded { _ in
+                self.showMenu = false
+        }
+
+        let tap = TapGesture()
+            .onEnded { _ in
+                self.showMenu = false
+
+            }
         
         
-        NavigationView {
+        return NavigationView {
             GeometryReader(){  reader in
                 
                 ZStack(alignment: .leading) {
@@ -72,24 +64,13 @@ struct ContentView: View {
                         
                         
                     if self.showMenu {
-                        HStack{
-                            MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType)
-                            
-                                .frame(width: reader.size.width * 0.7, alignment: .leading)
-                            
-                                .transition(.move(edge: .leading))
-                            
-                            Spacer()
-                            Spacer()
-
-                        }
-                        .frame(width: reader.size.width)
                         
-                        //.gesture(tap)
+                        MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, width: reader.size.width * 0.7, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
+                        .gesture(tap)
                     }
                     
                 }
-                //.gesture(drag)
+                .gesture(drag)
                 .sheet(isPresented:self.$auxLoginViewType.showLoginView){
                     LoginView()
                         .environment(\.showLoginView, self.$auxLoginViewType.showLoginView)
@@ -180,3 +161,4 @@ extension EnvironmentValues {
         set {self[ShowingLoginViewKey.self] = newValue}
     }
 }
+
