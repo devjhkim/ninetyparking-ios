@@ -30,16 +30,14 @@ struct AvailableHoursView: View {
     private var AvailableTime: some View {
         if let timeSlots = self.selectedParkingSpace?.wrappedValue.availableTime {
             
+  
             
+            print(timeSlots.count)
             return AnyView(
-                List(timeSlots, id: \.self){ slot in
-                    
-                    AvailableTimeRow(time: slot.description)
-                   
-
-                    
+                
+                List(0..<timeSlots.endIndex){index in
+                    AvailableTimeRow(time: timeSlots[index].description)
                 }
-                            
             )
         }else {
             return AnyView(
