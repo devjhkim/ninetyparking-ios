@@ -26,6 +26,8 @@ struct ContentView: View {
     @State var showMenu = false
     @State var auxLoginViewType: AuxLoginViewType = AuxLoginViewType()
     @State var showLoginView = false
+    @State var showParkingSpaceInfoView = false
+    @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     
     var profileButton: some View {
         Button(action: {}){
@@ -61,12 +63,21 @@ struct ContentView: View {
                     GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
                         .edgesIgnoringSafeArea(.bottom)
                         .environmentObject(self.lot)
+                        .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
+                        .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
                         
                         
                     if self.showMenu {
                         
                         MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, width: reader.size.width * 0.7, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
                         .gesture(tap)
+                    }
+                    
+                    if self.showParkingSpaceInfoView {
+                        ParkingSpaceInfoView()
+                            .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
+                            .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
+                            
                     }
                     
                 }
@@ -155,10 +166,28 @@ struct ShowingLoginViewKey: EnvironmentKey {
     static let defaultValue: Binding<Bool>? = nil
 }
 
+struct ShowingParkingSpaceInfoViewKey: EnvironmentKey {
+    static let defaultValue: Binding<Bool>? = nil
+}
+
+struct SelectedParkingSpace: EnvironmentKey {
+    static let defaultValue: Binding<ParkingSpace>? = nil
+}
+
 extension EnvironmentValues {
     var showLoginView: Binding<Bool>? {
         get {self[ShowingLoginViewKey.self]}
         set {self[ShowingLoginViewKey.self] = newValue}
+    }
+    
+    var showParkingSpaceInfoView: Binding<Bool>? {
+        get{self[ShowingParkingSpaceInfoViewKey.self]}
+        set{self[ShowingParkingSpaceInfoViewKey.self] = newValue}
+    }
+    
+    var selectedParkingSpace: Binding<ParkingSpace>? {
+        get {self[SelectedParkingSpace.self]}
+        set {self[SelectedParkingSpace.self] = newValue}
     }
 }
 

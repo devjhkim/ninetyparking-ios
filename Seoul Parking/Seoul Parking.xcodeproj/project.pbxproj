@@ -24,6 +24,8 @@
 		16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF299624B8319400836C81 /* GeometryGetter.swift */; };
 		16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DC741A24BD67970036734F /* ParkingSpace.swift */; };
 		16DC743124C004AE0036734F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DC743024C004AE0036734F /* LoginView.swift */; };
+		16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */; };
+		16E8980B24DD3179001907A0 /* AvailableHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8980A24DD3179001907A0 /* AvailableHoursView.swift */; };
 		16FB34AA24C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 in Resources */ = {isa = PBXBuildFile; fileRef = 16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */; };
 		16FB34AC24C54C3F007A05F9 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; };
 		16FB34AD24C54C3F007A05F9 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -95,6 +97,8 @@
 		16DC741A24BD67970036734F /* ParkingSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpace.swift; sourceTree = "<group>"; };
 		16DC742F24C004380036734F /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		16DC743024C004AE0036734F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpaceInfoView.swift; sourceTree = "<group>"; };
+		16E8980A24DD3179001907A0 /* AvailableHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoursView.swift; sourceTree = "<group>"; };
 		16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "KakaoOpenSDK-1.23.3"; sourceTree = "<group>"; };
 		16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = "KakaoOpenSDK-1.23.3/KakaoOpenSDK.framework"; sourceTree = "<group>"; };
 		16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoCommon.framework; path = "KakaoOpenSDK-1.23.3/KakaoCommon.framework"; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				16AF298D24B6F19D00836C81 /* Util */,
 				16AF295D24B6E47100836C81 /* AppDelegate.swift */,
 				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
+				16E8980A24DD3179001907A0 /* AvailableHoursView.swift */,
+				16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */,
 				16FB34B424C6C868007A05F9 /* SignupView.swift */,
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16AF295F24B6E47100836C81 /* SceneDelegate.swift */,
@@ -543,10 +549,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E8980B24DD3179001907A0 /* AvailableHoursView.swift in Sources */,
 				16FB34B524C6C868007A05F9 /* SignupView.swift in Sources */,
 				16AF299524B8236400836C81 /* MenuView.swift in Sources */,
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
+				16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */,
 				16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */,
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,
 				16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */,
