@@ -11,6 +11,7 @@ import SwiftUI
 struct ParkingSpaceInfoView: View {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
+    @Environment(\.showAvailableTimeView) var showAvailableTimeView
     
     var body: some View {
         
@@ -125,7 +126,9 @@ struct ParkingSpaceInfoView: View {
                 
                 Spacer()
                 
-                Button(action:{}){
+                Button(action:{
+                    self.showAvailableTimeView?.wrappedValue = true
+                }){
                     Text("예약하기")
                         
                     .fontWeight(.bold)
@@ -137,6 +140,7 @@ struct ParkingSpaceInfoView: View {
                     .cornerRadius(20)
                     
                 }
+               
                 
                 
                 

@@ -15,7 +15,28 @@ struct AvailableHoursView: View {
         ZStack{
             Color.white
             
+            self.AvailableTime
         }
+    }
+    
+    private var AvailableTime: some View {
+        if let timeSlots = self.selectedParkingSpace?.wrappedValue.availableTime {
+            return AnyView(
+                ForEach(timeSlots, id: \.self){ slot in
+                    
+                    Text(slot.description )
+                        .foregroundColor(Color.black)
+                    
+                }
+            
+            )
+        }else {
+            return AnyView(
+                EmptyView()
+            )
+
+        }
+        
     }
 }
 

@@ -27,6 +27,7 @@ struct ContentView: View {
     @State var auxLoginViewType: AuxLoginViewType = AuxLoginViewType()
     @State var showLoginView = false
     @State var showParkingSpaceInfoView = false
+    @State var showAvailableTimeView = false
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     
     var profileButton: some View {
@@ -55,10 +56,16 @@ struct ContentView: View {
         
         
         return NavigationView {
+            
+
+            
             GeometryReader(){  reader in
                 
                 ZStack(alignment: .leading) {
-                    
+
+                    NavigationLink(destination: AvailableHoursView().environment(\.selectedParkingSpace, self.$selectedParkingSpace), isActive: self.$showAvailableTimeView){
+                        EmptyView()
+                    }.hidden()
                     
                     GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
                         .edgesIgnoringSafeArea(.bottom)
@@ -77,6 +84,7 @@ struct ContentView: View {
                         ParkingSpaceInfoView()
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
+                            .environment(\.showAvailableTimeView, self.$showAvailableTimeView)
                             
                     }
                     
@@ -174,6 +182,10 @@ struct SelectedParkingSpace: EnvironmentKey {
     static let defaultValue: Binding<ParkingSpace>? = nil
 }
 
+struct ShowAvailableTimeView: EnvironmentKey {
+    static let defaultValue: Binding<Bool>? = nil
+}
+
 extension EnvironmentValues {
     var showLoginView: Binding<Bool>? {
         get {self[ShowingLoginViewKey.self]}
@@ -188,6 +200,11 @@ extension EnvironmentValues {
     var selectedParkingSpace: Binding<ParkingSpace>? {
         get {self[SelectedParkingSpace.self]}
         set {self[SelectedParkingSpace.self] = newValue}
+    }
+    
+    var showAvailableTimeView: Binding<Bool>? {
+        get{self[ShowAvailableTimeView.self]}
+        set{self[ShowAvailableTimeView.self] = newValue}
     }
 }
 
