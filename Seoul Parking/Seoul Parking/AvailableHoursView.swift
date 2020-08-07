@@ -11,24 +11,35 @@ import SwiftUI
 struct AvailableHoursView: View {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
+    
+    init() {
+        UITableView.appearance().backgroundColor = .white
+        
+        UITableViewCell.appearance().backgroundColor = .white
+    }
+    
     var body: some View {
         ZStack{
             Color.white
             
             self.AvailableTime
         }
+        
     }
     
     private var AvailableTime: some View {
         if let timeSlots = self.selectedParkingSpace?.wrappedValue.availableTime {
+            
+            
             return AnyView(
-                ForEach(timeSlots, id: \.self){ slot in
+                List(timeSlots, id: \.self){ slot in
                     
-                    Text(slot.description )
-                        .foregroundColor(Color.black)
+                    AvailableTimeRow(time: slot.description)
+                   
+
                     
                 }
-            
+                            
             )
         }else {
             return AnyView(
@@ -43,5 +54,16 @@ struct AvailableHoursView: View {
 struct AvailableHoursView_Previews: PreviewProvider {
     static var previews: some View {
         AvailableHoursView()
+    }
+}
+
+struct AvailableTimeRow: View {
+    var time : String
+    
+    var body: some View{
+        Text(time)
+            .foregroundColor(Color.black)
+            
+            
     }
 }
