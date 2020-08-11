@@ -11,7 +11,7 @@ import SwiftUI
 struct AvailableHoursView: View {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
-    
+    @State var showReservationView = false
     init() {
         UITableView.appearance().backgroundColor = .white
         
@@ -68,8 +68,11 @@ struct AvailableHoursView: View {
                 
                 List(0..<availableTime.endIndex){index in
                     
-                    NavigationLink(destination: ReservationView()){
+                    NavigationLink(destination: ReservationView(), isActive: self.$showReservationView){
                         AvailableTimeRow(time: availableTime[index])
+                            .onTapGesture {
+                                self.showReservationView = availableTime[index].isAvailable
+                        }
                     }
                     
                     
