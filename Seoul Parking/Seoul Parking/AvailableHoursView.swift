@@ -11,11 +11,13 @@ import SwiftUI
 struct AvailableHoursView: View {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
-    @State var showReservationView = false
+    @State var availableTime = [Time]()
+    
     init() {
         UITableView.appearance().backgroundColor = .white
         
         UITableViewCell.appearance().backgroundColor = .white
+        UITableViewCell.appearance().selectionStyle = .none
     }
     
     var body: some View {
@@ -25,65 +27,53 @@ struct AvailableHoursView: View {
             
             self.AvailableTime
         }
-        
-
-        
+        .onAppear(perform: {
+            if let timeSlots = self.selectedParkingSpace?.wrappedValue.availableTime {
+                
+                for (index, elem) in timeSlots.enumerated() {
+                    
+                    for(i, availability) in elem.enumerated(){
+                        
+                        var minute = "00"
+                        var isAvailable = false
+                        
+                        if i == 0{
+                            minute = "00"
+                        }else {
+                            minute = "30"
+                        }
+                        
+                        if availability == 0 {
+                            isAvailable = false
+                        } else if availability == 1 {
+                            isAvailable = true
+                        }
+                        
+                        self.availableTime.append(Time(hour: index, minute: minute, isAvailable: isAvailable))
+                    }
+                }
+            }
+        })
     }
     
     private var AvailableTime: some View {
-        if let timeSlots = self.selectedParkingSpace?.wrappedValue.availableTime {
+        return AnyView(
             
-           
-            
-            
-            var availableTime = [Time]()
-            
-            for (index, elem) in timeSlots.enumerated() {
+            List(0..<availableTime.endIndex, id: \.self){index in
                 
-                for(i, availability) in elem.enumerated(){
+                NavigationLink(destination: ReservationView(selectedTimeSlot: self.availableTime[index])
+                    .environment(\.selectedParkingSpace, self.selectedParkingSpace)
                     
-                    var minute = "00"
-                    var isAvailable = false
+                ){
+                    AvailableTimeRow(time: self.availableTime[index])
+                        .listRowBackground(Color.white)
                     
-                    if i == 0{
-                        minute = "00"
-                    }else {
-                        minute = "30"
-                    }
-                    
-                    if availability == 0 {
-                        isAvailable = false
-                    } else if availability == 1 {
-                        isAvailable = true
-                    }
-                    
-                    availableTime.append(Time(hour: index, minute: minute, isAvailable: isAvailable))
                 }
+                .disabled(!self.availableTime[index].isAvailable)
                 
                 
             }
-            
-            
-            return AnyView(
-                
-                List(0..<availableTime.endIndex){index in
-                    
-                    NavigationLink(destination: ReservationView(), isActive: self.$showReservationView){
-                        AvailableTimeRow(time: availableTime[index])
-                            .onTapGesture {
-                                self.showReservationView = availableTime[index].isAvailable
-                        }
-                    }
-                    
-                    
-                }
-            )
-        }else {
-            return AnyView(
-                EmptyView()
-            )
-
-        }
+        )
         
     }
 }
@@ -130,16 +120,16 @@ struct AvailableTimeRow: View {
                 .foregroundColor(Color.black)
                 .frame(width: 100)
         }
-//        .onTapGesture {
-//            self.showAlert = true
-//        }
-//        .alert(isPresented: self.$showAlert){
-//            Alert(title: Text( "예약하기"), message: Text( "예약하시겠습니까?" ), primaryButton: .cancel(Text("취소"), action: {self.showAlert = false}), secondaryButton: .default(Text("예약"), action: {}))
-//        }
+        //        .onTapGesture {
+        //            self.showAlert = true
+        //        }
+        //        .alert(isPresented: self.$showAlert){
+        //            Alert(title: Text( "예약하기"), message: Text( "예약하시겠습니까?" ), primaryButton: .cancel(Text("취소"), action: {self.showAlert = false}), secondaryButton: .default(Text("예약"), action: {}))
+        //        }
     }
     
     private var StatusImage: some View {
-
+        
         
         if time.isAvailable {
             return AnyView( Image(systemName: "checkmark.circle.fill")

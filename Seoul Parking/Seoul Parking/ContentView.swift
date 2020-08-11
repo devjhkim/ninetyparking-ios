@@ -186,6 +186,8 @@ struct ShowAvailableTimeView: EnvironmentKey {
     static let defaultValue: Binding<Bool>? = nil
 }
 
+
+
 extension EnvironmentValues {
     var showLoginView: Binding<Bool>? {
         get {self[ShowingLoginViewKey.self]}
@@ -206,5 +208,7 @@ extension EnvironmentValues {
         get{self[ShowAvailableTimeView.self]}
         set{self[ShowAvailableTimeView.self] = newValue}
     }
+    
+    
 }
 

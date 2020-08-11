@@ -9,8 +9,10 @@
 import SwiftUI
 
 struct ReservationView: View {
-    @State var plateNumber: String = ""
     
+    @State var plateNumber: String = ""
+    @Environment(\.selectedParkingSpace) var selectedParkingSpace
+    var selectedTimeSlot: Time
     
     var body: some View {
         
@@ -30,7 +32,7 @@ struct ReservationView: View {
                             .fill(Color.blue)
                             .frame(width: proxy.size.width * 0.9, height: 150)
                             .cornerRadius(20)
-                            .opacity(0.3)
+                            .opacity(0.5)
                         
                         VStack(alignment: .leading){
                             HStack{
@@ -39,8 +41,7 @@ struct ReservationView: View {
                                 
                                 Spacer()
                                 
-                                Text("14:00 ~ 14:29")
-                                    .foregroundColor(Color.black)
+                                self.EnteringTime
                                 
                             }
                             .padding()
@@ -61,7 +62,7 @@ struct ReservationView: View {
                             
                             .padding()
                             
-                            
+                        
                             Spacer()
                             
                         }
@@ -85,11 +86,24 @@ struct ReservationView: View {
         
     }
     
+    private var EnteringTime: some View {
+        
+        var timeString = ""
+        
+        if selectedTimeSlot.minute == "00" {
+            timeString = String(format: "%02d:00 ~ %02d:29", selectedTimeSlot.hour, selectedTimeSlot.hour)
+        }else {
+            timeString = String(format: "%02d:30 ~ %02d:59", selectedTimeSlot.hour, selectedTimeSlot.hour)
+        }
+        
+        return AnyView(Text(timeString).foregroundColor(Color.black))
+    }
+    
 
 }
 
 struct ReservationView_Previews: PreviewProvider {
     static var previews: some View {
-        ReservationView()
+        ReservationView( selectedTimeSlot: Time(hour: 0, minute: "", isAvailable: false))
     }
 }
