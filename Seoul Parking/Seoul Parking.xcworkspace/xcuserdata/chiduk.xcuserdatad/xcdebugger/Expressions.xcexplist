@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "locationManager">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in MenuView.body.getter:MenuView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UserInfo.getInstance.isLoggedIn">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SignupView.signUp():SignupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.name.trimmingCharacters(in: .whitespacesAndNewlines)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in SignupView.body.getter:SignupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.showNameMinAlert">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

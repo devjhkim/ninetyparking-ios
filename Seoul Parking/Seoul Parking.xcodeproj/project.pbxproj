@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
+		16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C4C824E113670015DCAC /* ReservationView.swift */; };
 		16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF295D24B6E47100836C81 /* AppDelegate.swift */; };
 		16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF295F24B6E47100836C81 /* SceneDelegate.swift */; };
 		16AF296224B6E47100836C81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF296124B6E47100836C81 /* ContentView.swift */; };
@@ -75,6 +76,7 @@
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		16A0C4C824E113670015DCAC /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		16AF295A24B6E47100836C81 /* 나인티 파킹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "나인티 파킹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AF295D24B6E47100836C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16AF295F24B6E47100836C81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
 				16E8980A24DD3179001907A0 /* AvailableHoursView.swift */,
 				16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */,
+				16A0C4C824E113670015DCAC /* ReservationView.swift */,
 				16FB34B424C6C868007A05F9 /* SignupView.swift */,
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16AF295F24B6E47100836C81 /* SceneDelegate.swift */,
@@ -550,6 +553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16E8980B24DD3179001907A0 /* AvailableHoursView.swift in Sources */,
+				16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */,
 				16FB34B524C6C868007A05F9 /* SignupView.swift in Sources */,
 				16AF299524B8236400836C81 /* MenuView.swift in Sources */,
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,

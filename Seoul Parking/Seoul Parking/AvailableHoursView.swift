@@ -19,11 +19,14 @@ struct AvailableHoursView: View {
     }
     
     var body: some View {
+        
         ZStack{
             Color.white
             
             self.AvailableTime
         }
+        
+
         
     }
     
@@ -65,8 +68,11 @@ struct AvailableHoursView: View {
                 
                 List(0..<availableTime.endIndex){index in
                     
-                
-                    AvailableTimeRow(time: availableTime[index])
+                    NavigationLink(destination: ReservationView()){
+                        AvailableTimeRow(time: availableTime[index])
+                    }
+                    
+                    
                 }
             )
         }else {
@@ -87,7 +93,10 @@ struct AvailableHoursView_Previews: PreviewProvider {
 
 struct AvailableTimeRow: View {
     var time : Time
+    
     @State var showAlert = false
+    
+    
     var body: some View{
         var timeString = ""
         
@@ -118,12 +127,12 @@ struct AvailableTimeRow: View {
                 .foregroundColor(Color.black)
                 .frame(width: 100)
         }
-        .onTapGesture {
-            self.showAlert = true
-        }
-        .alert(isPresented: self.$showAlert){
-            Alert(title: Text( "예약하기"), message: Text( "예약하시겠습니까?" ), primaryButton: .cancel(Text("취소"), action: {self.showAlert = false}), secondaryButton: .default(Text("예약"), action: {}))
-        }
+//        .onTapGesture {
+//            self.showAlert = true
+//        }
+//        .alert(isPresented: self.$showAlert){
+//            Alert(title: Text( "예약하기"), message: Text( "예약하시겠습니까?" ), primaryButton: .cancel(Text("취소"), action: {self.showAlert = false}), secondaryButton: .default(Text("예약"), action: {}))
+//        }
     }
     
     private var StatusImage: some View {
