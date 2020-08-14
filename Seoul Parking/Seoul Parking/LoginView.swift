@@ -15,6 +15,7 @@ import FBSDKCoreKit
 
 
 
+
 struct LoginView: View {
     @State var showEmailLoginView = false
     @State var showSignupView = false
@@ -30,9 +31,12 @@ struct LoginView: View {
                     Button(action: {
                         self.showEmailLoginView.toggle()
                     }){
-                        Text("Log in with Email")
+                        Image("emailLoginButton")
+                            .background(Color.white)
                     }
                 }
+                
+                
                 
                 
                 NavigationLink(destination: SignupView(loginResult: self.$loginResult), isActive: self.$showSignupView){
@@ -98,6 +102,7 @@ struct LoginView_Previews: PreviewProvider {
 
 struct KakaoLoginButton: UIViewRepresentable {
 
+    typealias UIViewType = UIButton
     
     @Environment(\.showLoginView) var showLoginView
     @Binding var loginResult: LoginResult
@@ -106,14 +111,15 @@ struct KakaoLoginButton: UIViewRepresentable {
         Coordinator(self)
     }
     
-    func makeUIView(context: Context) -> KOLoginButton {
+    func makeUIView(context: Context) -> UIButton {
         
-        let kakaoLoginButton = KOLoginButton()
+        let kakaoLoginButton = UIButton()
+        kakaoLoginButton.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
         kakaoLoginButton.addTarget(context.coordinator, action: #selector(Coordinator.login(_:)), for: .touchUpInside)
         return kakaoLoginButton
     }
     
-    func updateUIView(_ uiView: KOLoginButton, context: Context) {
+    func updateUIView(_ uiView: UIButton, context: Context) {
         
     }
     
@@ -231,7 +237,7 @@ struct NaverLoginButton: UIViewRepresentable {
         naverLoginButton.addTarget(context.coordinator, action: #selector(Coordinator.login(_:)), for: .touchUpInside)
         
         
-        naverLoginButton.setImage(UIImage(named: "naverLogin"), for: .normal)
+        naverLoginButton.setImage(UIImage(named: "naverLoginButton"), for: .normal)
         
         
         return naverLoginButton
@@ -364,29 +370,34 @@ struct NaverLoginButton: UIViewRepresentable {
 }
 
 struct FacebookLoginButton: UIViewRepresentable {
+   
     
+    typealias UIViewType = UIButton
     @Binding var loginResult: LoginResult
     @Environment(\.showLoginView) var showLoginView
     
-    typealias UIViewType = FBButton
+    
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
-    func makeUIView(context: Context) -> FBButton {
-        let facebookLoginButton = FBLoginButton()
-        facebookLoginButton.permissions = ["public_profile", "email"]
-        facebookLoginButton.delegate = context.coordinator
+    func makeUIView(context: Context) -> UIButton {
+//        let facebookLoginButton = FBLoginButton()
+//        facebookLoginButton.permissions = ["public_profile", "email"]
+//        facebookLoginButton.delegate = context.coordinator
+//
         
+        let facebookLoginButton = UIButton()
+        facebookLoginButton.setImage(UIImage(named: "facebookLoginButton"), for: .normal)
+        facebookLoginButton.addTarget(context.coordinator, action: #selector(Coordinator.handleLogin(_:)), for: .touchUpInside)
         return facebookLoginButton
     }
     
-    func updateUIView(_ uiView: FBButton, context: Context) {
-        
+    func updateUIView(_ uiView: UIButton, context: Context) {
     }
     
-    class Coordinator: NSObject, LoginButtonDelegate {
+    class Coordinator: NSObject {
         
         
         var button: FacebookLoginButton
@@ -395,61 +406,67 @@ struct FacebookLoginButton: UIViewRepresentable {
             self.button = button
         }
         
-        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-            if error != nil {
-            
-               return
-            }
-            
-            
-            
-            
-            if let facebookId = AccessToken.current?.userID {
+        @objc func handleLogin(_ sender: UIButton) {
+            let loginManager = LoginManager()
+            loginManager.logIn(permissions: ["public_profile"], viewController: nil){ loginResult in
                 
-                let params = [
-                    "id" : facebookId,
-                    "idType" : "FACEBOOK",
-                    "email": nil,
-                    "password": nil
-                ]
-                
-                DispatchQueue.main.async {
-                        requestLogIn(params: params, finished: { result in
+                switch loginResult {
+                case .failed(let error):
+                    print(error)
+                case .cancelled:
+                    print("User cancelled login.")
+                case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                    print("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
+                    GraphRequest(graphPath: "me", parameters: ["fields": "id"]).start(completionHandler: { (connection, result, error) -> Void in
+                        if (error == nil){
+                            let fbDetails = result as! NSDictionary
+                            print(fbDetails)
                             
-                            
-                    
-                            switch result.statusCode {
-                            case "200" :
-                                self.button.loginResult.showAlert = false
-                                handleLogInResult(result)
-                                self.button.showLoginView?.wrappedValue = false
+                            if let facebookId = fbDetails["id"] as? String{
+                                let params = [
+                                    "id" : facebookId,
+                                    "idType" : "FACEBOOK",
+                                    "email": nil,
+                                    "password": nil
+                                ]
                                 
-                                break
-                                
-                                
-                            case "201" :
-                                self.button.loginResult.showAlert = true
-                                break
-                                
-                            case "202" :
-                                self.button.loginResult.showAlert = true
-                                break
-                                
-                            default:
-                                break
+                                DispatchQueue.main.async {
+                                        requestLogIn(params: params, finished: { result in
+                                            
+                                            
+                                    
+                                            switch result.statusCode {
+                                            case "200" :
+                                                self.button.loginResult.showAlert = false
+                                                handleLogInResult(result)
+                                                self.button.showLoginView?.wrappedValue = false
+                                                
+                                                break
+                                                
+                                                
+                                            case "201" :
+                                                self.button.loginResult.showAlert = true
+                                                break
+                                                
+                                            case "202" :
+                                                self.button.loginResult.showAlert = true
+                                                break
+                                                
+                                            default:
+                                                break
+                                            }
+                                            self.button.loginResult.facebookId = facebookId
+                                            self.button.loginResult.statusCode = result.statusCode
+                                        })
+                                }
                             }
-                            self.button.loginResult.facebookId = facebookId
-                            self.button.loginResult.statusCode = result.statusCode
-                        })
+                        }
+                    })
                 }
-                
             }
-            
-            
+
         }
         
-        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-            
-        }
+        
     }
 }
