@@ -67,23 +67,16 @@ struct ReservationView: View {
                             
                         }
                         .frame(width: proxy.size.width * 0.8, height: 130)
-                        
-                        
+
                     }
                     
                     Spacer()
                 }
-                
-                
-                
-                
-                
             }
-            
-            
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
         }
-        
-        
     }
     
     private var EnteringTime: some View {

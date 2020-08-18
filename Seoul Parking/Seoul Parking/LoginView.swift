@@ -29,10 +29,10 @@ struct LoginView: View {
                 
                 NavigationLink(destination: EmailLoginView(), isActive: self.$showEmailLoginView){
                     Button(action: {
-                        self.showEmailLoginView.toggle()
+                        self.showEmailLoginView = true
                     }){
                         Image("emailLoginButton")
-                            .background(Color.white)
+                            
                     }
                 }
                 
@@ -51,17 +51,17 @@ struct LoginView: View {
                 KakaoLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
-                    .aspectRatio(contentMode: ContentMode.fit)
+                    
                 
                 NaverLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
-                    .aspectRatio(contentMode: .fit)
                     .padding(.top, 30)
-                    .aspectRatio(contentMode: ContentMode.fit)
+                    
                 
                 FacebookLoginButton(loginResult: self.$loginResult)
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarTitle("로그인", displayMode: .inline)
@@ -89,6 +89,7 @@ struct LoginView: View {
         
         }
         
+        
     }
     
 }
@@ -115,7 +116,7 @@ struct KakaoLoginButton: UIViewRepresentable {
         
         let kakaoLoginButton = UIButton()
         kakaoLoginButton.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
-        kakaoLoginButton.addTarget(context.coordinator, action: #selector(Coordinator.login(_:)), for: .touchUpInside)
+        kakaoLoginButton.addTarget(context.coordinator, action: #selector(context.coordinator.login(_:)), for: .touchUpInside)
         return kakaoLoginButton
     }
     
@@ -159,10 +160,10 @@ struct KakaoLoginButton: UIViewRepresentable {
                         if error != nil {
                             
                         }else{
-                            print(me! as KOUserMe)
+                            
                             
                             if let myinfo = me as KOUserMe? {
-                                print(myinfo.id as Any)
+                                
                                 
                                 if let myKakaoId = myinfo.id {
                                     self.button.loginResult.kakaoId = myKakaoId.description
@@ -372,7 +373,7 @@ struct NaverLoginButton: UIViewRepresentable {
 struct FacebookLoginButton: UIViewRepresentable {
    
     
-    typealias UIViewType = UIButton
+    //typealias UIViewType = UIButton
     @Binding var loginResult: LoginResult
     @Environment(\.showLoginView) var showLoginView
     
