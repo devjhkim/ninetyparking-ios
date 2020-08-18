@@ -24,7 +24,7 @@ struct ParkingSpaceInfoView: View {
             
             
             .onTapGesture {
-                print("Tap tap")
+                
                 self.showParkingSpaceInfoView?.wrappedValue = false
             }
             
@@ -110,35 +110,19 @@ struct ParkingSpaceInfoView: View {
                 Spacer()
                 
                 Button(action:{self.showParkingSpaceInfoView?.wrappedValue = false}){
-                    Text("닫기")
-                    .fontWeight(.bold)
-                    .font(.system(size: 15))
-                    .foregroundColor(.red)
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.red, lineWidth: 2)
-                    )
+                    Image("closeButton")
+
                 }
-                    
-                
-                
-                
+
                 Spacer()
                 
                 Button(action:{
+                    self.showParkingSpaceInfoView?.wrappedValue = false
                     self.showAvailableTimeView?.wrappedValue = true
                 }){
-                    Text("예약하기")
-                        
-                    .fontWeight(.bold)
-                    .font(.system(size: 15))
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
                     
-                    .cornerRadius(20)
-                    
+                    Image("reserveButton")
+
                 }
                
                 

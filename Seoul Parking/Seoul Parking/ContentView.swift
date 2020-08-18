@@ -33,9 +33,9 @@ struct ContentView: View {
     var profileButton: some View {
         Button(action: {}){
             Image(systemName: "person.crop.circle")
-            .imageScale(.large)
-            .accessibility(label: Text("User Profile"))
-            .padding()
+                .imageScale(.large)
+                .accessibility(label: Text("User Profile"))
+                .padding()
         }
     }
     
@@ -47,90 +47,99 @@ struct ContentView: View {
             .onEnded { _ in
                 self.showMenu = false
         }
-
+        
         let tap = TapGesture()
             .onEnded { _ in
                 self.showMenu = false
-
-            }
-        
-        
-        return NavigationView {
-            
-
-            
-            GeometryReader(){  reader in
                 
-                ZStack(alignment: .leading) {
-
-                    NavigationLink(destination: AvailableHoursView().environment(\.selectedParkingSpace, self.$selectedParkingSpace), isActive: self.$showAvailableTimeView){
-                        EmptyView()
-                    }.hidden()
+        }
+        
+        
+        return ZStack{
+            
+            
+            
+            NavigationView {
+                
+                
+                
+                GeometryReader(){  reader in
                     
-                    GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
-                        .edgesIgnoringSafeArea(.bottom)
-                        .environmentObject(self.lot)
-                        .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
-                        .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
+                    ZStack(alignment: .leading) {
                         
+                        NavigationLink(destination: AvailableHoursView().environment(\.selectedParkingSpace, self.$selectedParkingSpace), isActive: self.$showAvailableTimeView){
+                            EmptyView()
+                        }.hidden()
                         
-                    if self.showMenu {
-                        
-                        MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, width: reader.size.width * 0.7, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
-                        .gesture(tap)
-                    }
-                    
-                    if self.showParkingSpaceInfoView {
-                        ParkingSpaceInfoView()
+                        GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
+                            .edgesIgnoringSafeArea(.bottom)
+                            .environmentObject(self.lot)
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
-                            .environment(\.showAvailableTimeView, self.$showAvailableTimeView)
+                        
+                        
+                        if self.showMenu {
                             
+                            MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, width: reader.size.width * 0.7, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
+                                .gesture(tap)
+                        }
+                        
+                        
+                        
+                    }
+                    .gesture(drag)
+                    .sheet(isPresented:self.$auxLoginViewType.showLoginView){
+                        LoginView()
+                            .environment(\.showLoginView, self.$auxLoginViewType.showLoginView)
                     }
                     
                 }
-                .gesture(drag)
-                .sheet(isPresented:self.$auxLoginViewType.showLoginView){
-                    LoginView()
-                        .environment(\.showLoginView, self.$auxLoginViewType.showLoginView)
+                .navigationBarTitle(Text(APP_TITLE), displayMode: .inline)
+                .navigationBarItems(leading:
+                    Button(action: {
+                        withAnimation {
+                            self.showMenu.toggle()
+                        }
+                    }){
+                        Image(systemName: "line.horizontal.3")
+                            .renderingMode(.template)
+                            .foregroundColor(.black)
+                            .imageScale(.large)
+                            .padding()
+                    }
+                )
+                    .background(NavigationConfigurator {nc in
+                        nc.navigationBar.barTintColor = .white
+                        nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+                    })
+                    .onAppear(perform: loadData)
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .preferredColorScheme(.dark)
+            .onAppear(perform: {
+                if let isLoggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
+                    if isLoggedIn {
+                        UserInfo.getInstance.isLoggedIn = true
+                        if let name = UserDefaults.standard.value(forKey: "userName") as? String, let userUniqueId = UserDefaults.standard.value(forKey: "userUniqueId") as? String {
+                            UserInfo.getInstance.name = name
+                            UserInfo.getInstance.uniqueId = userUniqueId
+                        }
+                    }
                 }
+            })
+            
+            
+            if self.showParkingSpaceInfoView {
+                ParkingSpaceInfoView()
+                    .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
+                    .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
+                    .environment(\.showAvailableTimeView, self.$showAvailableTimeView)
                 
             }
-            .navigationBarTitle(Text(APP_TITLE), displayMode: .inline)
-            .navigationBarItems(leading:
-                Button(action: {
-                    withAnimation {
-                        self.showMenu.toggle()
-                    }
-                }){
-                    Image(systemName: "line.horizontal.3")
-                        .renderingMode(.template)
-                        .foregroundColor(.black)
-                         .imageScale(.large)
-                    .padding()
-                }
-            )
-                .background(NavigationConfigurator {nc in
-                    nc.navigationBar.barTintColor = .white
-                    nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-                })
-            .onAppear(perform: loadData)
         }
-    .navigationViewStyle(StackNavigationViewStyle())
-    .preferredColorScheme(.dark)
-    .onAppear(perform: {
-        if let isLoggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
-            if isLoggedIn {
-                UserInfo.getInstance.isLoggedIn = true
-                if let name = UserDefaults.standard.value(forKey: "userName") as? String, let userUniqueId = UserDefaults.standard.value(forKey: "userUniqueId") as? String {
-                    UserInfo.getInstance.name = name
-                    UserInfo.getInstance.uniqueId = userUniqueId
-                }
-            }
-        }
-    })
-    }
 
+    }
+    
     
     func loadData() {
         
@@ -142,21 +151,19 @@ struct ContentView: View {
             if data == nil {
                 return
             }
-
+            
             
             
             do{
                 if let rawData = data {
                     let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
 
-                    
-
                     DispatchQueue.main.async {
                         self.lot.spaces = parkingSpaces
                     }
-
+                    
                 }
-
+                
             }catch{
                 fatalError(error.localizedDescription)
             }

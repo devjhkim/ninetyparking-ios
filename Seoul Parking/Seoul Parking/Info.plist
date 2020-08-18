@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakao32a105c88ee033a2d479e9f8fa9a920a</string>
+				<string>kakaoe0da816370091f321c148544edf371c2</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,20 +37,22 @@
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb570055617204209</string>
+				<string>fb2584231118496788</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>570055617204209</string>
+	<string>2584231118496788</string>
 	<key>FacebookDisplayName</key>
 	<string>나인티 파킹</string>
 	<key>KAKAO_APP_KEY</key>
-	<string>32a105c88ee033a2d479e9f8fa9a920a</string>
+	<string>e0da816370091f321c148544edf371c2</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
@@ -59,7 +61,7 @@
 		<string>naversearchthirdlogin</string>
 		<string>kakaokompassauth</string>
 		<string>storykompassauth</string>
-		<string>kakao32a105c88ee033a2d479e9f8fa9a920a</string>
+		<string>kakaoe0da816370091f321c148544edf371c2</string>
 		<string>kakaolink</string>
 		<string>kakaotalk-5.9.7</string>
 		<string>fbapi</string>

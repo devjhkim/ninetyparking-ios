@@ -9,8 +9,8 @@
 import SwiftUI
 
 public let GOOGLE_MAPS_API_KEY = "AIzaSyBlalpyrjUftPgmWiQhWeEIxlbvv2JxqDg"
-public let KAKAO_API_KEY = "32a105c88ee033a2d479e9f8fa9a920a"
-public let SERVER_IP = "10.8.3.28"
+public let KAKAO_API_KEY = "e0da816370091f321c148544edf371c2"
+public let SERVER_IP = "10.8.7.73"
 public let APP_TITLE = "나인티 파킹"
    
 struct APP_SERVER {

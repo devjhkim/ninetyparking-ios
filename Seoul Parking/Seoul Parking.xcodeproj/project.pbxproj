@@ -802,7 +802,7 @@
 					"\"UIKit\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.kr.ninety.parking;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.ninety.parking;
 				PRODUCT_NAME = "나인티 파킹";
 				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -880,7 +880,7 @@
 					"\"UIKit\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.kr.ninety.parking;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.ninety.parking;
 				PRODUCT_NAME = "나인티 파킹";
 				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
