@@ -20,6 +20,9 @@ struct EmailLoginView: View {
     var body: some View {
         ZStack{
             Color.white
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
             VStack{
                 HStack{
                    Text("이메일 주소")
@@ -65,7 +68,7 @@ struct EmailLoginView: View {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }){
-                        Text("취소")
+                        Image("cancelButton")
                     }
                     
                     
@@ -90,9 +93,7 @@ struct EmailLoginView: View {
                         ]
                         
                         requestLogIn(params: params, finished: { result in
-                                
-                                
-                        
+
                                 switch result.statusCode {
                                 case "200" :
                                     
@@ -124,7 +125,7 @@ struct EmailLoginView: View {
                                 
                             })
                     }){
-                        Text("로그인")
+                        Image("loginButton")
                     }
                     .padding(.leading, 50)
                 }
@@ -136,6 +137,7 @@ struct EmailLoginView: View {
                 Spacer()
             }
             .padding()
+            
           
         }
     }
