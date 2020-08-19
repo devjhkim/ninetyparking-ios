@@ -12,7 +12,7 @@ struct ParkingSpaceInfoView: View {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
     @Environment(\.showAvailableTimeView) var showAvailableTimeView
-    
+     
     var body: some View {
         
         ZStack{

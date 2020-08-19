@@ -12,15 +12,15 @@ import Combine
 struct MenuView: View {
     
     @State var loginText = "로그인"
-    @State var showLonginView = false
+    
     
     @Binding var showMenu : Bool
     @Binding var auxLoginView: AuxLoginViewType
-    @State var width: CGFloat = 0
+    //@State var width: CGFloat = 0
     @State var size: CGSize = .zero
     @State var isLoggedIn = false
     
-    
+    @Environment(\.showLoginView) var showLoginView
     
     var body: some View {
         ZStack {
@@ -66,8 +66,8 @@ struct MenuView: View {
                                 .font(.headline)
                                 .onTapGesture(perform: {
                                     
-                                    self.showLonginView = false
-                                    self.auxLoginView.showLoginView = true
+                                    
+                                    self.showLoginView?.wrappedValue = true
                                     self.showMenu = false
                                     
                                 })
@@ -76,9 +76,7 @@ struct MenuView: View {
                         Spacer()
                     }
                     .padding(.top, 100)
-                    .sheet(isPresented: self.$showLonginView){
-                        LoginView()
-                    }
+                    
                     
                     
                     HStack {
@@ -138,7 +136,7 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView(showMenu: .constant(false), auxLoginView: .constant(AuxLoginViewType()), width: 0)
+        MenuView(showMenu: .constant(false), auxLoginView: .constant(AuxLoginViewType()))
     }
 }
 

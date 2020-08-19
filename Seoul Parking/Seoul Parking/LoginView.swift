@@ -22,12 +22,13 @@ struct LoginView: View {
     
     @State var loginResult = LoginResult()
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.showLoginView) var showLoginView
     
     var body: some View {
         NavigationView {
             VStack {
                 
-                NavigationLink(destination: EmailLoginView(), isActive: self.$showEmailLoginView){
+                NavigationLink(destination: EmailLoginView().environment(\.showLoginView, self.showLoginView), isActive: self.$showEmailLoginView){
                     Button(action: {
                         self.showEmailLoginView = true
                     }){

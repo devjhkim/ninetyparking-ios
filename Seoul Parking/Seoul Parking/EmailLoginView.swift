@@ -16,6 +16,7 @@ struct EmailLoginView: View {
     @State var showPasswordAlert = false
     @State var showPassword = false
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.showLoginView) var showLoginView
     
     var body: some View {
         ZStack{
@@ -107,6 +108,8 @@ struct EmailLoginView: View {
                                     UserInfo.getInstance.uniqueId = userUniqueId
                                     UserInfo.getInstance.name = name
                                     UserInfo.getInstance.isLoggedIn = true
+                                    
+                                    self.showLoginView?.wrappedValue = false
                                     
                                     self.presentationMode.wrappedValue.dismiss()
                                     

@@ -80,17 +80,18 @@ struct ContentView: View {
                         
                         if self.showMenu {
                             
-                            MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, width: reader.size.width * 0.7, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
+                            MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
                                 .gesture(tap)
+                                .environment(\.showLoginView, self.$showLoginView)
                         }
                         
                         
                         
                     }
                     .gesture(drag)
-                    .sheet(isPresented:self.$auxLoginViewType.showLoginView){
+                    .sheet(isPresented:self.$showLoginView){
                         LoginView()
-                            .environment(\.showLoginView, self.$auxLoginViewType.showLoginView)
+                            .environment(\.showLoginView, self.$showLoginView)
                     }
                     
                 }
