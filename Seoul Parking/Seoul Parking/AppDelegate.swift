@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_MAPS_API_KEY)
-        GMSPlacesClient.provideAPIKey(GOOGLE_MAPS_API_KEY)
+        GMSPlacesClient.provideAPIKey(GOOGLE_PLACES_API_KEY)
         
         //Naver Login
         let instance = NaverThirdPartyLoginConnection.getSharedInstance()

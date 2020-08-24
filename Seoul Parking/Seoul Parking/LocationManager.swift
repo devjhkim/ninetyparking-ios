@@ -60,6 +60,7 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         self.location = location
         self.geocode()
+        manager.stopUpdatingLocation()
     }
 }
 

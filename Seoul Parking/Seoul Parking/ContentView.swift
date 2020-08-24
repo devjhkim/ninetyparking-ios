@@ -28,6 +28,7 @@ struct ContentView: View {
     @State var showLoginView = false
     @State var showParkingSpaceInfoView = false
     @State var showAvailableTimeView = false
+    @State var showPlaceSearchView = false
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     
     var profileButton: some View {
@@ -71,6 +72,11 @@ struct ContentView: View {
                             EmptyView()
                         }.hidden()
                         
+//                        NavigationLink(destination: PlaceSearchView(), isActive: self.$showPlaceSearchView){
+//                            EmptyView()
+//                        }.hidden()
+                        
+                        
                         GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
                             .edgesIgnoringSafeArea(.bottom)
                             .environmentObject(self.lot)
@@ -86,12 +92,21 @@ struct ContentView: View {
                         }
                         
                         
+                       
+                        
                         
                     }
                     .gesture(drag)
                     .sheet(isPresented:self.$showLoginView){
                         LoginView()
                             .environment(\.showLoginView, self.$showLoginView)
+                    }
+                    
+                    ZStack{
+                        EmptyView()
+                    }
+                    .sheet(isPresented: self.$showPlaceSearchView){
+                        PlaceSearchView()
                     }
                     
                 }
@@ -107,13 +122,22 @@ struct ContentView: View {
                             .foregroundColor(.black)
                             .imageScale(.large)
                             .padding()
+                    },
+                                    
+                    trailing: Button(action: {self.showPlaceSearchView = true}){
+                        Image(systemName: "magnifyingglass")
+                            .renderingMode(.template)
+                            .foregroundColor(.black)
+                            .imageScale(.large)
+                            .padding()
+                                        
                     }
                 )
-                    .background(NavigationConfigurator {nc in
-                        nc.navigationBar.barTintColor = .white
-                        nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-                    })
-                    .onAppear(perform: loadData)
+                .background(NavigationConfigurator {nc in
+                    nc.navigationBar.barTintColor = .white
+                    nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+                })
+                .onAppear(perform: loadData)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .preferredColorScheme(.dark)
@@ -137,8 +161,10 @@ struct ContentView: View {
                     .environment(\.showAvailableTimeView, self.$showAvailableTimeView)
                 
             }
-        }
+            
 
+        }
+        
     }
     
     
@@ -158,7 +184,7 @@ struct ContentView: View {
             do{
                 if let rawData = data {
                     let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
-
+                    
                     DispatchQueue.main.async {
                         self.lot.spaces = parkingSpaces
                     }

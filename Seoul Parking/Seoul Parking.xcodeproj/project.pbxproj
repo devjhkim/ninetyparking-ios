@@ -11,6 +11,7 @@
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
 		16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C4C824E113670015DCAC /* ReservationView.swift */; };
 		16A0C50824EB84A50015DCAC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C50724EB84A50015DCAC /* Extension.swift */; };
+		16A0C54624F36B690015DCAC /* PlaceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C54524F36B690015DCAC /* PlaceSearchView.swift */; };
 		16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF295D24B6E47100836C81 /* AppDelegate.swift */; };
 		16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF295F24B6E47100836C81 /* SceneDelegate.swift */; };
 		16AF296224B6E47100836C81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AF296124B6E47100836C81 /* ContentView.swift */; };
@@ -80,6 +81,7 @@
 		16A0C4C824E113670015DCAC /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		16A0C50624E627B40015DCAC /* 나인티 파킹.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "나인티 파킹.entitlements"; sourceTree = "<group>"; };
 		16A0C50724EB84A50015DCAC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		16A0C54524F36B690015DCAC /* PlaceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchView.swift; sourceTree = "<group>"; };
 		16AF295A24B6E47100836C81 /* 나인티 파킹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "나인티 파킹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AF295D24B6E47100836C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16AF295F24B6E47100836C81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				16AF295F24B6E47100836C81 /* SceneDelegate.swift */,
 				16FB34B424C6C868007A05F9 /* SignupView.swift */,
 				16AF298D24B6F19D00836C81 /* Util */,
+				16A0C54524F36B690015DCAC /* PlaceSearchView.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				16AF299524B8236400836C81 /* MenuView.swift in Sources */,
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
+				16A0C54624F36B690015DCAC /* PlaceSearchView.swift in Sources */,
 				16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */,
 				16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */,
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,
