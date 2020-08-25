@@ -15,8 +15,9 @@ struct GoogleMapsView: UIViewRepresentable {
     
     private let zoom: Float = 15.0
     
-    @Binding var location: CLLocation
+    
     @EnvironmentObject var lot: ParkingLot
+    @EnvironmentObject var centerLocation: CenterLocation
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
     
@@ -28,17 +29,19 @@ struct GoogleMapsView: UIViewRepresentable {
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 15.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.delegate = context.coordinator
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
-        let camera = GMSCameraPosition.camera(withLatitude: self.location.latitude, longitude: self.location.longitude, zoom: 15.0)
+        let camera = GMSCameraPosition.camera(withLatitude: self.centerLocation.location.latitude, longitude: self.centerLocation.location.longitude, zoom: 15.0)
         
         mapView.animate(to: camera)
         mapView.clear()
         
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: self.location.latitude, longitude: self.location.longitude)
+        marker.position = CLLocationCoordinate2D(latitude: self.centerLocation.location.latitude, longitude: self.centerLocation.location.longitude)
         marker.map = mapView
         
         lot.spaces.forEach { space in
@@ -86,6 +89,6 @@ struct GoogleMapsView_Previews: PreviewProvider {
     var parkingSpaces = [ParkingSpace]()
     
     static var previews: some View {
-        GoogleMapsView(location: .constant(CLLocation()) )
+        GoogleMapsView()
     }
 }

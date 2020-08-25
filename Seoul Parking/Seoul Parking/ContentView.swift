@@ -21,7 +21,8 @@ struct AuxLoginViewType {
 }
 
 struct ContentView: View {
-    @ObservedObject var locationManager = LocationManager()
+
+    @EnvironmentObject var centerLocation : CenterLocation
     @EnvironmentObject var lot: ParkingLot
     @State var showMenu = false
     @State var auxLoginViewType: AuxLoginViewType = AuxLoginViewType()
@@ -39,9 +40,8 @@ struct ContentView: View {
                 .padding()
         }
     }
+
     
-    var currLng : String { return("\(locationManager.location?.longitude ?? 0)")}
-    var currLat: String { return("\(locationManager.location?.latitude ?? 0)")}
     var body: some View {
         
         let drag = DragGesture()
@@ -54,8 +54,7 @@ struct ContentView: View {
                 self.showMenu = false
                 
         }
-        
-        
+                
         return ZStack{
             
             
@@ -72,14 +71,12 @@ struct ContentView: View {
                             EmptyView()
                         }.hidden()
                         
-//                        NavigationLink(destination: PlaceSearchView(), isActive: self.$showPlaceSearchView){
-//                            EmptyView()
-//                        }.hidden()
                         
-                        
-                        GoogleMapsView(location: .constant(self.locationManager.location ?? CLLocation()))
+                                        
+                        GoogleMapsView()
                             .edgesIgnoringSafeArea(.bottom)
                             .environmentObject(self.lot)
+                            .environmentObject(self.centerLocation)
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
                         
@@ -106,7 +103,8 @@ struct ContentView: View {
                         EmptyView()
                     }
                     .sheet(isPresented: self.$showPlaceSearchView){
-                        PlaceSearchView()
+                        PlaceAutocompleteSearch()
+                            .environmentObject(self.centerLocation)
                     }
                     
                 }
