@@ -15,6 +15,7 @@ struct PlaceAutocompleteSearch: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var centerLocation: CenterLocation
+    @EnvironmentObject var lot: ParkingLot
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -24,9 +25,6 @@ struct PlaceAutocompleteSearch: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> GMSAutocompleteViewController {
         let searchController = GMSAutocompleteViewController()
         searchController.delegate = context.coordinator
-        let resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController.delegate = context.coordinator
-        
         
         return searchController
     }
@@ -35,7 +33,7 @@ struct PlaceAutocompleteSearch: UIViewControllerRepresentable {
         
     }
     
-    class Coordinator: NSObject, GMSAutocompleteResultsViewControllerDelegate, GMSAutocompleteViewControllerDelegate {
+    class Coordinator: NSObject, GMSAutocompleteViewControllerDelegate {
         
         var controller: PlaceAutocompleteSearch
         
@@ -48,6 +46,48 @@ struct PlaceAutocompleteSearch: UIViewControllerRepresentable {
             
             self.controller.presentationMode.wrappedValue.dismiss()
             print(place)
+            
+            let params = [
+                "latitude" : place.coordinate.latitude,
+                "longitude" : place.coordinate.longitude
+            ]
+            
+            guard let url = URL(string: REST_API.SPACE.FETCH) else {
+                return
+            }
+            
+            do{
+                let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+                
+                var request = URLRequest(url: url)
+                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                request.httpMethod = "POST"
+                request.httpBody = jsonParams
+                
+                URLSession.shared.dataTask(with: request){(data, response, error) in
+                    if data == nil {
+                        return
+                    }
+                    
+                    do{
+                        if let rawData = data {
+                            let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
+                            
+                            DispatchQueue.main.async {
+                                self.controller.lot.spaces = parkingSpaces
+                            }
+                            
+                        }
+                        
+                    }catch{
+                        fatalError(error.localizedDescription)
+                    }
+                }.resume()
+                
+                
+            }catch{
+                fatalError(error.localizedDescription)
+            }
         }
         
         func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -59,19 +99,6 @@ struct PlaceAutocompleteSearch: UIViewControllerRepresentable {
             
         }
         
-        func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-            print(place)
-        }
-        
-        func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
-            
-        }
-        
-        func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didSelect prediction: GMSAutocompletePrediction) -> Bool {
-            print(prediction)
-            
-            return true
-        }
         
         
         

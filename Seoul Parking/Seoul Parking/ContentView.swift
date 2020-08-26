@@ -54,7 +54,11 @@ struct ContentView: View {
                 self.showMenu = false
                 
         }
-                
+        
+        if UserInfo.getInstance.isLoggedIn {
+            
+        }
+        
         return ZStack{
             
             
@@ -105,6 +109,7 @@ struct ContentView: View {
                     .sheet(isPresented: self.$showPlaceSearchView){
                         PlaceAutocompleteSearch()
                             .environmentObject(self.centerLocation)
+                            .environmentObject(self.lot)
                     }
                     
                 }
@@ -135,7 +140,7 @@ struct ContentView: View {
                     nc.navigationBar.barTintColor = .white
                     nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
                 })
-                .onAppear(perform: loadData)
+                .onAppear(perform: fetchParkingSpaces)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .preferredColorScheme(.dark)
@@ -160,39 +165,58 @@ struct ContentView: View {
                 
             }
             
-
+            LoginView()
         }
         
     }
     
     
-    func loadData() {
+    func fetchParkingSpaces() {
         
         guard let url = URL(string: REST_API.SPACE.FETCH) else {
             return
         }
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request){(data, response, error) in
-            if data == nil {
-                return
-            }
+        
+        let params = [
             
+            "latitude" : self.centerLocation.location.latitude,
+            "longitude" : self.centerLocation.location.longitude
+        ]
+        
+        do{
+            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+           
+            var request = URLRequest(url: url)
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
             
-            
-            do{
-                if let rawData = data {
-                    let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
-                    
-                    DispatchQueue.main.async {
-                        self.lot.spaces = parkingSpaces
+            URLSession.shared.dataTask(with: request){(data, response, error) in
+                if data == nil {
+                    return
+                }
+ 
+                do{
+                    if let rawData = data {
+                        let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
+                        
+                        DispatchQueue.main.async {
+                            self.lot.spaces = parkingSpaces
+                        }
+                        
                     }
                     
+                }catch{
+                    fatalError(error.localizedDescription)
                 }
-                
-            }catch{
-                fatalError(error.localizedDescription)
-            }
-        }.resume()
+            }.resume()
+            
+          
+        }catch{
+            fatalError(error.localizedDescription)
+        }
+        
+        
     }
 }
 
