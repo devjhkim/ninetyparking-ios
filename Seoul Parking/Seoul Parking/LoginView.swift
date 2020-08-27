@@ -24,6 +24,16 @@ struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.showLoginView) var showLoginView
     
+    init() {
+        
+        //UINavigationBar.appearance().backgroundColor = .white
+        //UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "HelveticaNeue", size: 30)!]
+        //UINavigationBar.appearance().shadowImage = UIImage()
+        //UINavigationBar.appearance().isTranslucent = false
+        
+
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -65,18 +75,7 @@ struct LoginView: View {
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationBarTitle("로그인", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }){
-                Text("닫기")
-            } )
-                .background(Color.white)
-                .background(NavigationConfigurator {nc in
-                    nc.navigationBar.barTintColor = .white
-                    nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-                })
-                
+            .navigationBarTitle(Text("로그인 해주세요"))
             .alert(isPresented: self.$loginResult.showAlert){
                 Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회원 가입을 해야 합니다."),
                       primaryButton: .cancel(Text("취소"), action: {}),
@@ -84,14 +83,51 @@ struct LoginView: View {
                         self.showSignupView = true
                 }))
             }
-            
-            
-            
-        
+
         }
         
         
     }
+    
+}
+
+struct LoginButtonsView: View {
+    @State var showEmailLoginView = false
+    @State var loginResult = LoginResult()
+    @Environment(\.showLoginView) var showLoginView
+    var body: some View {
+        VStack {
+            
+            NavigationLink(destination: EmailLoginView().environment(\.showLoginView, self.showLoginView), isActive: self.$showEmailLoginView){
+                Button(action: {
+                    self.showEmailLoginView = true
+                }){
+                    Image("emailLoginButton")
+                        
+                }
+            }
+            
+            
+            
+            
+            KakaoLoginButton(loginResult: self.$loginResult)
+                .frame(width: 200, height: 30)
+                .padding(.top, 30)
+                
+            
+            NaverLoginButton(loginResult: self.$loginResult)
+                .frame(width: 200, height: 30)
+                .padding(.top, 30)
+                
+            
+            FacebookLoginButton(loginResult: self.$loginResult)
+                .frame(width: 200, height: 30)
+                .padding(.top, 30)
+            
+        }
+    }
+    
+    
     
 }
 

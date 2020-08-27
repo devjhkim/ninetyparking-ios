@@ -18,6 +18,8 @@ struct EmailLoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.showLoginView) var showLoginView
     
+
+    
     var body: some View {
         ZStack{
             Color.white
