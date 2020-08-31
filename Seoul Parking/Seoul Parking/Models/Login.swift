@@ -8,6 +8,11 @@
 
 import Foundation
 
+
+class LogIn: ObservableObject {
+    @Published var isLoggedIn = UserInfo.getInstance.isLoggedIn
+}
+
 struct LoginData: Hashable, Codable {
     var userUniqueId: String
     var statusCode: String

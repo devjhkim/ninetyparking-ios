@@ -8,6 +8,9 @@
             <PersistentString
                value = "locationManager.location">
             </PersistentString>
+            <PersistentString
+               value = "self.logInData.isLoggedIn">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState

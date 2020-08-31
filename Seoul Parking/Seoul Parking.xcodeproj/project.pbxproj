@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
+		166D045624FCBE99009373E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166D045524FCBE99009373E8 /* MainView.swift */; };
 		16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C4C824E113670015DCAC /* ReservationView.swift */; };
 		16A0C50824EB84A50015DCAC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C50724EB84A50015DCAC /* Extension.swift */; };
 		16A0C54824F501590015DCAC /* CenterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C54724F501590015DCAC /* CenterLocation.swift */; };
@@ -79,6 +80,7 @@
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		166D045524FCBE99009373E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		16A0C4C824E113670015DCAC /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		16A0C50624E627B40015DCAC /* 나인티 파킹.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "나인티 파킹.entitlements"; sourceTree = "<group>"; };
 		16A0C50724EB84A50015DCAC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				16AF298D24B6F19D00836C81 /* Util */,
 				16A0C54924F51E5B0015DCAC /* PlaceAutocompleteSearch.swift */,
 				16A0C54724F501590015DCAC /* CenterLocation.swift */,
+				166D045524FCBE99009373E8 /* MainView.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
 				16A0C54824F501590015DCAC /* CenterLocation.swift in Sources */,
+				166D045624FCBE99009373E8 /* MainView.swift in Sources */,
 				16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */,
 				16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */,
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,

@@ -24,6 +24,7 @@ struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.showLoginView) var showLoginView
     
+    
     init() {
         
         //UINavigationBar.appearance().backgroundColor = .white
@@ -64,7 +65,7 @@ struct LoginView: View {
                     .padding(.top, 30)
                     
                 
-                NaverLoginButton(loginResult: self.$loginResult)
+                NaverLoginButton(loginResult: self.$loginResult)   
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                     

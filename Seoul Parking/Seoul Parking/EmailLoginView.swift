@@ -20,6 +20,8 @@ struct EmailLoginView: View {
     
 
     
+    @EnvironmentObject var ld: LogIn
+    
     var body: some View {
         ZStack{
             Color.white
@@ -114,6 +116,8 @@ struct EmailLoginView: View {
                                     self.showLoginView?.wrappedValue = false
                                     
                                     self.presentationMode.wrappedValue.dismiss()
+                                    
+                                    self.ld.isLoggedIn = true
                                     
                                     break
                                     
