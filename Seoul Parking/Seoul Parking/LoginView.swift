@@ -51,7 +51,7 @@ struct LoginView: View {
                 
                 
                 
-                NavigationLink(destination: SignupView(loginResult: self.$loginResult), isActive: self.$showSignupView){
+                NavigationLink(destination: SignupView(), isActive: self.$showSignupView){
                     Button(action: {
                         self.showSignupView.toggle()
                     }){
@@ -92,7 +92,7 @@ struct LoginView: View {
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationBarTitle(Text("로그인 해주세요"))
+            .navigationBarTitle(Text(""))
             .alert(isPresented: self.$loginResult.showAlert){
                 Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회원 가입을 해야 합니다."),
                       primaryButton: .cancel(Text("취소"), action: {}),

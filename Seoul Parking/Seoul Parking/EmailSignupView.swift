@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SignupView: View {
+struct EmailSignupView: View {
     @Binding var loginResult: LoginResult
     @State var name = ""
     @State var email = ""
@@ -30,141 +30,140 @@ struct SignupView: View {
         ZStack {
             Color.white
             
-            NavigationView{
-                VStack {
-                    HStack {
-                        Text("이름")
-                            .foregroundColor(Color.black)
-                        TextField("", text: $name)
-                            .foregroundColor(.black)
-                            .alert(isPresented: self.$showNameMinAlert){
-                                Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert = false}))
-                        }
+            VStack {
+                HStack {
+                    Text("이름")
+                        .foregroundColor(Color.black)
+                    TextField("", text: $name)
+                        .foregroundColor(.black)
+                        .alert(isPresented: self.$showNameMinAlert){
+                            Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert = false}))
                     }
-                    .padding()
-                    .background(Capsule().stroke(Color.black, lineWidth: 2))
-                    
-                    HStack{
-                        Text("이메일 주소")
-                            .foregroundColor(Color.black)
-                        TextField("", text: self.$email)
-                            .foregroundColor(.black)
-                            .keyboardType(.emailAddress)
-                            
-                            .alert(isPresented: self.$showEmailAlert){
-                                Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
-                        }
-                        
-                    }
-                    .padding()
-                    .background(Capsule().stroke(Color.black, lineWidth: 2))
-                    
-                    HStack {
-                        Text("비밀번호")
-                            .foregroundColor(Color.black)
-                        //                        if showPassword {
-                        //                            TextField("", text: $password)
-                        //                                .foregroundColor(.black)
-                        //                        } else {
-                        //                            SecureField("", text: $password)
-                        //                                .textContentType(.newPassword)
-                        //                                .foregroundColor(.black)
-                        //                        }
-                        
-                        SecureField("", text: $password)
-                            .textContentType(.newPassword)
-                            .foregroundColor(.black)
-                        
-                        Button(action: {self.showPassword.toggle()}) {
-                            
-                            Image(systemName: "eye")
-                                .renderingMode(.template)
-                                .foregroundColor(Color.black)
-                            
-                        }
-                    }
-                    .padding()
-                    .background(Capsule().stroke(Color.black, lineWidth: 2))
-                    .alert(isPresented: self.$showPasswordLengthAlert){
-                        Alert(title: Text(""), message: Text("비밀번호 길이는 4 ~ 8글자 입니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordLengthAlert = false}))
-                    }
-                    
-                    HStack{
-                        Text("비밀번호 확인")
-                            .foregroundColor(.black)
-                        //                        if showConfirmPassword {
-                        //                           TextField("", text: $confirmPassword)
-                        //                               .foregroundColor(.black)
-                        //                       } else {
-                        //                           SecureField("", text: $confirmPassword)
-                        //                                .textContentType(.newPassword)
-                        //                               .foregroundColor(.black)
-                        //                       }
-                        //
-                        
-                        SecureField("", text: $confirmPassword)
-                            .textContentType(.newPassword)
-                            .foregroundColor(.black)
-                        
-                        Button(action: {self.showConfirmPassword.toggle()}) {
-                            
-                            Image(systemName: "eye")
-                                .renderingMode(.template)
-                                .foregroundColor(Color.black)
-                            
-                        }
-                    }
-                    .padding()
-                    .background(Capsule().stroke(Color.black, lineWidth: 2))
-                    .alert(isPresented: self.$showPasswordNotMatchingAlert){
-                        Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
-                    }
-                    
-                    HStack {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }){
-                            Image("cancelButton")
-                        }
-                        
-                        Button(action: {
-                            self.signUp()
-                        }){
-                            Image("signupButton")
-                        }
-                        .padding(.leading, 50)
-                    }
-                    .padding()
-                    .alert(isPresented: self.$showAlert){
-                        var message = ""
-                        
-                        switch self.alertType {
-                        case "201":
-                            message = "회원 가입에 실패하였습니다."
-                            break
-                            
-                        case "202":
-                            message = "이미 가입된 사용자입니다."
-                            break
-                            
-                            
-                        case "500":
-                            message = "서버에러"
-                            break
-                            
-                        default:
-                            
-                            break
-                        }
-                        
-                        return Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("확인"), action: {self.showAlert = false}))
-                    }
-                    
-                    Spacer()
                 }
                 .padding()
-            .navigationBarTitle(Text("회원가입"))
+                .background(Capsule().stroke(Color.black, lineWidth: 2))
+                
+                HStack{
+                    Text("이메일 주소")
+                        .foregroundColor(Color.black)
+                    TextField("", text: self.$email)
+                        .foregroundColor(.black)
+                        .keyboardType(.emailAddress)
+                        
+                        .alert(isPresented: self.$showEmailAlert){
+                            Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
+                    }
+                    
+                }
+                .padding()
+                .background(Capsule().stroke(Color.black, lineWidth: 2))
+                
+                HStack {
+                    Text("비밀번호")
+                        .foregroundColor(Color.black)
+                    //                        if showPassword {
+                    //                            TextField("", text: $password)
+                    //                                .foregroundColor(.black)
+                    //                        } else {
+                    //                            SecureField("", text: $password)
+                    //                                .textContentType(.newPassword)
+                    //                                .foregroundColor(.black)
+                    //                        }
+                    
+                    SecureField("", text: $password)
+                        .textContentType(.newPassword)
+                        .foregroundColor(.black)
+                    
+                    Button(action: {self.showPassword.toggle()}) {
+                        
+                        Image(systemName: "eye")
+                            .renderingMode(.template)
+                            .foregroundColor(Color.black)
+                        
+                    }
+                }
+                .padding()
+                .background(Capsule().stroke(Color.black, lineWidth: 2))
+                .alert(isPresented: self.$showPasswordLengthAlert){
+                    Alert(title: Text(""), message: Text("비밀번호 길이는 4 ~ 8글자 입니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordLengthAlert = false}))
+                }
+                
+                HStack{
+                    Text("비밀번호 확인")
+                        .foregroundColor(.black)
+                    //                        if showConfirmPassword {
+                    //                           TextField("", text: $confirmPassword)
+                    //                               .foregroundColor(.black)
+                    //                       } else {
+                    //                           SecureField("", text: $confirmPassword)
+                    //                                .textContentType(.newPassword)
+                    //                               .foregroundColor(.black)
+                    //                       }
+                    //
+                    
+                    SecureField("", text: $confirmPassword)
+                        .textContentType(.newPassword)
+                        .foregroundColor(.black)
+                    
+                    Button(action: {self.showConfirmPassword.toggle()}) {
+                        
+                        Image(systemName: "eye")
+                            .renderingMode(.template)
+                            .foregroundColor(Color.black)
+                        
+                    }
+                }
+                .padding()
+                .background(Capsule().stroke(Color.black, lineWidth: 2))
+                .alert(isPresented: self.$showPasswordNotMatchingAlert){
+                    Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
+                }
+                
+                HStack {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }){
+                        Image("cancelButton")
+                    }
+                    
+                    Button(action: {
+                        self.signUp()
+                    }){
+                        Image("signupButton")
+                    }
+                    .padding(.leading, 50)
+                }
+                .padding()
+                .alert(isPresented: self.$showAlert){
+                    var message = ""
+                    
+                    switch self.alertType {
+                    case "201":
+                        message = "회원 가입에 실패하였습니다."
+                        break
+                        
+                    case "202":
+                        message = "이미 가입된 사용자입니다."
+                        break
+                        
+                        
+                    case "500":
+                        message = "서버에러"
+                        break
+                        
+                    default:
+                        
+                        break
+                    }
+                    
+                    return Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("확인"), action: {self.showAlert = false}))
+                }
+                
+                Spacer()
+                
+                Spacer()
             }
+            .padding()
             
             
         }
@@ -293,8 +292,8 @@ struct SignupView: View {
     }
 }
 
-struct SignupView_Previews: PreviewProvider {
+struct EmailSignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView(loginResult: .constant(LoginResult()))
+        EmailSignupView(loginResult: .constant(LoginResult()))
     }
 }
