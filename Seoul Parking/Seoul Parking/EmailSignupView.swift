@@ -29,6 +29,8 @@ struct SignupView: View {
         
         ZStack {
             Color.white
+            
+            NavigationView{
                 VStack {
                     HStack {
                         Text("이름")
@@ -37,11 +39,11 @@ struct SignupView: View {
                             .foregroundColor(.black)
                             .alert(isPresented: self.$showNameMinAlert){
                                 Alert(title: Text(""), message: Text("이름은 2글자 이상 이어야 합니다."), dismissButton: .default(Text("확인"), action: {self.showNameMinAlert = false}))
-                            }
                         }
-                        .padding()
-                        .background(Capsule().stroke(Color.black, lineWidth: 2))
-                        
+                    }
+                    .padding()
+                    .background(Capsule().stroke(Color.black, lineWidth: 2))
+                    
                     HStack{
                         Text("이메일 주소")
                             .foregroundColor(Color.black)
@@ -51,7 +53,7 @@ struct SignupView: View {
                             
                             .alert(isPresented: self.$showEmailAlert){
                                 Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
-                            }
+                        }
                         
                     }
                     .padding()
@@ -60,21 +62,21 @@ struct SignupView: View {
                     HStack {
                         Text("비밀번호")
                             .foregroundColor(Color.black)
-//                        if showPassword {
-//                            TextField("", text: $password)
-//                                .foregroundColor(.black)
-//                        } else {
-//                            SecureField("", text: $password)
-//                                .textContentType(.newPassword)
-//                                .foregroundColor(.black)
-//                        }
+                        //                        if showPassword {
+                        //                            TextField("", text: $password)
+                        //                                .foregroundColor(.black)
+                        //                        } else {
+                        //                            SecureField("", text: $password)
+                        //                                .textContentType(.newPassword)
+                        //                                .foregroundColor(.black)
+                        //                        }
                         
                         SecureField("", text: $password)
-                        .textContentType(.newPassword)
-                        .foregroundColor(.black)
+                            .textContentType(.newPassword)
+                            .foregroundColor(.black)
                         
                         Button(action: {self.showPassword.toggle()}) {
-
+                            
                             Image(systemName: "eye")
                                 .renderingMode(.template)
                                 .foregroundColor(Color.black)
@@ -90,45 +92,45 @@ struct SignupView: View {
                     HStack{
                         Text("비밀번호 확인")
                             .foregroundColor(.black)
-//                        if showConfirmPassword {
-//                           TextField("", text: $confirmPassword)
-//                               .foregroundColor(.black)
-//                       } else {
-//                           SecureField("", text: $confirmPassword)
-//                                .textContentType(.newPassword)
-//                               .foregroundColor(.black)
-//                       }
-//
+                        //                        if showConfirmPassword {
+                        //                           TextField("", text: $confirmPassword)
+                        //                               .foregroundColor(.black)
+                        //                       } else {
+                        //                           SecureField("", text: $confirmPassword)
+                        //                                .textContentType(.newPassword)
+                        //                               .foregroundColor(.black)
+                        //                       }
+                        //
                         
                         SecureField("", text: $confirmPassword)
-                                                       .textContentType(.newPassword)
-                                                      .foregroundColor(.black)
+                            .textContentType(.newPassword)
+                            .foregroundColor(.black)
                         
-                       Button(action: {self.showConfirmPassword.toggle()}) {
-
-                           Image(systemName: "eye")
-                               .renderingMode(.template)
-                               .foregroundColor(Color.black)
-                           
-                       }
+                        Button(action: {self.showConfirmPassword.toggle()}) {
+                            
+                            Image(systemName: "eye")
+                                .renderingMode(.template)
+                                .foregroundColor(Color.black)
+                            
+                        }
                     }
                     .padding()
                     .background(Capsule().stroke(Color.black, lineWidth: 2))
                     .alert(isPresented: self.$showPasswordNotMatchingAlert){
                         Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
                     }
-
+                    
                     HStack {
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
                         }){
-                            Text("취소")
+                            Image("cancelButton")
                         }
-    
+                        
                         Button(action: {
                             self.signUp()
                         }){
-                            Text("회원가입")
+                            Image("signupButton")
                         }
                         .padding(.leading, 50)
                     }
@@ -161,14 +163,18 @@ struct SignupView: View {
                     Spacer()
                 }
                 .padding()
+            .navigationBarTitle(Text("회원가입"))
             }
+            
+            
+        }
         
         
     }
     
     func isValidEmail(email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
@@ -222,8 +228,8 @@ struct SignupView: View {
                     }
                     
                     do{
-                       
-
+                        
+                        
                         
                         if let rawData = data {
                             let json = try JSONSerialization.jsonObject(with: rawData, options: []) as? [String:Any]
@@ -275,9 +281,9 @@ struct SignupView: View {
                             }
                         }
                         
-                   }catch{
-                       fatalError(error.localizedDescription)
-                   }
+                    }catch{
+                        fatalError(error.localizedDescription)
+                    }
                 }.resume()
             }
             

@@ -74,6 +74,22 @@ struct LoginView: View {
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                 
+                HStack{
+                    Text("회원이 아니신가요?")
+                        .font(.system(size: 14))
+                    
+                    Text("먼저 회원 가입해주세요.")
+                        .underline()
+                        .font(.system(size: 14, weight: .bold))
+                        .padding(.leading, 5)
+                    
+                }
+                .frame(width: 300, height: 30)
+                .padding(.top, 30)
+                .onTapGesture {
+                    self.showSignupView = true
+                }
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarTitle(Text("로그인 해주세요"))

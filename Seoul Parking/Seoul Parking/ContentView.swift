@@ -37,17 +37,14 @@ struct ContentView: View {
 
     
     var body: some View {
-        ZStack{
-            if self.ld.isLoggedIn {
-                return AnyView(
-                    MainView()
-                )
-            } else {
-                return AnyView(
-                    LoginView()
-                )
-            }
-
+        if self.ld.isLoggedIn {
+            return AnyView(
+                MainView()
+            )
+        } else {
+            return AnyView(
+                LoginView()
+            )
         }
         
     }
