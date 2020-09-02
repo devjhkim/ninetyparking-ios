@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EmailSignupView: View {
-    @Binding var loginResult: LoginResult
+    
     @State var name = ""
     @State var email = ""
     @State var password = ""
@@ -24,6 +24,8 @@ struct EmailSignupView: View {
     @State var alertType = ""
     
     @Environment(\.presentationMode) var presentationMode
+    
+    @EnvironmentObject var login: LogIn
     
     var body: some View {
         
@@ -205,9 +207,9 @@ struct EmailSignupView: View {
         
         let params = [
             "name" : name,
-            "kakaoId": self.loginResult.kakaoId.count > 0 ? self.loginResult.kakaoId : nil,
-            "naverId": self.loginResult.naverId.count > 0 ? self.loginResult.naverId : nil,
-            "facebookId": self.loginResult.facebookId.count > 0 ? self.loginResult.facebookId : nil,
+            "kakaoId": self.login.kakaoId.count > 0 ? self.login.kakaoId : nil,
+            "naverId": self.login.naverId.count > 0 ? self.login.naverId : nil,
+            "facebookId": self.login.facebookId.count > 0 ? self.login.facebookId : nil,
             "email": self.email,
             "password": self.password,
             "phoneNumber": ""
@@ -294,6 +296,6 @@ struct EmailSignupView: View {
 
 struct EmailSignupView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailSignupView(loginResult: .constant(LoginResult()))
+        EmailSignupView()
     }
 }

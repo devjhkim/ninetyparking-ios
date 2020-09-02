@@ -26,14 +26,6 @@ struct ContentView: View {
     @EnvironmentObject var lot: ParkingLot
     
     @EnvironmentObject var ld : LogIn
-    var profileButton: some View {
-        Button(action: {}){
-            Image(systemName: "person.crop.circle")
-                .imageScale(.large)
-                .accessibility(label: Text("User Profile"))
-                .padding()
-        }
-    }
 
     
     var body: some View {
@@ -46,56 +38,6 @@ struct ContentView: View {
                 LoginView()
             )
         }
-        
-    }
-    
-    
-    func fetchParkingSpaces() {
-        
-        guard let url = URL(string: REST_API.SPACE.FETCH) else {
-            return
-        }
-        
-        let params = [
-            
-            "latitude" : self.centerLocation.location.latitude,
-            "longitude" : self.centerLocation.location.longitude
-        ]
-        
-        do{
-            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
-           
-            var request = URLRequest(url: url)
-            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            request.httpMethod = "POST"
-            request.httpBody = jsonParams
-            
-            URLSession.shared.dataTask(with: request){(data, response, error) in
-                if data == nil {
-                    return
-                }
- 
-                do{
-                    if let rawData = data {
-                        let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
-                        
-                        DispatchQueue.main.async {
-                            self.lot.spaces = parkingSpaces
-                        }
-                        
-                    }
-                    
-                }catch{
-                    fatalError(error.localizedDescription)
-                }
-            }.resume()
-            
-          
-        }catch{
-            fatalError(error.localizedDescription)
-        }
-        
-        
     }
 }
 

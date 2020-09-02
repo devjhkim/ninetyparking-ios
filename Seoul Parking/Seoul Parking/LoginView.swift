@@ -18,36 +18,37 @@ import FBSDKCoreKit
 
 struct LoginView: View {
     @State var showEmailLoginView = false
+    @State var showEmailSignupView = false
     @State var showSignupView = false
-    
     @State var loginResult = LoginResult()
+    
+    @EnvironmentObject var login: LogIn
+    
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.showLoginView) var showLoginView
     
     
-    init() {
-        
-        //UINavigationBar.appearance().backgroundColor = .white
-        //UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "HelveticaNeue", size: 30)!]
-        //UINavigationBar.appearance().shadowImage = UIImage()
-        //UINavigationBar.appearance().isTranslucent = false
-        
-
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
+                
+                Text(APP_TITLE)
+                    .bold()
+                    .font(.system(size: 40))
                 
                 NavigationLink(destination: EmailLoginView().environment(\.showLoginView, self.showLoginView), isActive: self.$showEmailLoginView){
                     Button(action: {
                         self.showEmailLoginView = true
                     }){
                         Image("emailLoginButton")
+                            .padding(.top, 50)
                             
                     }
                 }
                 
+                NavigationLink(destination: EmailSignupView(), isActive: self.$showEmailSignupView){
+                    EmptyView()
+                }.hidden()
                 
                 
                 
@@ -60,17 +61,17 @@ struct LoginView: View {
                 }.hidden()
                 
                 
-                KakaoLoginButton(loginResult: self.$loginResult)
+                KakaoLoginButton()
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                     
                 
-                NaverLoginButton(loginResult: self.$loginResult)   
+                NaverLoginButton()
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                     
                 
-                FacebookLoginButton(loginResult: self.$loginResult)
+                FacebookLoginButton()
                     .frame(width: 200, height: 30)
                     .padding(.top, 30)
                 
@@ -87,17 +88,19 @@ struct LoginView: View {
                 .frame(width: 300, height: 30)
                 .padding(.top, 30)
                 .onTapGesture {
-                    self.showSignupView = true
+                    
                 }
+                
+                Spacer()
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarTitle(Text(""))
-            .alert(isPresented: self.$loginResult.showAlert){
+            .alert(isPresented: self.$login.showLoginAlert){
                 Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회원 가입을 해야 합니다."),
                       primaryButton: .cancel(Text("취소"), action: {}),
                       secondaryButton: .default(Text("회원가입"), action: {
-                        self.showSignupView = true
+                        self.showEmailSignupView = true
                 }))
             }
 
@@ -108,45 +111,6 @@ struct LoginView: View {
     
 }
 
-struct LoginButtonsView: View {
-    @State var showEmailLoginView = false
-    @State var loginResult = LoginResult()
-    @Environment(\.showLoginView) var showLoginView
-    var body: some View {
-        VStack {
-            
-            NavigationLink(destination: EmailLoginView().environment(\.showLoginView, self.showLoginView), isActive: self.$showEmailLoginView){
-                Button(action: {
-                    self.showEmailLoginView = true
-                }){
-                    Image("emailLoginButton")
-                        
-                }
-            }
-            
-            
-            
-            
-            KakaoLoginButton(loginResult: self.$loginResult)
-                .frame(width: 200, height: 30)
-                .padding(.top, 30)
-                
-            
-            NaverLoginButton(loginResult: self.$loginResult)
-                .frame(width: 200, height: 30)
-                .padding(.top, 30)
-                
-            
-            FacebookLoginButton(loginResult: self.$loginResult)
-                .frame(width: 200, height: 30)
-                .padding(.top, 30)
-            
-        }
-    }
-    
-    
-    
-}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
@@ -157,10 +121,10 @@ struct LoginView_Previews: PreviewProvider {
 
 struct KakaoLoginButton: UIViewRepresentable {
 
-    typealias UIViewType = UIButton
     
+    @EnvironmentObject var login: LogIn
     @Environment(\.showLoginView) var showLoginView
-    @Binding var loginResult: LoginResult
+    
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -220,7 +184,7 @@ struct KakaoLoginButton: UIViewRepresentable {
                                 
                                 
                                 if let myKakaoId = myinfo.id {
-                                    self.button.loginResult.kakaoId = myKakaoId.description
+                                    
                                     
                                     let params = [
                                         "id" : myKakaoId.description,
@@ -230,32 +194,30 @@ struct KakaoLoginButton: UIViewRepresentable {
                                     ]
                                     
                                     DispatchQueue.main.async {
+                                        self.button.login.kakaoId = myKakaoId.description
+                                        
                                             requestLogIn(params: params, finished: { result in
                                                 
                                                 
                                         
                                                 switch result.statusCode {
                                                 case "200" :
-                                                    self.button.loginResult.showAlert = false
+                                                    
                                                     handleLogInResult(result)
-                                                    self.button.showLoginView?.wrappedValue = false
+                                                    
                                                     
                                                     break
                                                     
                                                     
                                                 case "201" :
-                                                    self.button.loginResult.showAlert = true
+                                                    self.button.login.showLoginAlert = true
                                                     break
                                                     
-                                                case "202" :
-                                                    self.button.loginResult.showAlert = true
-                                                    break
-                                                    
+                                               
                                                 default:
                                                     break
                                                 }
-                                                self.button.loginResult.kakaoId = myKakaoId
-                                                self.button.loginResult.statusCode = result.statusCode
+                                                
                                             })
                                     }
                                 }
@@ -273,12 +235,11 @@ struct KakaoLoginButton: UIViewRepresentable {
 
 struct NaverLoginButton: UIViewRepresentable {
     
-    @Binding var loginResult: LoginResult
+    
     @Environment(\.showLoginView) var showLoginView
+    @EnvironmentObject var login: LogIn
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
-    
-    typealias UIViewType = UIButton
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -365,31 +326,28 @@ struct NaverLoginButton: UIViewRepresentable {
                             ] 
                             
                             DispatchQueue.main.async {
+                                    self.button.login.naverId = naverId
+                                
                                     requestLogIn(params: params, finished: { result in
                                         print(result)
                                         
                                 
                                         switch result.statusCode {
                                         case "200" :
-                                            self.button.loginResult.showAlert = false
+
                                             handleLogInResult(result)
-                                            self.button.showLoginView?.wrappedValue = false
+
                                             break
                                             
                                             
                                         case "201" :
-                                            self.button.loginResult.showAlert = true
-                                            break
-                                            
-                                        case "202" :
-                                            self.button.loginResult.showAlert = true
+                                            self.button.login.showLoginAlert = true
                                             break
                                             
                                         default:
                                             break
                                         }
-                                        self.button.loginResult.naverId = naverId
-                                        self.button.loginResult.statusCode = result.statusCode
+                                        
                                     })
                             }
                         }
@@ -427,10 +385,10 @@ struct NaverLoginButton: UIViewRepresentable {
 struct FacebookLoginButton: UIViewRepresentable {
    
     
-    //typealias UIViewType = UIButton
-    @Binding var loginResult: LoginResult
-    @Environment(\.showLoginView) var showLoginView
     
+    
+    @Environment(\.showLoginView) var showLoginView
+    @EnvironmentObject var login: LogIn
     
     
     func makeCoordinator() -> Coordinator {
@@ -438,10 +396,6 @@ struct FacebookLoginButton: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> UIButton {
-//        let facebookLoginButton = FBLoginButton()
-//        facebookLoginButton.permissions = ["public_profile", "email"]
-//        facebookLoginButton.delegate = context.coordinator
-//
         
         let facebookLoginButton = UIButton()
         facebookLoginButton.setImage(UIImage(named: "facebookLoginButton"), for: .normal)
@@ -475,9 +429,12 @@ struct FacebookLoginButton: UIViewRepresentable {
                     GraphRequest(graphPath: "me", parameters: ["fields": "id"]).start(completionHandler: { (connection, result, error) -> Void in
                         if (error == nil){
                             let fbDetails = result as! NSDictionary
-                            print(fbDetails)
+                            
                             
                             if let facebookId = fbDetails["id"] as? String{
+                                
+                                
+                                
                                 let params = [
                                     "id" : facebookId,
                                     "idType" : "FACEBOOK",
@@ -486,32 +443,32 @@ struct FacebookLoginButton: UIViewRepresentable {
                                 ]
                                 
                                 DispatchQueue.main.async {
+                                    
+                                    self.button.login.facebookId = facebookId
+                                    
                                         requestLogIn(params: params, finished: { result in
                                             
                                             
                                     
                                             switch result.statusCode {
                                             case "200" :
-                                                self.button.loginResult.showAlert = false
+                                                
                                                 handleLogInResult(result)
-                                                self.button.showLoginView?.wrappedValue = false
+                                                
                                                 
                                                 break
                                                 
                                                 
                                             case "201" :
-                                                self.button.loginResult.showAlert = true
+                                                self.button.login.showLoginAlert = true
                                                 break
                                                 
-                                            case "202" :
-                                                self.button.loginResult.showAlert = true
-                                                break
+                                            
                                                 
                                             default:
                                                 break
                                             }
-                                            self.button.loginResult.facebookId = facebookId
-                                            self.button.loginResult.statusCode = result.statusCode
+                                            
                                         })
                                 }
                             }

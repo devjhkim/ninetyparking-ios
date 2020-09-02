@@ -11,6 +11,11 @@ import Foundation
 
 class LogIn: ObservableObject {
     @Published var isLoggedIn = UserInfo.getInstance.isLoggedIn
+    @Published var kakaoId = ""
+    @Published var naverId = ""
+    @Published var facebookId = ""
+    @Published var showEmailSignupView = false
+    @Published var showLoginAlert = false
 }
 
 struct LoginData: Hashable, Codable {
