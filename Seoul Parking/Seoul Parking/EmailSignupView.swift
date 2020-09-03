@@ -20,6 +20,7 @@ struct EmailSignupView: View {
     @State var showEmailAlert = false
     @State var showPasswordLengthAlert = false
     @State var showPasswordNotMatchingAlert = false
+    @State var showPlateNumberView = false
     @State var showAlert = false
     @State var alertType = ""
     
@@ -32,7 +33,16 @@ struct EmailSignupView: View {
         ZStack {
             Color.white
             
+            NavigationLink(destination: PlateNumberView(), isActive: self.$showPlateNumberView){
+                EmptyView()
+            }.hidden()
+            
             VStack {
+                Text("회원 기본정보")
+                    .bold()
+                    .font(.system(size: 40))
+                    .padding(.bottom, 50)
+                
                 HStack {
                     Text("이름")
                         .foregroundColor(Color.black)
@@ -129,7 +139,8 @@ struct EmailSignupView: View {
                     }
                     
                     Button(action: {
-                        self.signUp()
+                        //self.signUp()
+                        self.showPlateNumberView = true
                     }){
                         Image("signupButton")
                     }
