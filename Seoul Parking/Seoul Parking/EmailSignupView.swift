@@ -41,9 +41,9 @@ struct EmailSignupView: View {
         
         ZStack {
             Color.white
-                .onTapGesture {
-                    UIApplication.shared.endEditing()
-            }
+//                .onTapGesture {
+//                    UIApplication.shared.endEditing()
+//            }
 
             
             VStack(alignment: .leading) {
@@ -252,7 +252,7 @@ struct EmailSignupView: View {
             }
             .padding()
             .navigationBarTitle(Text(""))
-            .navigationBarHidden(true)
+            //.navigationBarHidden(true)
             
             
         }
