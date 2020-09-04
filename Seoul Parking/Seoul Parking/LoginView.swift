@@ -88,7 +88,7 @@ struct LoginView: View {
                 .frame(width: 300, height: 30)
                 .padding(.top, 30)
                 .onTapGesture {
-                    
+                    self.showSignupView = true
                 }
                 
                 Spacer()
@@ -329,7 +329,7 @@ struct NaverLoginButton: UIViewRepresentable {
                                     self.button.login.naverId = naverId
                                 
                                     requestLogIn(params: params, finished: { result in
-                                        print(result)
+                                        
                                         
                                 
                                         switch result.statusCode {

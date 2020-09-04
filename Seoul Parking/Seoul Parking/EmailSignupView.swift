@@ -14,35 +14,43 @@ struct EmailSignupView: View {
     @State var email = ""
     @State var password = ""
     @State var confirmPassword = ""
+    @State var plateNumber = ""
+    @State var plateNumbers = [String]()
     @State var showPassword = false
     @State var showConfirmPassword = false
     @State var showNameMinAlert = false
     @State var showEmailAlert = false
     @State var showPasswordLengthAlert = false
     @State var showPasswordNotMatchingAlert = false
-    @State var showPlateNumberView = false
     @State var showAlert = false
+    @State var showPlateNumberMaxAlert = false
+    @State var showAddPlateNumberAlert = false
     @State var alertType = ""
     
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var login: LogIn
     
+    init() {
+        UITableView.appearance().separatorStyle = .none
+    }
+    
     var body: some View {
+        
+        
         
         ZStack {
             Color.white
+                .onTapGesture {
+                    UIApplication.shared.endEditing()
+            }
+
             
-            NavigationLink(destination: PlateNumberView(), isActive: self.$showPlateNumberView){
-                EmptyView()
-            }.hidden()
-            
-            VStack {
+            VStack(alignment: .leading) {
                 Text("회원 기본정보")
                     .bold()
-                    .font(.system(size: 40))
-                    .padding(.bottom, 50)
-                
+                    .font(.system(size: 20))
+
                 HStack {
                     Text("이름")
                         .foregroundColor(Color.black)
@@ -131,7 +139,71 @@ struct EmailSignupView: View {
                     Alert(title: Text(""), message: Text("비밀번호가 일치하지 않습니다."), dismissButton: .default(Text("확인"), action: {self.showPasswordNotMatchingAlert = false}))
                 }
                 
+                HStack{
+                    Text("차량번호")
+                        .foregroundColor(Color.black)
+                    TextField("", text: self.$plateNumber)
+                        .foregroundColor(.black)
+                        .alert(isPresented: self.$showEmailAlert){
+                            Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
+                    }
+                    
+                    Button(action: {
+                        if !self.plateNumber.isEmpty {
+                            if self.plateNumbers.count < MAX_PLATE_NUMBERS {
+                                if !self.plateNumbers.contains(self.plateNumber){
+                                    self.plateNumbers.append(self.plateNumber)
+                                }
+                            } else {
+                                self.showPlateNumberMaxAlert = true
+                            }
+                            
+                        }
+                    }) {
+                        
+                        Text("추가")
+                        
+                    }
+                    
+                }
+                .padding()
+                .background(Capsule().stroke(Color.black, lineWidth: 2))
+                .alert(isPresented: self.$showPlateNumberMaxAlert, content: {
+                    Alert(title: Text(""), message: Text("차량은 3대 까지 등록 가능합니다."), dismissButton: .default(Text("확인")))
+                })
+                
+                List{
+                    ForEach(Array(zip(self.plateNumbers.indices, self.plateNumbers)), id: \.0) { index, number in
+                        HStack{
+                            Text(number)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                self.plateNumbers.remove(at: index)
+                            }){
+//                                Image(systemName: "xmark.circle.fill")
+//                                    .renderingMode(.template)
+//                                    .foregroundColor(Color.gray)
+//                                    .imageScale(.large)
+//                                    .padding()
+                                
+                                Text("삭제")
+                            }
+                        }
+
+                    }
+                    .onDelete(perform: delete(at:))
+                
+                }
+                .alert(isPresented: self.$showAddPlateNumberAlert, content: {
+                    Alert(title: Text(""), message: Text("차량번호를 입력해주세요."), dismissButton: .default(Text("확인")))
+                })
+                
                 HStack {
+                    
+                    Spacer()
+                    
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }){
@@ -139,12 +211,14 @@ struct EmailSignupView: View {
                     }
                     
                     Button(action: {
-                        //self.signUp()
-                        self.showPlateNumberView = true
+                        self.signUp()
+                        
                     }){
                         Image("signupButton")
                     }
                     .padding(.leading, 50)
+                    
+                    Spacer()
                 }
                 .padding()
                 .alert(isPresented: self.$showAlert){
@@ -177,11 +251,17 @@ struct EmailSignupView: View {
                 Spacer()
             }
             .padding()
+            .navigationBarTitle(Text(""))
+            .navigationBarHidden(true)
             
             
         }
+       
         
-        
+    }
+    
+    func delete(at offsets: IndexSet) {
+        self.plateNumbers.remove(atOffsets: offsets)
     }
     
     func isValidEmail(email: String) -> Bool {
@@ -212,9 +292,19 @@ struct EmailSignupView: View {
             return
         }
         
+        if self.plateNumbers.count <= 0 {
+            if self.plateNumber.isEmpty {
+                self.showAddPlateNumberAlert = true
+                
+                return
+            }else {
+                self.plateNumbers.append(self.plateNumber)
+            }
+        }
+        
         let name = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        print(name)
+        
         
         let params = [
             "name" : name,
@@ -223,8 +313,9 @@ struct EmailSignupView: View {
             "facebookId": self.login.facebookId.count > 0 ? self.login.facebookId : nil,
             "email": self.email,
             "password": self.password,
-            "phoneNumber": ""
-        ]
+            "phoneNumber": "",
+            "plateNumber": self.plateNumbers
+        ] as [String : Any]
         
         do{
             let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])

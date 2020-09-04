@@ -41,12 +41,12 @@ struct SignupView: View {
                         .padding(.top, 30)
                     
                     
-                NaverSignupButton(loginResult: self.$loginResult)
+                NaverSignupButton()
                         .frame(width: 200, height: 30)
                         .padding(.top, 30)
                     
                     
-                FacebookSignupButton(loginResult: self.$loginResult)
+                FacebookSignupButton()
                         .frame(width: 200, height: 30)
                         .padding(.top, 30)
                 
@@ -144,7 +144,7 @@ struct KakaoSignupButton: UIViewRepresentable {
 
 struct NaverSignupButton: UIViewRepresentable {
     
-    @Binding var loginResult: LoginResult
+    @EnvironmentObject var login: LogIn
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
@@ -216,7 +216,8 @@ struct NaverSignupButton: UIViewRepresentable {
                             guard let naverId = obj["id"] as? String else { return }
                              
                             DispatchQueue.main.async {
-                                     
+                                self.button.login.naverId = naverId
+                                self.button.login.showEmailSignupView = true
                             }
                          }
                      }
@@ -250,7 +251,7 @@ struct NaverSignupButton: UIViewRepresentable {
 
 struct FacebookSignupButton: UIViewRepresentable {
     
-    @Binding var loginResult: LoginResult
+    @EnvironmentObject var login: LogIn
     
     func makeUIView(context: Context) -> UIButton {
         let facebookSignupButton = UIButton()
@@ -289,11 +290,14 @@ struct FacebookSignupButton: UIViewRepresentable {
                     GraphRequest(graphPath: "me", parameters: ["fields": "id"]).start(completionHandler: { (connection, result, error) -> Void in
                         if (error == nil){
                             let fbDetails = result as! NSDictionary
-                            print(fbDetails)
+                            
                             
                             if let facebookId = fbDetails["id"] as? String{
                                 
-                            
+                                DispatchQueue.main.async {
+                                    self.button.login.facebookId = facebookId
+                                    self.button.login.showEmailSignupView = true
+                                }
                                 
                             }
                         }
