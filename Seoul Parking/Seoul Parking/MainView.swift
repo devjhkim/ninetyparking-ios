@@ -12,7 +12,7 @@ struct MainView: View {
     @EnvironmentObject var centerLocation : CenterLocation
     @EnvironmentObject var lot: ParkingLot
     @State var showMenu = false
-    @State var auxLoginViewType: AuxLoginViewType = AuxLoginViewType()
+    @State var auxViewType = AuxViewType()
     @State var showLoginView = false
     @State var showParkingSpaceInfoView = false
     @State var showAvailableTimeView = false
@@ -31,6 +31,8 @@ struct MainView: View {
                 
         }
         
+        
+        
         return ZStack{
             
             
@@ -41,13 +43,16 @@ struct MainView: View {
                 
                 GeometryReader(){  reader in
                     
+                    
                     ZStack(alignment: .leading) {
                         
                         NavigationLink(destination: AvailableHoursView().environment(\.selectedParkingSpace, self.$selectedParkingSpace), isActive: self.$showAvailableTimeView){
                             EmptyView()
                         }.hidden()
                         
-                        
+                        NavigationLink(destination: PaymentHistoryView(), isActive: self.$auxViewType.showPaymentHistoryView){
+                            EmptyView()
+                        }.hidden()
                         
                         GoogleMapsView()
                             .edgesIgnoringSafeArea(.bottom)
@@ -59,7 +64,7 @@ struct MainView: View {
                         
                         if self.showMenu {
                             
-                            MenuView(showMenu: self.$showMenu, auxLoginView: self.$auxLoginViewType, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
+                            MenuView(showMenu: self.$showMenu, auxView: self.$auxViewType, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
                                 .gesture(tap)
                                 .environment(\.showLoginView, self.$showLoginView)
                         }
@@ -129,61 +134,61 @@ struct MainView: View {
             
             
         }
-    .onAppear(perform: fetchParkingSpaces)
+        .onAppear(perform: fetchParkingSpaces)
         
     }
     
     func fetchParkingSpaces() {
-           
-           guard let url = URL(string: REST_API.SPACE.FETCH) else {
-               return
-           }
-           
-           let params = [
+        
+        guard let url = URL(string: REST_API.SPACE.FETCH) else {
+            return
+        }
+        
+        let params = [
             "userUniqueId": "35FC80DC-CB6B-40E0-89A1-7F0DEABDCE7D",
             "latitude" :"37.47846906924382",
             "longitude": "126.95208443935626",
             "address" :  "대한민국 서울특별시 관악구 봉천동 1570-1",
             "radiusArea":"1000"
-               //"latitude" : self.centerLocation.location.latitude,
-               //"longitude" : self.centerLocation.location.longitude
-           ]
-           
-           do{
-               let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
-              
-               var request = URLRequest(url: url)
-               request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-               request.httpMethod = "POST"
-               request.httpBody = jsonParams
-               
-               URLSession.shared.dataTask(with: request){(data, response, error) in
-                   if data == nil {
-                       return
-                   }
-    
-                   do{
-                       if let rawData = data {
-                           let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
-                           
-                           DispatchQueue.main.async {
-                               self.lot.spaces = parkingSpaces
-                           }
-                           
-                       }
-                       
-                   }catch{
-                       fatalError(error.localizedDescription)
-                   }
-               }.resume()
-               
-             
-           }catch{
-               fatalError(error.localizedDescription)
-           }
-           
-           
-       }
+            //"latitude" : self.centerLocation.location.latitude,
+            //"longitude" : self.centerLocation.location.longitude
+        ]
+        
+        do{
+            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+            
+            var request = URLRequest(url: url)
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
+            
+            URLSession.shared.dataTask(with: request){(data, response, error) in
+                if data == nil {
+                    return
+                }
+                
+                do{
+                    if let rawData = data {
+                        let parkingSpaces = try JSONDecoder().decode([ParkingSpace].self, from: rawData)
+                        
+                        DispatchQueue.main.async {
+                            self.lot.spaces = parkingSpaces
+                        }
+                        
+                    }
+                    
+                }catch{
+                    fatalError(error.localizedDescription)
+                }
+            }.resume()
+            
+            
+        }catch{
+            fatalError(error.localizedDescription)
+        }
+        
+        
+    }
 }
 
 struct MainView_Previews: PreviewProvider {

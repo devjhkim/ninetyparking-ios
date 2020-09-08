@@ -53,11 +53,7 @@ struct LoginView: View {
                 
                 
                 NavigationLink(destination: SignupView(), isActive: self.$showSignupView){
-                    Button(action: {
-                        self.showSignupView.toggle()
-                    }){
-                        EmptyView()
-                    }
+                    EmptyView()
                 }.hidden()
                 
                 
@@ -334,7 +330,7 @@ struct NaverLoginButton: UIViewRepresentable {
                                 
                                         switch result.statusCode {
                                         case "200" :
-
+                                            self.button.login.isLoggedIn = true
                                             handleLogInResult(result)
 
                                             break

@@ -22,38 +22,48 @@ struct SignupView: View {
     @EnvironmentObject var login: LogIn
     
     var body: some View {
+        
+        
+        
         ZStack{
             Color.white
                 .edgesIgnoringSafeArea(.all)
-           VStack {
+            
+            
+            VStack {
                 
-            NavigationLink(destination: EmailSignupView(), isActive: self.$login.showEmailSignupView){
+                NavigationLink(destination: EmailSignupView(), isActive: self.$login.showEmailSignupView){
                     Button(action: {
-                        self.login.showEmailSignupView = true
+                        self.login.showEmailSignupView.toggle()
                     }){
                         Image("emailSignupButton")
-                        
+
                     }
                 }
                 
-                KakaoSignupButton()
-                        .frame(width: 200, height: 30)
-                        .padding(.top, 30)
-                    
-                    
-                NaverSignupButton()
-                        .frame(width: 200, height: 30)
-                        .padding(.top, 30)
-                    
-                    
-                FacebookSignupButton()
-                        .frame(width: 200, height: 30)
-                        .padding(.top, 30)
+                NavigationLink(destination: EmailSignupView(), isActive: self.$showEmailSignupView){
+                    EmptyView()
+                }.hidden()
+                
+                KakaoSignupButton(showEmailSignupView: self.$showEmailSignupView)
+                    .frame(width: 200, height: 30)
+                    .padding(.top, 30)
+                
+                
+                NaverSignupButton(showEmailSignupView: self.$showEmailSignupView)
+                    .frame(width: 200, height: 30)
+                    .padding(.top, 30)
+                
+                
+                FacebookSignupButton(showEmailSignupView: self.$showEmailSignupView)
+                    .frame(width: 200, height: 30)
+                    .padding(.top, 30)
                 
                 Spacer()
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .navigationBarTitle("")
         }
     }
 }
@@ -66,7 +76,7 @@ struct SignupView_Previews: PreviewProvider {
 
 struct KakaoSignupButton: UIViewRepresentable {
     
-    
+    @Binding var showEmailSignupView: Bool
     @EnvironmentObject var login: LogIn
     
     func makeCoordinator() -> Coordinator {
@@ -96,7 +106,7 @@ struct KakaoSignupButton: UIViewRepresentable {
             guard let session = KOSession.shared() else {
                 return
             }
-
+            
             if session.isOpen() {
                 session.close()
             }
@@ -128,7 +138,7 @@ struct KakaoSignupButton: UIViewRepresentable {
                                 if let myKakaoId = myinfo.id {
                                     
                                     self.button.login.kakaoId = myKakaoId
-                                    self.button.login.showEmailSignupView = true
+                                    self.button.showEmailSignupView = true
                                     
                                 }
                             }
@@ -143,7 +153,7 @@ struct KakaoSignupButton: UIViewRepresentable {
 }
 
 struct NaverSignupButton: UIViewRepresentable {
-    
+    @Binding var showEmailSignupView: Bool
     @EnvironmentObject var login: LogIn
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
@@ -166,91 +176,91 @@ struct NaverSignupButton: UIViewRepresentable {
     
     class Coordinator: NSObject, NaverThirdPartyLoginConnectionDelegate {
         var button : NaverSignupButton
-         
-         init(_ button: NaverSignupButton){
-             
-             self.button = button
-             
-         }
-         
-         @objc func login(_ sender: UIButton){
-             self.button.loginInstance?.requestDeleteToken()
-             self.button.loginInstance?.delegate = self
-             self.button.loginInstance?.requestThirdPartyLogin()
-         }
-         
-         private func getNaverInfo() {
-             guard let isValidAccessToken = self.button.loginInstance?.isValidAccessTokenExpireTimeNow() else { return }
+        
+        init(_ button: NaverSignupButton){
             
-             if !isValidAccessToken {
-                 return
-             }
+            self.button = button
             
-             guard let tokenType = self.button.loginInstance?.tokenType else { return }
-             guard let accessToken = self.button.loginInstance?.accessToken else { return }
-             
-             let urlStr = "https://openapi.naver.com/v1/nid/me"
-             let url = URL(string: urlStr)!
+        }
+        
+        @objc func login(_ sender: UIButton){
+            self.button.loginInstance?.requestDeleteToken()
+            self.button.loginInstance?.delegate = self
+            self.button.loginInstance?.requestThirdPartyLogin()
+        }
+        
+        private func getNaverInfo() {
+            guard let isValidAccessToken = self.button.loginInstance?.isValidAccessTokenExpireTimeNow() else { return }
             
-             let authorization = "\(tokenType) \(accessToken)"
-             
-             let headers = ["Authorization": authorization]
-
-             var request = URLRequest(url: url)
-             
-             for (key, value) in headers {
-                 request.setValue(value, forHTTPHeaderField: key)
-             }
-             
-             URLSession.shared.dataTask(with: request) { (data, response, error) in
-                 if data == nil {
-                     return
-                 }
-
-                 do{
-                     if let rawData = data {
-                         let json = try JSONSerialization.jsonObject(with: rawData, options: []) as? [String:Any]
-                         
-                         if let json = json {
+            if !isValidAccessToken {
+                return
+            }
+            
+            guard let tokenType = self.button.loginInstance?.tokenType else { return }
+            guard let accessToken = self.button.loginInstance?.accessToken else { return }
+            
+            let urlStr = "https://openapi.naver.com/v1/nid/me"
+            let url = URL(string: urlStr)!
+            
+            let authorization = "\(tokenType) \(accessToken)"
+            
+            let headers = ["Authorization": authorization]
+            
+            var request = URLRequest(url: url)
+            
+            for (key, value) in headers {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if data == nil {
+                    return
+                }
+                
+                do{
+                    if let rawData = data {
+                        let json = try JSONSerialization.jsonObject(with: rawData, options: []) as? [String:Any]
+                        
+                        if let json = json {
                             guard let obj = json["response"] as? [String:Any] else { return }
                             guard let naverId = obj["id"] as? String else { return }
-                             
+                            
                             DispatchQueue.main.async {
                                 self.button.login.naverId = naverId
-                                self.button.login.showEmailSignupView = true
+                                self.button.$showEmailSignupView.wrappedValue = true
                             }
-                         }
-                     }
-
-                 }catch{
-                     fatalError(error.localizedDescription)
-                 }
-                 
-             }.resume()
+                        }
+                    }
+                    
+                }catch{
+                    fatalError(error.localizedDescription)
+                }
+                
+            }.resume()
             
-          }
-
-         
-         func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
-             getNaverInfo()
-         }
+        }
         
-         func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        
+        func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+            getNaverInfo()
+        }
+        
+        func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
             
-         }
+        }
         
-         func oauth20ConnectionDidFinishDeleteToken() {
+        func oauth20ConnectionDidFinishDeleteToken() {
             self.button.loginInstance?.requestThirdPartyLogin()
-         }
+        }
         
-         func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
             
-         }
+        }
     }
 }
 
 struct FacebookSignupButton: UIViewRepresentable {
-    
+    @Binding var showEmailSignupView: Bool
     @EnvironmentObject var login: LogIn
     
     func makeUIView(context: Context) -> UIButton {
@@ -296,7 +306,7 @@ struct FacebookSignupButton: UIViewRepresentable {
                                 
                                 DispatchQueue.main.async {
                                     self.button.login.facebookId = facebookId
-                                    self.button.login.showEmailSignupView = true
+                                    self.button.showEmailSignupView = true
                                 }
                                 
                             }
@@ -304,7 +314,7 @@ struct FacebookSignupButton: UIViewRepresentable {
                     })
                 }
             }
-
+            
         }
     }
 }

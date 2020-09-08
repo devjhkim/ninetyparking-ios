@@ -144,9 +144,7 @@ struct EmailSignupView: View {
                         .foregroundColor(Color.black)
                     TextField("", text: self.$plateNumber)
                         .foregroundColor(.black)
-                        .alert(isPresented: self.$showEmailAlert){
-                            Alert(title: Text(""), message: Text("유효한 이메일 주소 형식이 아닙니다."), dismissButton: .default(Text("확인"), action: {self.showEmailAlert = false}))
-                    }
+                        
                     
                     Button(action: {
                         if !self.plateNumber.isEmpty {
@@ -251,8 +249,9 @@ struct EmailSignupView: View {
                 Spacer()
             }
             .padding()
-            .navigationBarTitle(Text(""))
-            //.navigationBarHidden(true)
+        
+            .navigationBarTitle(Text(""), displayMode: .inline)
+            
             
             
         }

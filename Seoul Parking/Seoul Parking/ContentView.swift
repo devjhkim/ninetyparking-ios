@@ -9,14 +9,15 @@
 import SwiftUI
 import GoogleMaps
 
-struct AuxLoginViewType {
+struct AuxViewType {
     var viewType: Category = .none
     var showLoginView: Bool = false
+    var showPaymentHistoryView: Bool = false
     enum Category: Int {
         case none = 0
-        case login = 1
-        case loginWithEmail = 2
-        case sigup = 3
+        case paymentHistory = 1
+        case totalAmountSpent = 2
+        case totalTimeParked = 3
     }
 }
 
@@ -32,11 +33,28 @@ struct ContentView: View {
         if self.ld.isLoggedIn {
             return AnyView(
                 MainView()
+                    .onAppear(perform: {
+                        
+                        if let loggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
+                            self.ld.isLoggedIn = loggedIn
+                        }
+                        
+                        
+                    })
             )
+            
         } else {
             return AnyView(
                 LoginView()
+                    .onAppear(perform: {
+                        if let loggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
+                            self.ld.isLoggedIn = loggedIn
+                        }
+
+                    })
             )
+            
+            
         }
     }
 }

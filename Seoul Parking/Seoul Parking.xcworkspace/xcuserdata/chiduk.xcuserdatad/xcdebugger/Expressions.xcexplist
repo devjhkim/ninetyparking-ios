@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #2 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UserInfo.getInstance.isLoggedIn">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in SignupView.body.getter:SignupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.showNameMinAlert">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,6 +26,14 @@
             </PersistentString>
             <PersistentString
                value = "self.logInData.isLoggedIn">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SignupView.signUp():SignupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.name.trimmingCharacters(in: .whitespacesAndNewlines)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -30,26 +54,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SignupView.signUp():SignupView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.name.trimmingCharacters(in: .whitespacesAndNewlines)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in SignupView.body.getter:SignupView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.showNameMinAlert">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "GoogleMapsView.updateUIView(_:context:):GoogleMapsView.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.centerLocation.location.latitude">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in KakaoSignupButton.Coordinator.login(_:):SignupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "login">
+            </PersistentString>
+            <PersistentString
+               value = "self.button.login">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

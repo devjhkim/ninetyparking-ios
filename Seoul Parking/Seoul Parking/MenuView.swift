@@ -10,13 +10,13 @@ import SwiftUI
 import Combine
 
 struct MenuView: View {
-    
+    @EnvironmentObject var login: LogIn
     @State var loginText = "로그인"
     
     
     @Binding var showMenu : Bool
-    @Binding var auxLoginView: AuxLoginViewType
-    //@State var width: CGFloat = 0
+    @Binding var auxView: AuxViewType
+    
     @State var size: CGSize = .zero
     @State var isLoggedIn = false
     
@@ -80,32 +80,20 @@ struct MenuView: View {
                     
                     
                     HStack {
-                        Image(systemName: "envelope")
+                        Image(systemName: "wonsign.square")
                             .foregroundColor(.gray)
                             .imageScale(.large)
-                        Text("Messages")
+                        Text("결제내역")
                             .foregroundColor(.gray)
                             .font(.headline)
                         
                         Spacer()
                     }
                     .padding(.top, 30)
+                    .onTapGesture {
+                        self.auxView.showPaymentHistoryView = true
+                    }
                     
-                    HStack {
-                        Image(systemName: "gear")
-                            .foregroundColor(.gray)
-                            .imageScale(.large)
-                        Text("Settings")
-                            .foregroundColor(.gray)
-                            .font(.headline)
-                        
-                        Spacer()
-                    }
-                    .padding(.top, 30)
-                    .gesture(TapGesture()
-                    .onEnded{ _ in
-                        print("Settings tapped")
-                    })
                     
                     Spacer()
                 }
@@ -136,7 +124,7 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView(showMenu: .constant(false), auxLoginView: .constant(AuxLoginViewType()))
+        MenuView(showMenu: .constant(false), auxView: .constant(AuxViewType()))
     }
 }
 
