@@ -44,7 +44,7 @@ struct MenuView: View {
                             .imageScale(.large)
                             .foregroundColor(.gray)
                         
-                        if UserInfo.getInstance.isLoggedIn {
+                        if self.login.isLoggedIn {
                             HStack{
                                 Text(UserInfo.getInstance.name)
                                     .foregroundColor(Color.gray)
@@ -117,7 +117,7 @@ struct MenuView: View {
     
     func logout() {
         handleLogout()
-        self.isLoggedIn = false
+        self.login.isLoggedIn = false
     }
     
 }

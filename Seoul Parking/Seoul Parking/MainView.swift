@@ -17,6 +17,7 @@ struct MainView: View {
     @State var showParkingSpaceInfoView = false
     @State var showAvailableTimeView = false
     @State var showPlaceSearchView = false
+    @State var showSearchHistoryView = false
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     
     var body: some View {
@@ -54,12 +55,21 @@ struct MainView: View {
                             EmptyView()
                         }.hidden()
                         
-                        GoogleMapsView()
+                        NavigationLink(destination: SearchHistoryView(), isActive: self.$showSearchHistoryView){
+                            EmptyView()
+                        }.hidden()
+                        
+                        GoogleMapsView(showSearchHistoryView: self.$showSearchHistoryView)
                             .edgesIgnoringSafeArea(.bottom)
                             .environmentObject(self.lot)
                             .environmentObject(self.centerLocation)
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
+                        
+                        
+                        
+                            
+                            
                         
                         
                         if self.showMenu {
@@ -68,6 +78,8 @@ struct MainView: View {
                                 .gesture(tap)
                                 .environment(\.showLoginView, self.$showLoginView)
                         }
+                        
+
                         
                         
                         
