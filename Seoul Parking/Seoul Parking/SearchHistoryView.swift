@@ -9,9 +9,36 @@
 import SwiftUI
 
 struct SearchHistoryView: View {
+    @State var searchHistory = [SearchHistory]()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List{
+            ForEach(Array(zip(self.searchHistory.indices, self.searchHistory)), id: \.0){ index, elem in
+                VStack{
+                    Text(elem.date)
+                        .foregroundColor(Color.black)
+                    Text(elem.address)
+                        .foregroundColor(Color.black)
+                }
+            }
+        }
+        .onAppear(perform: fetch)
+    
     }
+    
+    func fetch() {
+        let history = [
+            SearchHistory(address: "선릉역", date: "2020-09-08"),
+            SearchHistory(address: "강남역", date: "2020-09-10")
+        ]
+        
+        self.searchHistory = history
+    }
+}
+
+struct SearchHistory {
+    var address: String
+    var date: String
 }
 
 struct SearchHistoryView_Previews: PreviewProvider {
