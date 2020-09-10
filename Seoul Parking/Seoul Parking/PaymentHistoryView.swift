@@ -25,7 +25,7 @@ struct PaymentHistoryView: View {
             ForEach(Array(zip(self.history.indices, self.history)), id: \.0){ index, elem in
                 NavigationLink(destination: PayView()){
                     
-                    VStack{
+                    VStack(alignment: .center){
                         Text(elem.date)
                             .foregroundColor(Color.black)
                             .padding()
@@ -36,11 +36,13 @@ struct PaymentHistoryView: View {
                         Text(elem.isPaid ? "결제완료" : "요금미납")
                             .foregroundColor(Color.black)
                             .padding()
-                                          
+                        
                     }
+                    .frame(maxWidth: .infinity)
                     .background(Color.blue)
-                    .padding()
-                    .shadow(color: Color.gray, radius: 10)
+//                    .padding()
+//                    .shadow(color: Color.gray, radius: 10)
+//                    .navigationBarTitle("결제내역")
 
                 }
             

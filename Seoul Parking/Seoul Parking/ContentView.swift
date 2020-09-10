@@ -37,6 +37,8 @@ struct ContentView: View {
                         
                         if let loggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
                             self.ld.isLoggedIn = loggedIn
+                            
+                            getUserInfo()
                         }
                         
                         

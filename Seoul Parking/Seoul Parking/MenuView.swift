@@ -129,80 +129,80 @@ struct MenuView_Previews: PreviewProvider {
 }
 
 
-struct MenuContent: View {
-    var body: some View {
-        
-        
-        List{
-            HStack {
-                Image(systemName: "person")
-                    .imageScale(.large)
-                    .foregroundColor(.gray)
-                
-                if UserInfo.getInstance.isLoggedIn {
-                    HStack{
-                        Text(UserInfo.getInstance.name)
-                            .foregroundColor(Color.gray)
-                            .font(.headline)
-                        
-                        Text("로그아웃")
-                            .foregroundColor(Color.gray)
-                            .font(.system(size: 10))
-                            .underline()
-                            .onTapGesture {
-                                //self.logout()
-                        }
-                        
-                        
-                    }
-                    
-                } else {
-                    Text("로그인 하세요")
-                        .foregroundColor(.gray)
-                        .font(.headline)
-                        .onTapGesture(perform: {
-                            
-                            //                         self.showLonginView = false
-                            //                         self.auxLoginView.showLoginView = true
-                            //                         self.showMenu = false
-                            
-                        })
-                }
-                
-                
-                
-                
-                
-            }
-            .padding(.top, 100)
-            
-            //             .sheet(isPresented: self.$showLonginView){
-            //                 LoginView()
-            //             }
-            //
-            
-            HStack {
-                Image(systemName: "envelope")
-                    .foregroundColor(.gray)
-                    .imageScale(.large)
-                Text("Messages")
-                    .foregroundColor(.gray)
-                    .font(.headline)
-            }
-            .padding(.top, 30)
-            HStack {
-                Image(systemName: "gear")
-                    .foregroundColor(.gray)
-                    .imageScale(.large)
-                Text("Settings")
-                    .foregroundColor(.gray)
-                    .font(.headline)
-            }
-            .padding(.top, 30)
-            .gesture(TapGesture()
-            .onEnded{ _ in
-                print("Settings tapped")
-            })
-        }
-    }
-}
+//struct MenuContent: View {
+//    var body: some View {
+//
+//
+//        List{
+//            HStack {
+//                Image(systemName: "person")
+//                    .imageScale(.large)
+//                    .foregroundColor(.gray)
+//
+//                if UserInfo.getInstance.isLoggedIn {
+//                    HStack{
+//                        Text(UserInfo.getInstance.name)
+//                            .foregroundColor(Color.gray)
+//                            .font(.headline)
+//
+//                        Text("로그아웃")
+//                            .foregroundColor(Color.gray)
+//                            .font(.system(size: 10))
+//                            .underline()
+//                            .onTapGesture {
+//                                //self.logout()
+//                        }
+//
+//
+//                    }
+//
+//                } else {
+//                    Text("로그인 하세요")
+//                        .foregroundColor(.gray)
+//                        .font(.headline)
+//                        .onTapGesture(perform: {
+//
+//                            //                         self.showLonginView = false
+//                            //                         self.auxLoginView.showLoginView = true
+//                            //                         self.showMenu = false
+//
+//                        })
+//                }
+//
+//
+//
+//
+//
+//            }
+//            .padding(.top, 100)
+//
+//            //             .sheet(isPresented: self.$showLonginView){
+//            //                 LoginView()
+//            //             }
+//            //
+//
+//            HStack {
+//                Image(systemName: "envelope")
+//                    .foregroundColor(.gray)
+//                    .imageScale(.large)
+//                Text("Messages")
+//                    .foregroundColor(.gray)
+//                    .font(.headline)
+//            }
+//            .padding(.top, 30)
+//            HStack {
+//                Image(systemName: "gear")
+//                    .foregroundColor(.gray)
+//                    .imageScale(.large)
+//                Text("Settings")
+//                    .foregroundColor(.gray)
+//                    .font(.headline)
+//            }
+//            .padding(.top, 30)
+//            .gesture(TapGesture()
+//            .onEnded{ _ in
+//                print("Settings tapped")
+//            })
+//        }
+//    }
+//}

@@ -52,3 +52,14 @@ func handleLogout(){
     UserInfo.getInstance.uniqueId = ""
     UserInfo.getInstance.isLoggedIn = false
 }
+
+func getUserInfo() {
+    if let name = UserDefaults.standard.value(forKey: "userName") as? String {
+        UserInfo.getInstance.name = name
+    }
+    
+    if let uniqueId = UserDefaults.standard.value(forKey: "userUniqueId") as? String {
+        UserInfo.getInstance.uniqueId = uniqueId
+    }
+    
+}

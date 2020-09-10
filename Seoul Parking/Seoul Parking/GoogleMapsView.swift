@@ -42,13 +42,15 @@ struct GoogleMapsView: UIViewRepresentable {
         searchHistoryButton.tintColor = .black
         searchHistoryButton.clipsToBounds = true
         searchHistoryButton.layer.cornerRadius = 25
-        searchHistoryButton.layer.shadowColor = UIColor.gray.cgColor
-        searchHistoryButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        searchHistoryButton.layer.shadowRadius = 5.0
+        searchHistoryButton.layer.shadowColor = UIColor.black.cgColor
+        searchHistoryButton.layer.shadowOffset = .zero
+        searchHistoryButton.layer.shadowOpacity = 0.5
+        searchHistoryButton.layer.shadowRadius = 5
+        searchHistoryButton.layer.masksToBounds = false
 
         
         mapView.addSubview(searchHistoryButton)
-        searchHistoryButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 60).isActive = true
+        searchHistoryButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 10).isActive = true
         searchHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
         searchHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         searchHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true

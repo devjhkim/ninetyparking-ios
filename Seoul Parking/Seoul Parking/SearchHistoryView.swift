@@ -17,12 +17,16 @@ struct SearchHistoryView: View {
                 VStack{
                     Text(elem.date)
                         .foregroundColor(Color.black)
+                        .padding()
+                    
                     Text(elem.address)
                         .foregroundColor(Color.black)
+                        .padding()
                 }
             }
         }
         .onAppear(perform: fetch)
+        .navigationBarTitle("검색내역")
     
     }
     
