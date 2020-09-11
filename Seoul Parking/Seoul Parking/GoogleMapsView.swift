@@ -55,7 +55,7 @@ struct GoogleMapsView: UIViewRepresentable {
         searchHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
         let settingsButton = UIButton()
-        let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        let settingsButtonImage = UIImage(systemName: "gear", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         settingsButtonImage?.withRenderingMode(.alwaysTemplate)
         settingsButton.setImage(settingsButtonImage, for: .normal)
         settingsButton.backgroundColor = .white
