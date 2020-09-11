@@ -32,12 +32,12 @@ struct GoogleMapsView: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
+        
         let searchHistoryButton = UIButton()
         let buttonImage = UIImage(systemName: "list.dash", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         buttonImage?.withRenderingMode(.alwaysTemplate)
         searchHistoryButton.setImage(buttonImage, for: .normal)
         searchHistoryButton.addTarget(context.coordinator, action: #selector(context.coordinator.searchHistoryButtonPressed(_:)), for: .touchUpInside)
-        //searchHistoryButton.frame = CGRect(x: 100, y: 60, width: 50, height: 50)
         searchHistoryButton.backgroundColor = .white
         searchHistoryButton.tintColor = .black
         searchHistoryButton.clipsToBounds = true
@@ -47,14 +47,25 @@ struct GoogleMapsView: UIViewRepresentable {
         searchHistoryButton.layer.shadowOpacity = 0.5
         searchHistoryButton.layer.shadowRadius = 5
         searchHistoryButton.layer.masksToBounds = false
-
-        
         mapView.addSubview(searchHistoryButton)
         searchHistoryButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 10).isActive = true
         searchHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
         searchHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         searchHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         searchHistoryButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let settingsButton = UIButton()
+        let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        settingsButtonImage?.withRenderingMode(.alwaysTemplate)
+        settingsButton.setImage(settingsButtonImage, for: .normal)
+        settingsButton.backgroundColor = .white
+        settingsButton.tintColor = .black
+        
+        mapView.addSubview(settingsButton)
+        settingsButton.topAnchor.constraint(equalTo: searchHistoryButton.bottomAnchor, constant: 10).isActive = true
+        settingsButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        
         return mapView
     }
     
