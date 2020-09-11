@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(ParkingLot())
             .environmentObject(CenterLocation())
             .environmentObject(LogIn())
+            .environmentObject(NotificationCenter())
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

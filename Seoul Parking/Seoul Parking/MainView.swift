@@ -11,6 +11,8 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var centerLocation : CenterLocation
     @EnvironmentObject var lot: ParkingLot
+    @EnvironmentObject var notificationCenter: NotificationCenter
+    
     @State var showMenu = false
     @State var auxViewType = AuxViewType()
     @State var showLoginView = false

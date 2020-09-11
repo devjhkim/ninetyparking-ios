@@ -25,9 +25,8 @@ struct ContentView: View {
     
     @EnvironmentObject var centerLocation : CenterLocation
     @EnvironmentObject var lot: ParkingLot
-    
     @EnvironmentObject var ld : LogIn
-
+    @EnvironmentObject var notificationCenter: NotificationCenter
     
     var body: some View {
         if self.ld.isLoggedIn {

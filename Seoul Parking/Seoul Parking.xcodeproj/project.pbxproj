@@ -35,6 +35,7 @@
 		16DC743124C004AE0036734F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DC743024C004AE0036734F /* LoginView.swift */; };
 		16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */; };
 		16E8980B24DD3179001907A0 /* AvailableHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8980A24DD3179001907A0 /* AvailableHoursView.swift */; };
+		16ECAE1E250B55EF008C7AD5 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ECAE1D250B55EF008C7AD5 /* NotificationCenter.swift */; };
 		16FB34AA24C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 in Resources */ = {isa = PBXBuildFile; fileRef = 16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */; };
 		16FB34AC24C54C3F007A05F9 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; };
 		16FB34AD24C54C3F007A05F9 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -118,6 +119,7 @@
 		16DC743024C004AE0036734F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpaceInfoView.swift; sourceTree = "<group>"; };
 		16E8980A24DD3179001907A0 /* AvailableHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoursView.swift; sourceTree = "<group>"; };
+		16ECAE1D250B55EF008C7AD5 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		16FB34A924C54B9F007A05F9 /* KakaoOpenSDK-1.23.3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "KakaoOpenSDK-1.23.3"; sourceTree = "<group>"; };
 		16FB34AB24C54C3F007A05F9 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = "KakaoOpenSDK-1.23.3/KakaoOpenSDK.framework"; sourceTree = "<group>"; };
 		16FB34AF24C54C43007A05F9 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoCommon.framework; path = "KakaoOpenSDK-1.23.3/KakaoCommon.framework"; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				16AF296824B6E47400836C81 /* LaunchScreen.storyboard */,
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16DC743024C004AE0036734F /* LoginView.swift */,
+				16ECAE1D250B55EF008C7AD5 /* NotificationCenter.swift */,
 				169429732508BD5D006AF973 /* SearchHistoryView.swift */,
 				1661D66324FE3F3700AF56E7 /* SignupView.swift */,
 				16AF299424B8236400836C81 /* MenuView.swift */,
@@ -585,6 +588,7 @@
 				16BE9F1A25076045009A61BD /* PaymentHistoryView.swift in Sources */,
 				169429742508BD5E006AF973 /* SearchHistoryView.swift in Sources */,
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
+				16ECAE1E250B55EF008C7AD5 /* NotificationCenter.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
 				16A0C54824F501590015DCAC /* CenterLocation.swift in Sources */,
 				166D045624FCBE99009373E8 /* MainView.swift in Sources */,
