@@ -33,7 +33,10 @@ struct MainView: View {
                 self.showMenu = false
                 
         }
-        
+
+        if let payload = self.notificationCenter.payload {
+            print(payload.notification.request.content.userInfo)
+        }
         
         
         return ZStack{
@@ -56,6 +59,8 @@ struct MainView: View {
                         NavigationLink(destination: PaymentHistoryView(), isActive: self.$auxViewType.showPaymentHistoryView){
                             EmptyView()
                         }.hidden()
+                        
+                        
                         
                         NavigationLink(destination: SearchHistoryView(), isActive: self.$showSearchHistoryView){
                             EmptyView()
@@ -151,6 +156,8 @@ struct MainView: View {
         .onAppear(perform: fetchParkingSpaces)
         
     }
+    
+    
     
     func fetchParkingSpaces() {
         
