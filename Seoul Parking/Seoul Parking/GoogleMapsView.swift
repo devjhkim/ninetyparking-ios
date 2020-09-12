@@ -58,6 +58,7 @@ struct GoogleMapsView: UIViewRepresentable {
         let settingsButtonImage = UIImage(systemName: "gear", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         settingsButtonImage?.withRenderingMode(.alwaysTemplate)
         settingsButton.setImage(settingsButtonImage, for: .normal)
+        settingsButton.addTarget(context.coordinator, action: #selector(context.coordinator.settingsButtonPressed(_:)), for: .touchUpInside)
         settingsButton.backgroundColor = .white
         settingsButton.tintColor = .black
         settingsButton.clipsToBounds = true
@@ -128,6 +129,10 @@ struct GoogleMapsView: UIViewRepresentable {
         @objc func searchHistoryButtonPressed(_ sender: UIButton){
             
             self.mapView.showSearchHistoryView = true
+        }
+        
+        @objc func settingsButtonPressed(_ sender: UIButton){
+            
         }
         
     }
