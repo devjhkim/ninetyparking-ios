@@ -34,8 +34,18 @@ struct MainView: View {
                 
         }
 
-        if let payload = self.notificationCenter.payload {
-            print(payload.notification.request.content.userInfo)
+        DispatchQueue.main.async {
+            if let payload = self.notificationCenter.payload {
+               
+                if let data = payload.notification.request.content.userInfo["payload"]{
+                    if let msgDict = data as? [String:String] {
+                        if msgDict["messageType"] == "PAY_REQUEST" {
+                            self.auxViewType.showPaymentHistoryView = true
+                            self.notificationCenter.payload = nil
+                        }
+                    }
+                }
+            }
         }
         
         
@@ -72,6 +82,9 @@ struct MainView: View {
                             .environmentObject(self.centerLocation)
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
+                            .onAppear(perform: {
+                                
+                            })
                         
                         
                         

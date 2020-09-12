@@ -60,10 +60,20 @@ struct GoogleMapsView: UIViewRepresentable {
         settingsButton.setImage(settingsButtonImage, for: .normal)
         settingsButton.backgroundColor = .white
         settingsButton.tintColor = .black
+        settingsButton.clipsToBounds = true
+        settingsButton.layer.cornerRadius = 25
+        settingsButton.layer.shadowColor = UIColor.black.cgColor
+        settingsButton.layer.shadowOffset = .zero
+        settingsButton.layer.shadowOpacity = 0.5
+        settingsButton.layer.shadowRadius = 5
+        settingsButton.layer.masksToBounds = false
+
         
         mapView.addSubview(settingsButton)
         settingsButton.topAnchor.constraint(equalTo: searchHistoryButton.bottomAnchor, constant: 10).isActive = true
         settingsButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         
         return mapView
