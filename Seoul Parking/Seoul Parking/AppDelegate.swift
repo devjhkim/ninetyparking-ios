@@ -114,27 +114,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         UserInfo.getInstance.deviceToken = token
         
-        guard let url = URL(string: REST_API.USER.UPDATE_DEVICE_TOKEN) else {return}
         
-        let params = [
-            "userUniqueId": UserInfo.getInstance.uniqueId,
-            "iosDeviceToken": UserInfo.getInstance.deviceToken
-        ]
-        
-        do{
-            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+        if UserInfo.getInstance.uniqueId.count > 0 {
+            guard let url = URL(string: REST_API.USER.UPDATE_DEVICE_TOKEN) else {return}
             
-            var request = URLRequest(url: url)
-            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            request.httpMethod = "POST"
-            request.httpBody = jsonParams
+            let params = [
+                "userUniqueId": UserInfo.getInstance.uniqueId,
+                "iosDeviceToken": UserInfo.getInstance.deviceToken
+            ]
             
-            URLSession.shared.dataTask(with: request){(data, response, error) in
+            do{
+                let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
                 
-            }.resume()
-        }catch{
-            fatalError(error.localizedDescription)
+                var request = URLRequest(url: url)
+                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                request.httpMethod = "POST"
+                request.httpBody = jsonParams
+                
+                URLSession.shared.dataTask(with: request){(data, response, error) in
+                    
+                }.resume()
+            }catch{
+                fatalError(error.localizedDescription)
+            }
         }
+        
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
