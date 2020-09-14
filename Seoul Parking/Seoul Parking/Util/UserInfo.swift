@@ -15,6 +15,7 @@ class UserInfo {
     private var _name: String = ""
     private var _uniqueId: String = ""
     private var _isLoggedIn: Bool = false
+    private var _deviceToken: String = ""
 
     var name: String {
         get { return _name }
@@ -30,6 +31,11 @@ class UserInfo {
     var isLoggedIn : Bool {
         get { return _isLoggedIn }
         set(i) {_isLoggedIn = i}
+    }
+    
+    var deviceToken : String {
+        get { return _deviceToken }
+        set(t) {_deviceToken = t}
     }
 }
 

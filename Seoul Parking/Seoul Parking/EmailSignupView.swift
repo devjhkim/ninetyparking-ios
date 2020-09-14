@@ -313,7 +313,8 @@ struct EmailSignupView: View {
             "email": self.email,
             "password": self.password,
             "phoneNumber": "",
-            "plateNumber": self.plateNumbers
+            "plateNumber": self.plateNumbers,
+            "iosDeviceToken" : UserInfo.getInstance.deviceToken
         ] as [String : Any]
         
         do{

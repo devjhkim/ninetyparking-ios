@@ -111,6 +111,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
+        
+        UserInfo.getInstance.deviceToken = token
+        
+        guard let url = URL(string: REST_API.USER.UPDATE_DEVICE_TOKEN) else {return}
+        
+        let params = [
+            "userUniqueId": UserInfo.getInstance.uniqueId,
+            "iosDeviceToken": UserInfo.getInstance.deviceToken
+        ]
+        
+        do{
+            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+            
+            var request = URLRequest(url: url)
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
+            
+            URLSession.shared.dataTask(with: request){(data, response, error) in
+                
+            }.resume()
+        }catch{
+            fatalError(error.localizedDescription)
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

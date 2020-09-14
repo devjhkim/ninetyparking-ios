@@ -167,6 +167,7 @@ struct MainView: View {
             
         }
         .onAppear(perform: fetchParkingSpaces)
+        .onAppear(perform: updateDeviceToken)
         
     }
     
@@ -222,6 +223,30 @@ struct MainView: View {
         }
         
         
+    }
+    
+    func updateDeviceToken() {
+        guard let url = URL(string: REST_API.USER.UPDATE_DEVICE_TOKEN) else {return}
+        
+        let params = [
+            "userUniqueId": UserInfo.getInstance.uniqueId,
+            "iosDeviceToken": UserInfo.getInstance.deviceToken
+        ]
+        
+        do{
+            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+            
+            var request = URLRequest(url: url)
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
+            
+            URLSession.shared.dataTask(with: request){(data, response, error) in
+                
+            }.resume()
+        }catch{
+            fatalError(error.localizedDescription)
+        }
     }
 }
 
