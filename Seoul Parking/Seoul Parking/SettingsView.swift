@@ -37,19 +37,25 @@ struct SettingsView: View {
                 }
                 .padding()
                 
-                HStack{
-                    Text("차량번호")
-                        .foregroundColor(.black)
-                    Spacer()
-                    PlateNumberText
-                        .foregroundColor(.gray)
-                    Image(systemName: "arrow.right.circle")
-                        .renderingMode(.template)
-                        .foregroundColor(Color.gray)
-                        .imageScale(.large)
-                    
+                VStack{
+                    HStack{
+                        Text("차량번호")
+                            .foregroundColor(.black)
+                        Spacer()
+                        PlateNumberText
+                            .foregroundColor(.gray)
+                        Image(systemName: "arrow.right.circle")
+                            .renderingMode(.template)
+                            .foregroundColor(Color.gray)
+                            .imageScale(.large)
+                        
+                    }
+                    .padding()
+
+                    NavigationLink(destination: PlateNumberModificationView()){
+                        EmptyView()
+                    }
                 }
-                .padding()
                 
                 VStack {
                     HStack{

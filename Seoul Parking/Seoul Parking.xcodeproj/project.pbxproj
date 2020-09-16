@@ -14,6 +14,7 @@
 		16926FAD2511EE1F0007E4F8 /* NameModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */; };
 		16926FAF2511EEC40007E4F8 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FAE2511EEC40007E4F8 /* Store.swift */; };
 		16926FB125120A420007E4F8 /* EmailModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FB025120A420007E4F8 /* EmailModificationView.swift */; };
+		16926FB3251211EE0007E4F8 /* PlateNumberModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FB2251211EE0007E4F8 /* PlateNumberModificationView.swift */; };
 		169429742508BD5E006AF973 /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169429732508BD5D006AF973 /* SearchHistoryView.swift */; };
 		16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C4C824E113670015DCAC /* ReservationView.swift */; };
 		16A0C50824EB84A50015DCAC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C50724EB84A50015DCAC /* Extension.swift */; };
@@ -94,6 +95,7 @@
 		16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModificationView.swift; sourceTree = "<group>"; };
 		16926FAE2511EEC40007E4F8 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		16926FB025120A420007E4F8 /* EmailModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModificationView.swift; sourceTree = "<group>"; };
+		16926FB2251211EE0007E4F8 /* PlateNumberModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNumberModificationView.swift; sourceTree = "<group>"; };
 		169429732508BD5D006AF973 /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
 		16A0C4C824E113670015DCAC /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		16A0C50624E627B40015DCAC /* 나인티 파킹.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "나인티 파킹.entitlements"; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				16BE9F1925076045009A61BD /* PaymentHistoryView.swift */,
 				16BE9F1B25076059009A61BD /* PayView.swift */,
 				16926FB025120A420007E4F8 /* EmailModificationView.swift */,
+				16926FB2251211EE0007E4F8 /* PlateNumberModificationView.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */,
 				16FB34B524C6C868007A05F9 /* EmailSignupView.swift in Sources */,
 				16926FAD2511EE1F0007E4F8 /* NameModificationView.swift in Sources */,
+				16926FB3251211EE0007E4F8 /* PlateNumberModificationView.swift in Sources */,
 				16AF299524B8236400836C81 /* MenuView.swift in Sources */,
 				16BE9F1A25076045009A61BD /* PaymentHistoryView.swift in Sources */,
 				16926FB125120A420007E4F8 /* EmailModificationView.swift in Sources */,
