@@ -9,8 +9,95 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject var store: Store
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Color.white.edgesIgnoringSafeArea(.all)
+            
+            List{
+                VStack{
+                    HStack{
+                        Text("이름")
+                            .foregroundColor(.black)
+                        Spacer()
+                        Text(self.store.user.name)
+                            .foregroundColor(.gray)
+                        Image(systemName: "arrow.right.circle")
+                            .renderingMode(.template)
+                            .foregroundColor(Color.gray)
+                            .imageScale(.large)
+                        
+                    }
+                    
+                    NavigationLink(destination:NameModificationView()){
+                        EmptyView()
+                    }
+                }
+                .padding()
+                
+                HStack{
+                    Text("차량번호")
+                        .foregroundColor(.black)
+                    Spacer()
+                    PlateNumberText
+                        .foregroundColor(.gray)
+                    Image(systemName: "arrow.right.circle")
+                        .renderingMode(.template)
+                        .foregroundColor(Color.gray)
+                        .imageScale(.large)
+                    
+                }
+                .padding()
+                
+                VStack {
+                    HStack{
+                        Text("이메일")
+                            .foregroundColor(.black)
+                        Spacer()
+                        Text(self.store.user.email)
+                            .foregroundColor(.gray)
+                        Image(systemName: "arrow.right.circle")
+                            .renderingMode(.template)
+                            .foregroundColor(Color.gray)
+                            .imageScale(.large)
+                    }
+                    .padding()
+                    
+                    NavigationLink(destination: EmailModificationView()){
+                        EmptyView()
+                    }
+                }
+                
+                
+                HStack{
+                    Text("비밀번호 변경")
+                        .foregroundColor(.black)
+                    Spacer()
+                    
+                    Image(systemName: "arrow.right.circle")
+                        .renderingMode(.template)
+                        .foregroundColor(Color.gray)
+                        .imageScale(.large)
+                }
+                .padding()
+            }
+            
+        }
+        
+    }
+    
+    private var PlateNumberText: some View {
+        var plateNumber = ""
+        
+        if self.store.user.plateNumbers.count > 0 {
+            plateNumber = self.store.user.plateNumbers[0]
+        }
+        
+        return AnyView(
+            Text(plateNumber)
+        )
     }
 }
 

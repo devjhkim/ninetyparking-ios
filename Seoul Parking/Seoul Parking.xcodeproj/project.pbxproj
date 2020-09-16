@@ -11,6 +11,9 @@
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
 		1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D66324FE3F3700AF56E7 /* SignupView.swift */; };
 		166D045624FCBE99009373E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166D045524FCBE99009373E8 /* MainView.swift */; };
+		16926FAD2511EE1F0007E4F8 /* NameModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */; };
+		16926FAF2511EEC40007E4F8 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FAE2511EEC40007E4F8 /* Store.swift */; };
+		16926FB125120A420007E4F8 /* EmailModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FB025120A420007E4F8 /* EmailModificationView.swift */; };
 		169429742508BD5E006AF973 /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169429732508BD5D006AF973 /* SearchHistoryView.swift */; };
 		16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C4C824E113670015DCAC /* ReservationView.swift */; };
 		16A0C50824EB84A50015DCAC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A0C50724EB84A50015DCAC /* Extension.swift */; };
@@ -88,6 +91,9 @@
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		1661D66324FE3F3700AF56E7 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		166D045524FCBE99009373E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModificationView.swift; sourceTree = "<group>"; };
+		16926FAE2511EEC40007E4F8 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		16926FB025120A420007E4F8 /* EmailModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModificationView.swift; sourceTree = "<group>"; };
 		169429732508BD5D006AF973 /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
 		16A0C4C824E113670015DCAC /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		16A0C50624E627B40015DCAC /* 나인티 파킹.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "나인티 파킹.entitlements"; sourceTree = "<group>"; };
@@ -211,6 +217,7 @@
 				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
 				16AF299624B8319400836C81 /* GeometryGetter.swift */,
 				16AF299024B6F39800836C81 /* GoogleMapsView.swift */,
+				16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */,
 				16ECAE1F250CAF20008C7AD5 /* SettingsView.swift */,
 				16AF296B24B6E47400836C81 /* Info.plist */,
 				16AF296824B6E47400836C81 /* LaunchScreen.storyboard */,
@@ -232,6 +239,7 @@
 				166D045524FCBE99009373E8 /* MainView.swift */,
 				16BE9F1925076045009A61BD /* PaymentHistoryView.swift */,
 				16BE9F1B25076059009A61BD /* PayView.swift */,
+				16926FB025120A420007E4F8 /* EmailModificationView.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -277,6 +285,7 @@
 			children = (
 				16DC741A24BD67970036734F /* ParkingSpace.swift */,
 				16FB34B624C82493007A05F9 /* Login.swift */,
+				16926FAE2511EEC40007E4F8 /* Store.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -587,8 +596,10 @@
 				16E8980B24DD3179001907A0 /* AvailableHoursView.swift in Sources */,
 				16A0C4C924E113670015DCAC /* ReservationView.swift in Sources */,
 				16FB34B524C6C868007A05F9 /* EmailSignupView.swift in Sources */,
+				16926FAD2511EE1F0007E4F8 /* NameModificationView.swift in Sources */,
 				16AF299524B8236400836C81 /* MenuView.swift in Sources */,
 				16BE9F1A25076045009A61BD /* PaymentHistoryView.swift in Sources */,
+				16926FB125120A420007E4F8 /* EmailModificationView.swift in Sources */,
 				169429742508BD5E006AF973 /* SearchHistoryView.swift in Sources */,
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
 				16ECAE1E250B55EF008C7AD5 /* NotificationCenter.swift in Sources */,
@@ -598,6 +609,7 @@
 				16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */,
 				16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */,
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,
+				16926FAF2511EEC40007E4F8 /* Store.swift in Sources */,
 				16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */,
 				16FB34B324C6C5E9007A05F9 /* EmailLoginView.swift in Sources */,
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,

@@ -12,8 +12,8 @@ import GoogleMaps
 
 struct GoogleMapsView: UIViewRepresentable {
     
-    @Binding var showSearchHistoryView: Bool
     
+    @Binding var auxViewType: AuxViewType
     private let zoom: Float = 15.0
     
     
@@ -128,11 +128,11 @@ struct GoogleMapsView: UIViewRepresentable {
         
         @objc func searchHistoryButtonPressed(_ sender: UIButton){
             
-            self.mapView.showSearchHistoryView = true
+            self.mapView.auxViewType.showSearchiHistoryView = true
         }
         
         @objc func settingsButtonPressed(_ sender: UIButton){
-            
+            self.mapView.auxViewType.showSettingsView = true
         }
         
     }
@@ -144,6 +144,6 @@ struct GoogleMapsView_Previews: PreviewProvider {
     var parkingSpaces = [ParkingSpace]()
     
     static var previews: some View {
-        GoogleMapsView(showSearchHistoryView: .constant(false))
+        GoogleMapsView(auxViewType: .constant(AuxViewType()))
     }
 }

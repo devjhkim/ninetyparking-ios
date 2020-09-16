@@ -13,6 +13,8 @@ struct AuxViewType {
     var viewType: Category = .none
     var showLoginView: Bool = false
     var showPaymentHistoryView: Bool = false
+    var showSearchiHistoryView: Bool = false
+    var showSettingsView: Bool = false
     enum Category: Int {
         case none = 0
         case paymentHistory = 1
@@ -27,6 +29,7 @@ struct ContentView: View {
     @EnvironmentObject var lot: ParkingLot
     @EnvironmentObject var ld : LogIn
     @EnvironmentObject var notificationCenter: NotificationCenter
+    @EnvironmentObject var store: Store
     
     var body: some View {
         if self.ld.isLoggedIn {
@@ -38,6 +41,11 @@ struct ContentView: View {
                             self.ld.isLoggedIn = loggedIn
                             
                             getUserInfo()
+                            
+                            self.store.user.name = UserInfo.getInstance.name
+                            self.store.user.email = UserInfo.getInstance.email
+                            self.store.user.plateNumbers = UserInfo.getInstance.plateNumbers
+                            self.store.user.userUniqueId = UserInfo.getInstance.uniqueId
                         }
                         
                         

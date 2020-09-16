@@ -22,6 +22,8 @@ struct LoginData: Hashable, Codable {
     var userUniqueId: String
     var statusCode: String
     var name: String
+    var email: String
+    var plateNumbers: [String]
 }
 
 struct LoginResult {
