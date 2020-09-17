@@ -13,7 +13,7 @@ struct AuxViewType {
     var viewType: Category = .none
     var showLoginView: Bool = false
     var showPaymentHistoryView: Bool = false
-    var showSearchiHistoryView: Bool = false
+    var showSearchHistoryView: Bool = false
     var showSettingsView: Bool = false
     enum Category: Int {
         case none = 0
@@ -30,6 +30,12 @@ struct ContentView: View {
     @EnvironmentObject var ld : LogIn
     @EnvironmentObject var notificationCenter: NotificationCenter
     @EnvironmentObject var store: Store
+    
+    init() {
+        UINavigationBar.appearance().backgroundColor = .white
+        UITableViewCell.appearance().selectionStyle = .none
+        
+    }
     
     var body: some View {
         if self.ld.isLoggedIn {

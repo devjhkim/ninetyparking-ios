@@ -12,12 +12,13 @@ struct SettingsView: View {
     
     @EnvironmentObject var store: Store
     
+    
     var body: some View {
         ZStack{
             Color.white.edgesIgnoringSafeArea(.all)
             
-            List{
-                VStack{
+            VStack{
+                NavigationLink(destination:NameModificationView()){
                     HStack{
                         Text("이름")
                             .foregroundColor(.black)
@@ -30,14 +31,11 @@ struct SettingsView: View {
                             .imageScale(.large)
                         
                     }
-                    
-                    NavigationLink(destination:NameModificationView()){
-                        EmptyView()
-                    }
+                    .padding()
                 }
-                .padding()
                 
-                VStack{
+                NavigationLink(destination: PlateNumberModificationView()){
+                    
                     HStack{
                         Text("차량번호")
                             .foregroundColor(.black)
@@ -48,16 +46,12 @@ struct SettingsView: View {
                             .renderingMode(.template)
                             .foregroundColor(Color.gray)
                             .imageScale(.large)
-                        
                     }
                     .padding()
-
-                    NavigationLink(destination: PlateNumberModificationView()){
-                        EmptyView()
-                    }
+                    
                 }
                 
-                VStack {
+                NavigationLink(destination:EmailModificationView()){
                     HStack{
                         Text("이메일")
                             .foregroundColor(.black)
@@ -70,25 +64,28 @@ struct SettingsView: View {
                             .imageScale(.large)
                     }
                     .padding()
-                    
-                    NavigationLink(destination: EmailModificationView()){
-                        EmptyView()
+                }
+                
+                
+                NavigationLink(destination: PasswordModificationView()){
+                    HStack{
+                        Text("비밀번호 변경")
+                            .foregroundColor(.black)
+                        Spacer()
+                        
+                        Image(systemName: "arrow.right.circle")
+                            .renderingMode(.template)
+                            .foregroundColor(Color.gray)
+                            .imageScale(.large)
                     }
+                    .padding()
+
                 }
                 
+                Spacer()
                 
-                HStack{
-                    Text("비밀번호 변경")
-                        .foregroundColor(.black)
-                    Spacer()
-                    
-                    Image(systemName: "arrow.right.circle")
-                        .renderingMode(.template)
-                        .foregroundColor(Color.gray)
-                        .imageScale(.large)
-                }
-                .padding()
             }
+            
             
         }
         

@@ -55,7 +55,7 @@ struct GoogleMapsView: UIViewRepresentable {
         searchHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
         let settingsButton = UIButton()
-        let settingsButtonImage = UIImage(systemName: "gear", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         settingsButtonImage?.withRenderingMode(.alwaysTemplate)
         settingsButton.setImage(settingsButtonImage, for: .normal)
         settingsButton.addTarget(context.coordinator, action: #selector(context.coordinator.settingsButtonPressed(_:)), for: .touchUpInside)
@@ -128,7 +128,7 @@ struct GoogleMapsView: UIViewRepresentable {
         
         @objc func searchHistoryButtonPressed(_ sender: UIButton){
             
-            self.mapView.auxViewType.showSearchiHistoryView = true
+            self.mapView.auxViewType.showSearchHistoryView = true
         }
         
         @objc func settingsButtonPressed(_ sender: UIButton){

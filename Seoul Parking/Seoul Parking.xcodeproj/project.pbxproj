@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16122FC9251354C000CD9662 /* PasswordModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16122FC8251354C000CD9662 /* PasswordModificationView.swift */; };
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
 		1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D66324FE3F3700AF56E7 /* SignupView.swift */; };
@@ -88,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		16122FC8251354C000CD9662 /* PasswordModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModificationView.swift; sourceTree = "<group>"; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		1661D66324FE3F3700AF56E7 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				16A0C4C824E113670015DCAC /* ReservationView.swift */,
 				16AF295F24B6E47100836C81 /* SceneDelegate.swift */,
 				16FB34B424C6C868007A05F9 /* EmailSignupView.swift */,
+				16122FC8251354C000CD9662 /* PasswordModificationView.swift */,
 				16AF298D24B6F19D00836C81 /* Util */,
 				16A0C54924F51E5B0015DCAC /* PlaceAutocompleteSearch.swift */,
 				16A0C54724F501590015DCAC /* CenterLocation.swift */,
@@ -620,6 +623,7 @@
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16BE9F1C25076059009A61BD /* PayView.swift in Sources */,
 				16A0C50824EB84A50015DCAC /* Extension.swift in Sources */,
+				16122FC9251354C000CD9662 /* PasswordModificationView.swift in Sources */,
 				16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */,
 				16ECAE20250CAF20008C7AD5 /* SettingsView.swift in Sources */,
 				16DC743124C004AE0036734F /* LoginView.swift in Sources */,
@@ -803,6 +807,7 @@
 					"$(PROJECT_DIR)/KakaoOpenSDK-1.23.3",
 				);
 				INFOPLIST_FILE = "Seoul Parking/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -862,7 +867,7 @@
 				PRODUCT_NAME = "나인티 파킹";
 				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -881,6 +886,7 @@
 					"$(PROJECT_DIR)/KakaoOpenSDK-1.23.3",
 				);
 				INFOPLIST_FILE = "Seoul Parking/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -940,7 +946,7 @@
 				PRODUCT_NAME = "나인티 파킹";
 				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

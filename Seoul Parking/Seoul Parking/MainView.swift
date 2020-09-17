@@ -23,6 +23,8 @@ struct MainView: View {
     @State var showSettingsView = false
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     
+
+    
     var body: some View {
         let drag = DragGesture()
             .onEnded { _ in
@@ -73,7 +75,7 @@ struct MainView: View {
                         
                         
                         
-                        NavigationLink(destination: SearchHistoryView(), isActive: self.$showSearchHistoryView){
+                        NavigationLink(destination: SearchHistoryView(), isActive: self.$auxViewType.showSearchHistoryView){
                             EmptyView()
                         }.hidden()
                         
@@ -87,27 +89,14 @@ struct MainView: View {
                             .environmentObject(self.centerLocation)
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
-                            
-                        
-                        
-                        
-                            
-                            
-                        
-                        
+
                         if self.showMenu {
                             
                             MenuView(showMenu: self.$showMenu, auxView: self.$auxViewType, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
                                 .gesture(tap)
                                 .environment(\.showLoginView, self.$showLoginView)
                         }
-                        
 
-                        
-                        
-                        
-                        
-                        
                     }
                     .gesture(drag)
                     .sheet(isPresented:self.$showLoginView){
