@@ -11,71 +11,114 @@ import SwiftUI
 struct PlateNumberModificationView: View {
     
     @State var newPlateNumber = ""
-    @State var plateNumbers = [String]()
+    @State var showAlert = false
     @State var showPlateNumberMaxAlert = false
     @State var showAddPlateNumberAlert = false
+    @State var showPlateNumbersUpdatedAlert = false
+    
+    @EnvironmentObject var store: Store
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack{
-            HStack{
-                Text("차량번호")
-                    .foregroundColor(Color.black)
-                TextField("", text: self.$newPlateNumber)
-                    .foregroundColor(.black)
-                
-                
-                Button(action: {
-                    if !self.newPlateNumber.isEmpty {
-                        if self.plateNumbers.count < MAX_PLATE_NUMBERS {
-                            if !self.plateNumbers.contains(self.newPlateNumber){
-                                self.plateNumbers.append(self.newPlateNumber)
+        ZStack{
+            Color.white.edgesIgnoringSafeArea(.all)
+            
+            VStack{
+                HStack{
+                    Text("차량번호")
+                        .foregroundColor(Color.black)
+                    TextField("", text: self.$newPlateNumber)
+                        .foregroundColor(.black)
+                    
+                    
+                    Button(action: {
+                        if !self.newPlateNumber.isEmpty {
+                            if self.store.user.plateNumbers.count < MAX_PLATE_NUMBERS {
+                                if !self.store.user.plateNumbers.contains(self.newPlateNumber){
+                                    self.store.user.plateNumbers.append(self.newPlateNumber)
+                                }
+                            } else {
+                                self.showPlateNumberMaxAlert = true
                             }
-                        } else {
-                            self.showPlateNumberMaxAlert = true
+                            
+                        }
+                    }) {
+                        
+                        Text("추가")
+                        
+                    }
+                    
+                }
+                .padding()
+                .background(Capsule().stroke(Color.black, lineWidth: 2))
+                
+                    
+                .alert(isPresented: self.$showPlateNumberMaxAlert, content: {
+                    Alert(title: Text(""), message: Text("차량은 3대 까지 등록 가능합니다."), dismissButton: .default(Text("확인")))
+                })
+                
+                List{
+                    ForEach(Array(zip(self.store.user.plateNumbers.indices, self.store.user.plateNumbers)), id: \.0) { index, number in
+                        HStack{
+                            Text(number)
+                                .foregroundColor(Color.black)
+                            Spacer()
+                            
+                            Button(action: {
+                                self.store.user.plateNumbers.remove(at: index)
+                            }){
+                            
+                                Text("삭제")
+                                    .foregroundColor(.red)
+                            }
                         }
                         
                     }
-                }) {
-                    
-                    Text("추가")
+                    .onDelete(perform: delete(at:))
                     
                 }
+                .alert(isPresented: self.$showAddPlateNumberAlert, content: {
+                    Alert(title: Text(""), message: Text("차량번호를 입력해주세요."), dismissButton: .default(Text("확인")))
+                })
+                
+                HStack{
+                    Spacer()
+                    
+                    Button(action:{self.presentationMode.wrappedValue.dismiss()}){
+                        Image("cancelButton")
+                    }
+                        .alert(isPresented: self.$showAlert){
+                            Alert(title: Text(""), message: Text("서버에러"), dismissButton: .default(Text("확인"), action: {self.showAlert = false}))
+                        }
+                        
+                    Spacer()
+                    
+                    Button(action: { self.updatePlateNumbers()}){
+                        Image("changeButton")
+                    }
+                    .alert(isPresented:self.$showPlateNumbersUpdatedAlert){
+                        Alert(title: Text(""), message: Text("차량번호가 변경 되었습니다."), dismissButton: .default(Text("확인"), action: {self.presentationMode.wrappedValue.dismiss()}))
+                    }
+                    
+                    Spacer()
+                }
+                .padding()
+                
                 
             }
             .padding()
-            .background(Capsule().stroke(Color.black, lineWidth: 2))
-            .alert(isPresented: self.$showPlateNumberMaxAlert, content: {
-                Alert(title: Text(""), message: Text("차량은 3대 까지 등록 가능합니다."), dismissButton: .default(Text("확인")))
-            })
-            
-            List{
-                ForEach(Array(zip(self.plateNumbers.indices, self.plateNumbers)), id: \.0) { index, number in
-                    HStack{
-                        Text(number)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            self.plateNumbers.remove(at: index)
-                        }){
-                        
-                            Text("삭제")
-                        }
-                    }
-                    
-                }
-                .onDelete(perform: delete(at:))
-                
-            }
-            .alert(isPresented: self.$showAddPlateNumberAlert, content: {
-                Alert(title: Text(""), message: Text("차량번호를 입력해주세요."), dismissButton: .default(Text("확인")))
-            })
         }
+        
+        
     }
     
     
     func delete(at offsets: IndexSet) {
-        self.plateNumbers.remove(atOffsets: offsets)
+        self.store.user.plateNumbers.remove(atOffsets: offsets)
+    }
+    
+    func updatePlateNumbers() {
+        
     }
     
 }
