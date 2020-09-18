@@ -85,6 +85,7 @@ struct SettingsView: View {
                 Spacer()
                 
             }
+            .navigationTitle(Text("설정"))
             
             
         }

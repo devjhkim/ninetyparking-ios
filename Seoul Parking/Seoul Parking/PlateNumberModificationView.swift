@@ -73,6 +73,9 @@ struct PlateNumberModificationView: View {
                             }
                         }
                         .listRowBackground(Color.white)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .listRowInsets(EdgeInsets())
+                        .background(Color.white)
                         
                     }
                     .onDelete(perform: delete(at:))

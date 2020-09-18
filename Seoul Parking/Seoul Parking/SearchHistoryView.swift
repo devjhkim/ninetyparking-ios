@@ -11,6 +11,10 @@ import SwiftUI
 struct SearchHistoryView: View {
     @State var searchHistory = [SearchHistory]()
     
+    init() {
+        UITableView.appearance().separatorStyle = .none
+    }
+    
     var body: some View {
         List{
             ForEach(Array(zip(self.searchHistory.indices, self.searchHistory)), id: \.0){ index, elem in
@@ -23,9 +27,14 @@ struct SearchHistoryView: View {
                         .foregroundColor(Color.black)
                         .padding()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .listRowInsets(EdgeInsets())
+                .background(Color.white)
             }
         }
+
         .onAppear(perform: fetch)
+        
         .navigationBarTitle("검색내역")
     
     }

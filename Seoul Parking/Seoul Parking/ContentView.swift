@@ -32,8 +32,10 @@ struct ContentView: View {
     @EnvironmentObject var store: Store
     
     init() {
-        UINavigationBar.appearance().backgroundColor = .white
-        UITableViewCell.appearance().selectionStyle = .none
+
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = false
+
         
     }
     
