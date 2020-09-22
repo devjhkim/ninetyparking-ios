@@ -84,10 +84,10 @@ struct ParkingSpaceInfoView: View {
     }
     
     private var Price: some View {
-        if let unitPrice = self.selectedParkingSpace?.wrappedValue.info {
+        if let unitPrice = self.selectedParkingSpace?.wrappedValue.chargePerTenMinute {
             return AnyView(
                 
-                Text("가격: (30분당) " + unitPrice + "원")
+                Text("가격: (10분당) " + unitPrice + "원")
                     .foregroundColor(Color.black)
                     
                     

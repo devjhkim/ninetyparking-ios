@@ -75,13 +75,14 @@ struct LoginView: View {
                     Text("회원이 아니신가요?")
                         .font(.system(size: 14))
                     
-                    Text("먼저 회원 가입해주세요.")
+                    Text("여기를 클릭하여 회원가입을 해주세요.")
                         .underline()
                         .font(.system(size: 14, weight: .bold))
                         .padding(.leading, 5)
                     
                 }
-                .frame(width: 300, height: 30)
+                .frame( height: 30)
+                .frame(maxWidth:.infinity)
                 .padding(.top, 30)
                 .onTapGesture {
                     self.showSignupView = true
@@ -91,7 +92,7 @@ struct LoginView: View {
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationBarTitle(Text(""))
+            .navigationBarTitle(Text(""), displayMode: .inline)
             .alert(isPresented: self.$login.showLoginAlert){
                 Alert(title: Text("미가입 회원"), message: Text("존재하지 않는 ID입니다. 먼저 회원 가입을 해야 합니다."),
                       primaryButton: .cancel(Text("취소"), action: {}),
@@ -185,8 +186,8 @@ struct KakaoLoginButton: UIViewRepresentable {
                                     let params = [
                                         "id" : myKakaoId.description,
                                         "idType" : "KAKAO",
-                                        "email": nil,
-                                        "password": nil
+                                        "email": "NULL",
+                                        "password": "NULL"
                                     ]
                                     
                                     DispatchQueue.main.async {

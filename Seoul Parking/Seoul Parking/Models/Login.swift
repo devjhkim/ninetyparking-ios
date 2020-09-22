@@ -19,10 +19,12 @@ class LogIn: ObservableObject {
 }
 
 struct LoginData: Hashable, Codable {
+    var currentTime: String
     var userUniqueId: String
     var statusCode: String
     var name: String
     var email: String
+    var resultMessage: String
     var plateNumbers: [String]
 }
 

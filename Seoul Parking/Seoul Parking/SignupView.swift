@@ -62,7 +62,9 @@ struct SignupView: View {
                 Spacer()
                 
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity)
+            .frame(height: 500)
+            .padding()
             .navigationBarTitle("")
         }
     }

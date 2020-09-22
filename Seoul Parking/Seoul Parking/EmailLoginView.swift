@@ -25,9 +25,11 @@ struct EmailLoginView: View {
     var body: some View {
         ZStack{
             Color.white
+                .edgesIgnoringSafeArea(.all)
             .onTapGesture {
                 UIApplication.shared.endEditing()
             }
+            
             VStack{
                 HStack{
                    Text("이메일 주소")
@@ -146,6 +148,8 @@ struct EmailLoginView: View {
                 Spacer()
             }
             .padding()
+            .padding(.top, 50)
+            .navigationTitle(" ")
             
           
         }
