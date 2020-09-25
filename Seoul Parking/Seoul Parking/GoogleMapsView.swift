@@ -98,6 +98,8 @@ struct GoogleMapsView: UIViewRepresentable {
             pin.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             pin.icon = GMSMarker.markerImage(with: .blue)
             pin.userData = space
+            pin.title = space.spaceName
+            pin.snippet = "10분당 " + space.chargePerTenMinute + "원"
             pin.map = mapView
         }
         
@@ -123,7 +125,7 @@ struct GoogleMapsView: UIViewRepresentable {
                 
             }
             
-            return true
+            return false
         }
         
         @objc func searchHistoryButtonPressed(_ sender: UIButton){
@@ -137,13 +139,4 @@ struct GoogleMapsView: UIViewRepresentable {
         
     }
     
-}
-
-struct GoogleMapsView_Previews: PreviewProvider {
-    
-    var parkingSpaces = [ParkingSpace]()
-    
-    static var previews: some View {
-        GoogleMapsView(auxViewType: .constant(AuxViewType()))
-    }
 }
