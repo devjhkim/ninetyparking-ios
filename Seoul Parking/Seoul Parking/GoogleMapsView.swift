@@ -96,6 +96,7 @@ struct GoogleMapsView: UIViewRepresentable {
             
             let pin = GMSMarker()
             pin.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            
             pin.icon = GMSMarker.markerImage(with: .blue)
             pin.userData = space
             pin.title = space.spaceName
@@ -135,8 +136,23 @@ struct GoogleMapsView: UIViewRepresentable {
         
         @objc func settingsButtonPressed(_ sender: UIButton){
             self.mapView.auxViewType.showSettingsView = true
+            
+            
         }
         
     }
     
+}
+
+class MapIconView: UIView {
+    var address = ""
+    var price = ""
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
