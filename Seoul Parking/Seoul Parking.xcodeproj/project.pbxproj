@@ -10,6 +10,7 @@
 		16122FC9251354C000CD9662 /* PasswordModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16122FC8251354C000CD9662 /* PasswordModificationView.swift */; };
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
+		1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164322092539688600CF7A3E /* AlertWithTextField.swift */; };
 		1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D66324FE3F3700AF56E7 /* SignupView.swift */; };
 		166D045624FCBE99009373E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166D045524FCBE99009373E8 /* MainView.swift */; };
 		16926FAD2511EE1F0007E4F8 /* NameModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */; };
@@ -92,6 +93,7 @@
 		16122FC8251354C000CD9662 /* PasswordModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModificationView.swift; sourceTree = "<group>"; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		164322092539688600CF7A3E /* AlertWithTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextField.swift; sourceTree = "<group>"; };
 		1661D66324FE3F3700AF56E7 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		166D045524FCBE99009373E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModificationView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
 				16926FB025120A420007E4F8 /* EmailModificationView.swift */,
 				16FB34B424C6C868007A05F9 /* EmailSignupView.swift */,
+				164322092539688600CF7A3E /* AlertWithTextField.swift */,
 				16AF299624B8319400836C81 /* GeometryGetter.swift */,
 				16AF299024B6F39800836C81 /* GoogleMapsView.swift */,
 				16AF296B24B6E47400836C81 /* Info.plist */,
@@ -619,6 +622,7 @@
 				16926FAF2511EEC40007E4F8 /* Store.swift in Sources */,
 				16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */,
 				16FB34B324C6C5E9007A05F9 /* EmailLoginView.swift in Sources */,
+				1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */,
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16BE9F1C25076059009A61BD /* PayView.swift in Sources */,

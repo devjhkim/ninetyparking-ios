@@ -10,17 +10,12 @@ import SwiftUI
 import GoogleMaps
 
 struct AuxViewType {
-    var viewType: Category = .none
+    
     var showLoginView: Bool = false
     var showPaymentHistoryView: Bool = false
     var showSearchHistoryView: Bool = false
     var showSettingsView: Bool = false
-    enum Category: Int {
-        case none = 0
-        case paymentHistory = 1
-        case totalAmountSpent = 2
-        case totalTimeParked = 3
-    }
+    var showPasswordCheckAlert: Bool = false
 }
 
 struct ContentView: View {

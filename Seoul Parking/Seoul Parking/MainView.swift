@@ -96,6 +96,14 @@ struct MainView: View {
                                 .gesture(tap)
                                 .environment(\.showLoginView, self.$showLoginView)
                         }
+                        
+                        if self.auxViewType.showPasswordCheckAlert {
+                            AlertWithTextField(auxType: self.$auxViewType,
+                                                //showAlert: self.$auxViewType.showPasswordCheckAlert,
+                                               placeholder: "비밀번호",
+                                               title: "비밀번호 확인",
+                                               message: "본인확인을 위해 비밀번호를 입력해야 합니다.")
+                        }
 
                     }
                     .gesture(drag)
@@ -112,6 +120,8 @@ struct MainView: View {
                             .environmentObject(self.centerLocation)
                             .environmentObject(self.lot)
                     }
+                    
+            
                     
                 }
                 .navigationBarTitle(Text(APP_TITLE), displayMode: .inline)

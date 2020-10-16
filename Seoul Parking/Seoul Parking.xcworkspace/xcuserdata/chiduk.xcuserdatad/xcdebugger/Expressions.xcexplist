@@ -3,13 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in closure #1 in KakaoSignupButton.Coordinator.login(_:):SignupView.swift">
+         contextName = "GoogleMapsView.updateUIView(_:context:):GoogleMapsView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "login">
+               value = "self.centerLocation.location.latitude">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in AlertWithTextField.updateUIViewController(_:context:):AlertWithTextField.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "self.button.login">
+               value = "self.textString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -49,6 +54,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AlertWithTextField.updateUIViewController(_:context:):AlertWithTextField.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.showAlert">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #3 in closure #1 in MenuView.body.getter:MenuView.swift">
          <PersistentStrings>
             <PersistentString
@@ -73,10 +86,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GoogleMapsView.updateUIView(_:context:):GoogleMapsView.swift">
+         contextName = "closure #1 in closure #1 in KakaoSignupButton.Coordinator.login(_:):SignupView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.centerLocation.location.latitude">
+               value = "login">
+            </PersistentString>
+            <PersistentString
+               value = "self.button.login">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -135,7 +135,7 @@ struct GoogleMapsView: UIViewRepresentable {
         }
         
         @objc func settingsButtonPressed(_ sender: UIButton){
-            self.mapView.auxViewType.showSettingsView = true
+            self.mapView.auxViewType.showPasswordCheckAlert = true
             
             
         }

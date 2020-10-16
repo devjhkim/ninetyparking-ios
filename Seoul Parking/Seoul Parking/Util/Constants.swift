@@ -13,7 +13,7 @@ public let GOOGLE_PLACES_API_KEY = "AIzaSyDFTi7tbp7f_hKLx5piWY3ybYNaIJoQo2I"
 public let KAKAO_API_KEY = "e0da816370091f321c148544edf371c2"
 public let SERVER_PORT = "49090"
 
-public let SERVER_IP = "10.8.1.40" + ":" + SERVER_PORT
+public let SERVER_IP = "10.8.6.225" + ":" + SERVER_PORT
 //public let SERVER_IP = "ninetysystem.cafe24.com"
 
 public let APP_TITLE = "나인티 파킹"
@@ -32,6 +32,7 @@ struct REST_API {
         public static let LOG_IN = APP_SERVER.HOST + "/api/user/login"
         public static let SIGN_UP = APP_SERVER.HOST + "/api/user/signup"
         public static let UPDATE_DEVICE_TOKEN = APP_SERVER.HOST + "/api/user/update/deviceToken"
+        public static let CHECK_PASSWORD = APP_SERVER.HOST + "/api/user/check/password"
         
         struct UPDATE {
             public static let DEVICE_TOKEN = APP_SERVER.HOST + "/api/user/update/deviceToken"
