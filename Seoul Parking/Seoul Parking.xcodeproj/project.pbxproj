@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16118F2C253D94A000E5F868 /* PasswordCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16118F2B253D94A000E5F868 /* PasswordCheckView.swift */; };
 		16122FC9251354C000CD9662 /* PasswordModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16122FC8251354C000CD9662 /* PasswordModificationView.swift */; };
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		16118F2B253D94A000E5F868 /* PasswordCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCheckView.swift; sourceTree = "<group>"; };
 		16122FC8251354C000CD9662 /* PasswordModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModificationView.swift; sourceTree = "<group>"; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16DC743024C004AE0036734F /* LoginView.swift */,
 				166D045524FCBE99009373E8 /* MainView.swift */,
+				16118F2B253D94A000E5F868 /* PasswordCheckView.swift */,
 				16AF299424B8236400836C81 /* MenuView.swift */,
 				16DC741724BD67570036734F /* Models */,
 				16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */,
@@ -613,6 +616,7 @@
 				169429742508BD5E006AF973 /* SearchHistoryView.swift in Sources */,
 				16FB34B724C82493007A05F9 /* Login.swift in Sources */,
 				16ECAE1E250B55EF008C7AD5 /* NotificationCenter.swift in Sources */,
+				16118F2C253D94A000E5F868 /* PasswordCheckView.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
 				16A0C54824F501590015DCAC /* CenterLocation.swift in Sources */,
 				166D045624FCBE99009373E8 /* MainView.swift in Sources */,

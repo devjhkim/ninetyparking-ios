@@ -29,18 +29,18 @@ struct AlertWithTextField: UIViewControllerRepresentable {
         
         if self.auxType.showPasswordCheckAlert {
             
-            // Create UIAlertController instance that is gonna present on UIViewController
+            
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             context.coordinator.alert = alert
             
-            // Adds UITextField & make sure that coordinator is delegate to UITextField.
+            
             alert.addTextField { textField in
                 DispatchQueue.main.async {
                     self.passwordTextField = textField
                     
                     passwordTextField?.placeholder = self.placeholder
-                    passwordTextField?.text = self.textString            // setting initial value
-                    passwordTextField?.delegate = context.coordinator    // using coordinator as delegate
+                    passwordTextField?.text = self.textString
+                    passwordTextField?.delegate = context.coordinator
                     passwordTextField?.addTarget(context.coordinator, action: #selector(Coordinator.textFieldDidChange(_:)), for: .editingChanged)
 
                 }
@@ -49,17 +49,17 @@ struct AlertWithTextField: UIViewControllerRepresentable {
             
             
             
-            // As usual adding actions
+            
             alert.addAction(UIAlertAction(title: NSLocalizedString("취소", comment: "") , style: .destructive) { _ in
                 
-                // On dismiss, SiwftUI view's two-way binding variable must be update (setting false) means, remove Alert's View from UI
+            
                 alert.dismiss(animated: true) {
                     self.auxType.showPasswordCheckAlert = false
                 }
             })
             
             let confirmAction = UIAlertAction(title: NSLocalizedString("확인", comment: ""), style: .default) { _ in
-                // On submit action, get texts from TextField & set it on SwiftUI View's two-way binding varaible `textString` so that View receives enter response.
+            
                 if let textField = alert.textFields?.first, let text = textField.text {
                     self.textString = text
                 }
@@ -132,12 +132,10 @@ struct AlertWithTextField: UIViewControllerRepresentable {
             
             alert.addAction(confirmAction)
             
-            // Most important, must be dispatched on Main thread,
-            // Curious? then remove `DispatchQueue.main.async` & find out yourself, Dont be lazy
-            DispatchQueue.main.async { // must be async !!
-                controller.present(alert, animated: false, completion: {
-                    self.auxType.showPasswordCheckAlert = false  // hide holder after alert dismiss
-                    context.coordinator.alert = nil
+            DispatchQueue.main.async {
+                controller.present(alert, animated: true, completion: {
+                    //self.auxType.showPasswordCheckAlert = false
+                    //context.coordinator.alert = nil
 
                         
                 })
@@ -149,13 +147,13 @@ struct AlertWithTextField: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<AlertWithTextField>) {
-        
+        print("update!!!")
         
         //guard context.coordinator.alert == nil else { return }
         
         
     }
-    
+    //self    나인티_파킹.AlertWithTextField.Coordinator    0x0000000281a3f480
     func makeCoordinator() -> AlertWithTextField.Coordinator {
         Coordinator(self)
     }
