@@ -89,8 +89,12 @@ struct SettingsView: View {
             
             
         }
+        .onDisappear(perform: {
+            self.store.user.password = ""
+        })
         
     }
+    
     
     private var PlateNumberText: some View {
         var plateNumber = ""

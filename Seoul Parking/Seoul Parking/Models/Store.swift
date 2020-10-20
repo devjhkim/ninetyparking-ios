@@ -18,4 +18,5 @@ struct User: Hashable, Codable {
     var name: String = ""
     var email: String = ""
     var plateNumbers: [String] = [String]()
+    var password: String = ""
 }

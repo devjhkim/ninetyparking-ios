@@ -19,7 +19,7 @@ struct PasswordModificationView: View {
     
     @State var showAlert = false
     
-    
+    @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -131,7 +131,8 @@ struct PasswordModificationView: View {
         
         let params = [
             "userUniqueId": UserInfo.getInstance.uniqueId,
-            "newPassword": self.newPassword
+            "newPassword": self.newPassword,
+            "currentPassword": self.store.user.password
         ]
         
         do{

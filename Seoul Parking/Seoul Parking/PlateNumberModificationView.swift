@@ -126,7 +126,8 @@ struct PlateNumberModificationView: View {
 
         let params = [
             "userUniqueId" : UserInfo.getInstance.uniqueId,
-            "newPlateNumbers" : self.store.user.plateNumbers
+            "newPlateNumbers" : self.store.user.plateNumbers,
+            "currentPassword": self.store.user.password
         ] as [String : Any]
         
         do{

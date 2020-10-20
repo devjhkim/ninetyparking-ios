@@ -84,7 +84,8 @@ struct NameModificationView: View {
         
         let params = [
             "userUniqueId": self.store.user.userUniqueId,
-            "newName": self.newName
+            "newName": self.newName,
+            "currentPassword": self.store.user.password
         ]
         
         

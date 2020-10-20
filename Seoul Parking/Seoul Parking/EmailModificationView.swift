@@ -87,7 +87,8 @@ struct EmailModificationView: View {
         
         let params = [
             "userUniqueId": self.store.user.userUniqueId,
-            "newEmail": self.newEmail
+            "newEmail": self.newEmail,
+            "currentPassword": self.store.user.password
         ]
         
         
