@@ -10,18 +10,27 @@ import SwiftUI
 import WebKit
 
 struct PayView: View {
+    @State var oid: String
+    @State var amount: String
+    @State var paymentMethod: String
+    
     var body: some View {
-        PaymentWebView()
+        PaymentWebView(oid: self.oid, amount: self.amount, paymentMethod: self.paymentMethod)
     }
 }
 
 struct PayView_Previews: PreviewProvider {
     static var previews: some View {
-        PayView()
+        PayView(oid: "", amount: "", paymentMethod: "")
     }
 }
 
 struct PaymentWebView: UIViewRepresentable {
+    
+    @State var oid: String
+    @State var amount: String
+    @State var paymentMethod: String
+    @EnvironmentObject var store: Store
     
     func makeCoordinator() -> Coordinator {
         Coordinator()
@@ -31,13 +40,13 @@ struct PaymentWebView: UIViewRepresentable {
         let webView = WKWebView()
         
         let params =
-            "P_INI_PAYMENT=CARD&" +
-            "P_MID=INIpayTest&" +
+            "P_INI_PAYMENT=" + self.paymentMethod + "&" +
+            "P_MID=" + KG_INICIS_MID + "&" +
             "P_GOODS=주차비&" +
-            "P_OID=134&" +
-            "P_AMT=1000&" +
-            "P_UNAME=나인티&" +
-            "P_EMAIL=abc@gmail.com&" +
+            "P_OID=" + self.oid + "&" +
+            "P_AMT=" + self.amount + "&" +
+            "P_UNAME=" + self.store.user.name + "&" +
+            "P_EMAIL=" + self.store.user.email + "&" +
             "P_NEXT_URL=https://ninetysystem.cafe24.com&" +
             "P_NOTI_URL=https://ninetysystem.cafe24.com"
         

@@ -38,6 +38,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AppDelegate.application(_:didFailToRegisterForRemoteNotificationsWithError:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in AlertWithTextField.makeUIViewController(context:):AlertWithTextField.swift">
          <PersistentStrings>
             <PersistentString

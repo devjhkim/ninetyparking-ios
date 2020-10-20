@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16118F2C253D94A000E5F868 /* PasswordCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16118F2B253D94A000E5F868 /* PasswordCheckView.swift */; };
+		16118F30253EB0D600E5F868 /* PaymentMethodSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16118F2F253EB0D600E5F868 /* PaymentMethodSelectionView.swift */; };
 		16122FC9251354C000CD9662 /* PasswordModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16122FC8251354C000CD9662 /* PasswordModificationView.swift */; };
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
@@ -92,6 +93,7 @@
 /* Begin PBXFileReference section */
 		0BC94EEE0F54808490DC1D45 /* Pods_Seoul_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Seoul_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16118F2B253D94A000E5F868 /* PasswordCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCheckView.swift; sourceTree = "<group>"; };
+		16118F2F253EB0D600E5F868 /* PaymentMethodSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodSelectionView.swift; sourceTree = "<group>"; };
 		16122FC8251354C000CD9662 /* PasswordModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModificationView.swift; sourceTree = "<group>"; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				16E8980A24DD3179001907A0 /* AvailableHoursView.swift */,
 				16DC742F24C004380036734F /* Bridge-Header.h */,
 				16A0C54724F501590015DCAC /* CenterLocation.swift */,
+				16118F2F253EB0D600E5F868 /* PaymentMethodSelectionView.swift */,
 				16AF296124B6E47100836C81 /* ContentView.swift */,
 				161CB84324CEA1A70006DC0D /* CustomViews */,
 				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
@@ -639,6 +642,7 @@
 				161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */,
 				16AF298F24B6F1C000836C81 /* Constants.swift in Sources */,
 				16A0C54A24F51E5B0015DCAC /* PlaceAutocompleteSearch.swift in Sources */,
+				16118F30253EB0D600E5F868 /* PaymentMethodSelectionView.swift in Sources */,
 				1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

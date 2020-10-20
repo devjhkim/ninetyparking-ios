@@ -13,6 +13,7 @@ struct Payment {
     var date: String
     var parkingLotName: String
     var isPaid: Bool
+    var amount: String
 }
 
 struct PaymentHistoryView: View {
@@ -23,7 +24,7 @@ struct PaymentHistoryView: View {
         
         List{
             ForEach(Array(zip(self.history.indices, self.history)), id: \.0){ index, elem in
-                NavigationLink(destination: PayView()){
+                NavigationLink(destination: PaymentMethodSelectionView(amount: elem.amount, oid: elem.paymentId)){
                     
                     VStack(alignment: .center){
                         Text(elem.date)
@@ -55,11 +56,11 @@ struct PaymentHistoryView: View {
     
     func getHistory() {
         let history = [
-            Payment(paymentId: "1", date: "2020-09-03", parkingLotName: "선릉역1", isPaid: false),
-            Payment(paymentId: "2", date: "2020-09-04", parkingLotName: "선릉역2", isPaid: true),
-            Payment(paymentId: "3", date: "2020-09-05", parkingLotName: "선릉역3", isPaid: true),
-            Payment(paymentId: "4", date: "2020-09-06", parkingLotName: "선릉역4", isPaid: false),
-            Payment(paymentId: "5", date: "2020-09-07", parkingLotName: "선릉역5", isPaid: false)
+            Payment(paymentId: "1", date: "2020-09-03", parkingLotName: "선릉역1", isPaid: false, amount: "1000"),
+            Payment(paymentId: "2", date: "2020-09-04", parkingLotName: "선릉역2", isPaid: true, amount: "25000"),
+            Payment(paymentId: "3", date: "2020-09-05", parkingLotName: "선릉역3", isPaid: true, amount: "4000"),
+            Payment(paymentId: "4", date: "2020-09-06", parkingLotName: "선릉역4", isPaid: false, amount: "55000"),
+            Payment(paymentId: "5", date: "2020-09-07", parkingLotName: "선릉역5", isPaid: false, amount: "10000")
         ]
         
         

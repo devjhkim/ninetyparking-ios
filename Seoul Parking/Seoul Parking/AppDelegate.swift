@@ -35,15 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //Facebook Login
         ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions )
         
-        self.getNotificationSettings()
+        
+        self.registerForPushNotifications()
         
         return true
     }
     
     func registerForPushNotifications() {
-      UNUserNotificationCenter.current()
-        .requestAuthorization(options: [.alert, .sound, .badge]) {
-          [weak self] granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {[weak self] granted, error in
           guard let self = self else { return }
           print("Permission granted: \(granted)")
           
@@ -100,11 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-//
-//        print(deviceTokenString)
-//    }
 
     //No callback in simulator -- must use device to get valid push token
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
