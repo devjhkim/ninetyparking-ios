@@ -39,12 +39,13 @@ struct MainView: View {
 
         DispatchQueue.main.async {
             if let payload = self.notificationCenter.payload {
-               
+                print(payload.notification.request.content.userInfo)
                 if let data = payload.notification.request.content.userInfo["payload"]{
                     if let msgDict = data as? [String:String] {
                         if msgDict["messageType"] == "PAY_REQUEST" {
                             self.auxViewType.showPaymentHistoryView = true
-                            self.notificationCenter.payload = nil
+                            self.auxViewType.showPaymentMethodSelectionView = true
+                            //self.notificationCenter.payload = nil
                         }
                     }
                 }
@@ -69,7 +70,7 @@ struct MainView: View {
                             EmptyView()
                         }.hidden()
                         
-                        NavigationLink(destination: PaymentHistoryView(), isActive: self.$auxViewType.showPaymentHistoryView){
+                        NavigationLink(destination: PaymentHistoryView(auxViewType: self.$auxViewType), isActive: self.$auxViewType.showPaymentHistoryView){
                             EmptyView()
                         }.hidden()
                         

@@ -17,6 +17,7 @@ struct AuxViewType {
     var showSettingsView: Bool = false
     var showPasswordCheckAlert: Bool = false
     var showWrongPasswordAlert: Bool = false
+    var showPaymentMethodSelectionView: Bool = false
 }
 
 struct ContentView: View {

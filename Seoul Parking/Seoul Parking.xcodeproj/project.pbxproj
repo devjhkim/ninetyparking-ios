@@ -110,7 +110,7 @@
 		16A0C50724EB84A50015DCAC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		16A0C54724F501590015DCAC /* CenterLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLocation.swift; sourceTree = "<group>"; };
 		16A0C54924F51E5B0015DCAC /* PlaceAutocompleteSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAutocompleteSearch.swift; sourceTree = "<group>"; };
-		16AF295A24B6E47100836C81 /* 나인티 파킹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "나인티 파킹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16AF295A24B6E47100836C81 /* Ninety Parking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ninety Parking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AF295D24B6E47100836C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16AF295F24B6E47100836C81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		16AF296124B6E47100836C81 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 		16AF295B24B6E47100836C81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				16AF295A24B6E47100836C81 /* 나인티 파킹.app */,
+				16AF295A24B6E47100836C81 /* Ninety Parking.app */,
 				16AF297024B6E47400836C81 /* Seoul ParkingTests.xctest */,
 				16AF297B24B6E47500836C81 /* Seoul ParkingUITests.xctest */,
 			);
@@ -352,7 +352,7 @@
 			);
 			name = "Seoul Parking";
 			productName = "Seoul Parking";
-			productReference = 16AF295A24B6E47100836C81 /* 나인티 파킹.app */;
+			productReference = 16AF295A24B6E47100836C81 /* Ninety Parking.app */;
 			productType = "com.apple.product-type.application";
 		};
 		16AF296F24B6E47400836C81 /* Seoul ParkingTests */ = {
@@ -740,7 +740,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -794,7 +794,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -876,7 +876,7 @@
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.ninety.parking;
-				PRODUCT_NAME = "나인티 파킹";
+				PRODUCT_NAME = "Ninety Parking";
 				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -955,7 +955,7 @@
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.ninety.parking;
-				PRODUCT_NAME = "나인티 파킹";
+				PRODUCT_NAME = "Ninety Parking";
 				SWIFT_OBJC_BRIDGING_HEADER = "Seoul Parking/Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

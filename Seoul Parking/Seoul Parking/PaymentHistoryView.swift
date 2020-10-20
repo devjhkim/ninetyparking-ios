@@ -18,38 +18,67 @@ struct Payment {
 
 struct PaymentHistoryView: View {
     
+    @Binding var auxViewType: AuxViewType
     @State var history = [Payment]()
+    @EnvironmentObject var notificationCenter: NotificationCenter
     
     var body: some View {
         
-        List{
-            ForEach(Array(zip(self.history.indices, self.history)), id: \.0){ index, elem in
-                NavigationLink(destination: PaymentMethodSelectionView(amount: elem.amount, oid: elem.paymentId)){
-                    
-                    VStack(alignment: .center){
-                        Text(elem.date)
-                            .foregroundColor(Color.black)
-                            .padding()
-                        Text(elem.parkingLotName)
-                            .foregroundColor(Color.black)
-                            .padding()
-                        
-                        Text(elem.isPaid ? "결제완료" : "요금미납")
-                            .foregroundColor(Color.black)
-                            .padding()
-                        
-                    }
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-//                    .padding()
-//                    .shadow(color: Color.gray, radius: 10)
-//                    .navigationBarTitle("결제내역")
-
-                }
+//        DispatchQueue.main.async{
+//            if let payload = self.notificationCenter.payload {
+//
+//                if let data = payload.notification.request.content.userInfo["payload"]{
+//                    if let msgDict = data as? [String:String] {
+//                        if msgDict["messageType"] == "PAY_REQUEST" {
+//
+//                            NavigationLink(destination: LoginView(), isActive:self.$auxViewType.showPaymentMethodSelectionView){
+//                                EmptyView()
+//                            }.hidden()
+//
+//                            self.notificationCenter.payload = nil
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        
+         ZStack{
             
+            
+            List{
+                ForEach(Array(zip(self.history.indices, self.history)), id: \.0){ index, elem in
+                    NavigationLink(destination: PaymentMethodSelectionView(amount: elem.amount, oid: elem.paymentId)){
+                        
+                        VStack(alignment: .center){
+                            Text(elem.date)
+                                .foregroundColor(Color.black)
+                                .padding()
+                            Text(elem.parkingLotName)
+                                .foregroundColor(Color.black)
+                                .padding()
+                            
+                            Text(elem.isPaid ? "결제완료" : "요금미납")
+                                .foregroundColor(Color.black)
+                                .padding()
+                            
+                        }
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+    //                    .padding()
+    //                    .shadow(color: Color.gray, radius: 10)
+    //                    .navigationBarTitle("결제내역")
+
+                    }
+                
+                }
             }
-        }
             .onAppear(perform: getHistory)
+
+            NavigationLink(destination: LoginView(), isActive: self.$auxViewType.showPaymentMethodSelectionView){
+                EmptyView()
+            }
+            
+        }
 
         
     }
@@ -71,6 +100,7 @@ struct PaymentHistoryView: View {
 
 struct PaymentHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentHistoryView()
+        PaymentHistoryView(auxViewType: .constant(AuxViewType()))
     }
 }
+

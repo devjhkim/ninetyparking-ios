@@ -30,18 +30,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GoogleMapsView.updateUIView(_:context:):GoogleMapsView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.centerLocation.location.latitude">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "AppDelegate.application(_:didFailToRegisterForRemoteNotificationsWithError:):AppDelegate.swift">
          <PersistentStrings>
             <PersistentString
                value = "error.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GoogleMapsView.updateUIView(_:context:):GoogleMapsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.centerLocation.location.latitude">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -60,18 +60,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "AlertWithTextField.updateUIViewController(_:context:):AlertWithTextField.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.showAlert">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #1 in AppDelegate.registerForPushNotifications():AppDelegate.swift">
       </ContextState>
       <ContextState
          contextName = "closure #2 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
                value = "UserInfo.getInstance.isLoggedIn">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AlertWithTextField.updateUIViewController(_:context:):AlertWithTextField.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.showAlert">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -107,6 +110,14 @@
          <PersistentStrings>
             <PersistentString
                value = "UserInfo.getInstance.isLoggedIn">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in MainView.body.getter:MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "payload.notification.request.content.userInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
