@@ -31,6 +31,8 @@ struct PaymentMethodSelectionView: View {
         PaymentMethodLabel(label: Text("가상계좌이체"), method: "VBANK")
     ]
     
+    
+    
     var body: some View {
         ZStack{
             Color.white
@@ -57,59 +59,18 @@ struct PaymentMethodSelectionView: View {
                         
                         NavigationLink(destination: PayView(oid: self.oid, amount: self.amount, paymentMethod: elem.method) ){
                             elem.label
-                            
-//                            VStack(alignment: .leading){
-//
-//                            }
-//                            .frame(maxWidth: .infinity)
-//                            .onTapGesture {
-//                                self.selectedMethod = elem.method
-//                            }
-//                            .listRowBackground(self.selectedMethod == elem.method ? Color.blue.opacity(0.2) : Color.clear)
+                                
                         }
-                        
-                        
-                            
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    
-                    
                 }
-                .frame(height: 200)
-                
-                
-//                HStack{
-//                    Spacer()
-//
-//                    Button(action: {
-//
-//                        if self.selectedMethod.isEmpty {
-//                            self.showSelectMethodAlert.toggle()
-//                            return
-//                        }
-//
-//                        self.showPayView.toggle()
-//
-//                    }){
-//                        Image("payButton")
-//                    }
-//
-//                    Spacer()
-//
-//                }
-//
-//                NavigationLink(destination: PayView(oid: self.oid, amount: self.amount, paymentMethod: self.selectedMethod), isActive: self.$showPayView){
-//                    EmptyView()
-//                }.hidden()
 
-                
-                
                 Spacer()
-                
-                
-                
+
             }
         }
         .onAppear(perform: {
+            
             let intAmount = Int(self.amount) ?? 0
             
             let numberFormatter = NumberFormatter()
