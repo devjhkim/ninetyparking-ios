@@ -23,7 +23,8 @@ struct MainView: View {
     @State var showSettingsView = false
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     
-
+    @State var amount = ""
+    @State var oid = ""
     
     var body: some View {
         let drag = DragGesture()
@@ -43,9 +44,19 @@ struct MainView: View {
                 if let data = payload.notification.request.content.userInfo["payload"]{
                     if let msgDict = data as? [String:String] {
                         if msgDict["messageType"] == "PAY_REQUEST" {
-                            self.auxViewType.showPaymentHistoryView = true
+                            
+                            if let amount = msgDict["amount"] {
+                                self.amount = amount
+                            }
+                            
+                            if let oid = msgDict["oid"] {
+                                self.oid = oid
+                            }
+                            
+                            
+                            
                             self.auxViewType.showPaymentMethodSelectionView = true
-                            //self.notificationCenter.payload = nil
+                            self.notificationCenter.payload = nil
                         }
                     }
                 }
@@ -70,10 +81,13 @@ struct MainView: View {
                             EmptyView()
                         }.hidden()
                         
-                        NavigationLink(destination: PaymentHistoryView(auxViewType: self.$auxViewType), isActive: self.$auxViewType.showPaymentHistoryView){
+                        NavigationLink(destination: PaymentHistoryView(), isActive: self.$auxViewType.showPaymentHistoryView){
                             EmptyView()
                         }.hidden()
                         
+                        NavigationLink(destination: PaymentMethodSelectionView(amount: self.amount, oid: self.oid), isActive: self.$auxViewType.showPaymentMethodSelectionView){
+                            EmptyView()
+                        }.hidden()
                         
                         
                         NavigationLink(destination: SearchHistoryView(), isActive: self.$auxViewType.showSearchHistoryView){
@@ -170,6 +184,9 @@ struct MainView: View {
         }
         .onAppear(perform: fetchParkingSpaces)
         .onAppear(perform: updateDeviceToken)
+        .onAppear(perform: {
+            
+        })
         
     }
     

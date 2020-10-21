@@ -8,17 +8,28 @@
 
 import SwiftUI
 
-enum PaymentMethod: String {
-    case card = "CARD"
-    case phone = "MOBILE"
-    case bank = "BANK"
-    case vbank = "VBANK"
+
+
+struct PaymentMethodLabel {
+    var label : Text
+    var method : String
 }
 
 struct PaymentMethodSelectionView: View {
+    //@Binding var auxViewType: AuxViewType
     @State var amount: String
     @State var oid: String
     @State var selectedMethod = ""
+    @State var formattedCurrencyAmount = ""
+    @State var showPayView = false
+    @State var showSelectMethodAlert = false
+    
+    var paymentMethods = [
+        PaymentMethodLabel(label: Text("신용카드"), method: "CARD"),
+        PaymentMethodLabel(label: Text("휴대전화"), method: "MOBILE"),
+        PaymentMethodLabel(label: Text("계좌이체"), method: "BANK"),
+        PaymentMethodLabel(label: Text("가상계좌이체"), method: "VBANK")
+    ]
     
     var body: some View {
         ZStack{
@@ -26,20 +37,81 @@ struct PaymentMethodSelectionView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading){
-                Text(String(format: "결제금액: %@ 원", self.amount))
+                Text(String(format: "결제금액: %@원", self.formattedCurrencyAmount))
+                    .bold()
+                    .font(.system(size: 18))
                     .foregroundColor(Color.black)
+                    .padding()
                 
-                Picker(selection: self.$selectedMethod, label: Text("결제방식 선택")){
-                    Text("신용카드").tag(PaymentMethod.card)
-                    Text("휴대전화").tag(PaymentMethod.phone)
-                    Text("계좌이체").tag(PaymentMethod.bank)
-                    Text("가장계좌이체").tag(PaymentMethod.vbank)
+                
+                Text("결제 방식을 선택해 주세요:")
+                    .foregroundColor(Color.black)
+                    .padding()
+                    .alert(isPresented: self.$showSelectMethodAlert){
+                        Alert(title: Text("결제방식 선택"), message: Text("결제 방식을 선택해 주세요."), dismissButton: .default(Text("확인")))
+                    }
+                
+                                
+                List{
+                    ForEach(Array(zip(self.paymentMethods.indices, self.paymentMethods)), id: \.0) { index, elem in
+                        elem.label
+                            .onTapGesture {
+                                self.selectedMethod = elem.method
+                            }
+                            .listRowBackground(self.selectedMethod == elem.method ? Color.blue.opacity(0.2) : Color.clear)
+                            
+                    }
+                    
+                    
+                }
+                .frame(height: 200)
+                
+                
+                HStack{
+                    Spacer()
+                    
+                    Button(action: {
+                        
+                        if self.selectedMethod.isEmpty {
+                            self.showSelectMethodAlert.toggle()
+                            return
+                        }
+                        
+                        self.showPayView.toggle()
+                        
+                    }){
+                        Image("payButton")
+                    }
+                    
+                    Spacer()
+                    
                 }
                 
+                NavigationLink(destination: PayView(oid: self.oid, amount: self.amount, paymentMethod: self.selectedMethod), isActive: self.$showPayView){
+                    EmptyView()
+                }.hidden()
 
+                
+                
+                Spacer()
+                
+                
                 
             }
         }
+        .onAppear(perform: {
+            let intAmount = Int(self.amount) ?? 0
+            
+            let numberFormatter = NumberFormatter()
+            numberFormatter.locale = Locale.current
+            numberFormatter.numberStyle = .currency
+            
+            if let formattedAmount = numberFormatter.string(from: intAmount as NSNumber){
+                self.formattedCurrencyAmount = formattedAmount
+            }
+        })
+        .navigationTitle(Text("결제방식"))
+        
     }
 }
 

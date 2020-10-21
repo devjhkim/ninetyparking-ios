@@ -129,5 +129,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in PaymentHistoryView.body.getter:PaymentHistoryView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.showPaymentMethodSelectionView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
