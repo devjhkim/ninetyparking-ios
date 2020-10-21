@@ -54,11 +54,21 @@ struct PaymentMethodSelectionView: View {
                                 
                 List{
                     ForEach(Array(zip(self.paymentMethods.indices, self.paymentMethods)), id: \.0) { index, elem in
-                        elem.label
-                            .onTapGesture {
-                                self.selectedMethod = elem.method
-                            }
-                            .listRowBackground(self.selectedMethod == elem.method ? Color.blue.opacity(0.2) : Color.clear)
+                        
+                        NavigationLink(destination: PayView(oid: self.oid, amount: self.amount, paymentMethod: elem.method) ){
+                            elem.label
+                            
+//                            VStack(alignment: .leading){
+//
+//                            }
+//                            .frame(maxWidth: .infinity)
+//                            .onTapGesture {
+//                                self.selectedMethod = elem.method
+//                            }
+//                            .listRowBackground(self.selectedMethod == elem.method ? Color.blue.opacity(0.2) : Color.clear)
+                        }
+                        
+                        
                             
                     }
                     
@@ -67,29 +77,29 @@ struct PaymentMethodSelectionView: View {
                 .frame(height: 200)
                 
                 
-                HStack{
-                    Spacer()
-                    
-                    Button(action: {
-                        
-                        if self.selectedMethod.isEmpty {
-                            self.showSelectMethodAlert.toggle()
-                            return
-                        }
-                        
-                        self.showPayView.toggle()
-                        
-                    }){
-                        Image("payButton")
-                    }
-                    
-                    Spacer()
-                    
-                }
-                
-                NavigationLink(destination: PayView(oid: self.oid, amount: self.amount, paymentMethod: self.selectedMethod), isActive: self.$showPayView){
-                    EmptyView()
-                }.hidden()
+//                HStack{
+//                    Spacer()
+//
+//                    Button(action: {
+//
+//                        if self.selectedMethod.isEmpty {
+//                            self.showSelectMethodAlert.toggle()
+//                            return
+//                        }
+//
+//                        self.showPayView.toggle()
+//
+//                    }){
+//                        Image("payButton")
+//                    }
+//
+//                    Spacer()
+//
+//                }
+//
+//                NavigationLink(destination: PayView(oid: self.oid, amount: self.amount, paymentMethod: self.selectedMethod), isActive: self.$showPayView){
+//                    EmptyView()
+//                }.hidden()
 
                 
                 
