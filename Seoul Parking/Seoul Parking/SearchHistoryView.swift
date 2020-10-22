@@ -19,10 +19,7 @@ struct SearchHistoryView: View {
         List{
             ForEach(Array(zip(self.searchHistory.indices, self.searchHistory)), id: \.0){ index, elem in
                 VStack{
-                    Text(elem.date)
-                        .foregroundColor(Color.black)
-                        .padding()
-                    
+                   
                     Text(elem.address)
                         .foregroundColor(Color.black)
                         .padding()
@@ -40,19 +37,44 @@ struct SearchHistoryView: View {
     }
     
     func fetch() {
-        let history = [
-            SearchHistory(address: "선릉역", date: "2020-09-08"),
-            SearchHistory(address: "강남역", date: "2020-09-10")
+        guard let url = URL(string: REST_API.SPACE.SEARCH_HISTORY) else {return}
+        
+        let params = [
+            "userUniqueId": UserInfo.getInstance.uniqueId
         ]
         
-        self.searchHistory = history
+        do{
+            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+            
+            var request = URLRequest(url: url)
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
+            
+            URLSession.shared.dataTask(with: request){(data, response, error) in
+                if data == nil {
+                    return
+                }
+                
+                do{
+                    if let rawData = data {
+                        let history = try JSONDecoder().decode([SearchHistory].self, from: rawData)
+                        
+                        DispatchQueue.main.async {
+                            self.searchHistory = history
+                        }
+                    }
+                }catch{
+                    fatalError(error.localizedDescription)
+                }
+                
+            }.resume()
+        }catch{
+            fatalError(error.localizedDescription)
+        }
     }
 }
 
-struct SearchHistory {
-    var address: String
-    var date: String
-}
 
 struct SearchHistoryView_Previews: PreviewProvider {
     static var previews: some View {

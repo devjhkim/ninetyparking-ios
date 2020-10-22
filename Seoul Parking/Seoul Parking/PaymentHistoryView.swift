@@ -8,19 +8,11 @@
 
 import SwiftUI
 
-struct Payment {
-    var paymentId: String
-    var date: String
-    var parkingLotName: String
-    var isPaid: Bool
-    var amount: String
-}
-
 struct PaymentHistoryView: View {
     
-    //@Binding var auxViewType: AuxViewType
+    
     @State var history = [Payment]()
-    //@EnvironmentObject var notificationCenter: NotificationCenter
+    @State var showPaymentMethodSelectionView  = false
     
     
     var body: some View {
@@ -30,51 +22,93 @@ struct PaymentHistoryView: View {
             
             List{
                 ForEach(Array(zip(self.history.indices, self.history)), id: \.0){ index, elem in
-                    NavigationLink(destination: PaymentMethodSelectionView( amount: elem.amount, oid: elem.paymentId)){
+                    NavigationLink(destination: PaymentMethodSelectionView( amount: elem.amount, oid: elem.paymentUniqueId)){
 
-                        VStack(alignment: .center){
-                            Text(elem.date)
+                        VStack(alignment: .leading){
+                            Text(String(format: "주차일자: %@", elem.date))
                                 .foregroundColor(Color.black)
-                                .padding()
-                            Text(elem.parkingLotName)
+                                .padding(.top, 10)
+                                
+                            Text(String(format: "주차지: %@", elem.address))
                                 .foregroundColor(Color.black)
-                                .padding()
-
+                                .padding(.top, 5)
+                            
+                            Text(String(format: "주차금액: %@원", self.getFormattedCurrency(amount: elem.amount)))
+                                .foregroundColor(Color.black)
+                                .padding(.top, 5)
+                            
                             Text(elem.isPaid ? "결제완료" : "요금미납")
                                 .foregroundColor(Color.black)
-                                .padding()
+                                .padding(.top, 5)
+                                .padding(.bottom, 10)
 
                         }
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-
-
                     }
-
+                    .disabled(elem.isPaid)
                 }
+                
             }
             .onAppear(perform: getHistory)
             
-
-
-            
+        }
+ 
+    }
+    
+    private func getFormattedCurrency(amount: String) -> String {
+        let intAmount = Int(amount) ?? 0
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale.current
+        numberFormatter.numberStyle = .currency
+        
+        if let formattedAmount = numberFormatter.string(from: intAmount as NSNumber){
+            return formattedAmount
+        }else{
+            return ""
         }
 
-
-        
     }
     
     func getHistory() {
-        let history = [
-            Payment(paymentId: "1", date: "2020-09-03", parkingLotName: "선릉역1", isPaid: false, amount: "1000"),
-            Payment(paymentId: "2", date: "2020-09-04", parkingLotName: "선릉역2", isPaid: true, amount: "25000"),
-            Payment(paymentId: "3", date: "2020-09-05", parkingLotName: "선릉역3", isPaid: true, amount: "4000"),
-            Payment(paymentId: "4", date: "2020-09-06", parkingLotName: "선릉역4", isPaid: false, amount: "55000"),
-            Payment(paymentId: "5", date: "2020-09-07", parkingLotName: "선릉역5", isPaid: false, amount: "10000")
+        
+        
+        guard let url = URL(string: REST_API.MENU.PAYMENT_HISTORY) else {return}
+        
+        let params = [
+            "userUniqueId": UserInfo.getInstance.uniqueId
         ]
         
+        do{
+            let jsonParams = try JSONSerialization.data(withJSONObject: params, options: [])
+            
+            var request = URLRequest(url: url)
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonParams
+            
+            URLSession.shared.dataTask(with: request){(data, response, error) in
+                if data == nil {
+                    return
+                }
+                
+                do{
+                    if let rawData = data {
+                        let history = try JSONDecoder().decode([Payment].self, from: rawData)
+                        
+                        DispatchQueue.main.async {
+                            self.history = history
+                        }
+                    }
+                }catch{
+                    fatalError(error.localizedDescription)
+                }
+                
+            }.resume()
+        }catch{
+            fatalError(error.localizedDescription)
+        }
         
-        self.history = history
+        
         
     }
 }

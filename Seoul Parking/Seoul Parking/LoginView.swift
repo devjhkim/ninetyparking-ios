@@ -199,7 +199,7 @@ struct KakaoLoginButton: UIViewRepresentable {
                                         
                                                 switch result.statusCode {
                                                 case "200" :
-                                                    
+                                                    self.button.login.isLoggedIn = true
                                                     handleLogInResult(result)
                                                     
                                                     
@@ -449,7 +449,7 @@ struct FacebookLoginButton: UIViewRepresentable {
                                     
                                             switch result.statusCode {
                                             case "200" :
-                                                
+                                                self.button.login.isLoggedIn = true
                                                 handleLogInResult(result)
                                                 
                                                 

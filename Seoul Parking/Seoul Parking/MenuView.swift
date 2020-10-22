@@ -75,7 +75,7 @@ struct MenuView: View {
                         
                         Spacer()
                     }
-                    .padding(.top, 100)
+                    .padding(.top, 10)
                     
                     
                     
@@ -96,16 +96,18 @@ struct MenuView: View {
                     
                     
                     Spacer()
+                    Spacer()
                 }
-                    .padding()
-                    .frame(width: self.size.width)
-                    .frame(maxHeight: .infinity)
-                    .background(Color.white)
-                    .edgesIgnoringSafeArea(.all)
-                    .offset(x: self.showMenu ? 0 : -self.size.width )
-                    .animation(.default)
+                .padding()
+                .frame(width: self.size.width)
+                .frame(maxHeight: .infinity)
+                .background(Color.white)
+                .edgesIgnoringSafeArea(.all)
+                .offset(x: self.showMenu ? 0 : -self.size.width )
+                .animation(.default)
                 
                 Spacer()
+                
             }
         }
         .onAppear(perform: {
