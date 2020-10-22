@@ -40,26 +40,23 @@ struct MainView: View {
 
         DispatchQueue.main.async {
             if let payload = self.notificationCenter.payload {
-                print(payload.notification.request.content.userInfo)
-                if let data = payload.notification.request.content.userInfo["payload"]{
-                    if let msgDict = data as? [String:String] {
-                        if msgDict["messageType"] == "PAY_REQUEST" {
-                            
-                            if let amount = msgDict["amount"] {
-                                self.amount = amount
-                            }
-                            
-                            if let oid = msgDict["oid"] {
-                                self.oid = oid
-                            }
-                            
-                            
+                
+                let message = payload.notification.request.content.userInfo
+                
+                
+                if let messageType = message["messageType"] as? String {
+                    if messageType == "PAY_REQUEST" {
+                        if let amount = message["amount"] as? String, let oid = message["oid"] as? String {
+                            self.amount = amount
+                            self.oid = oid
                             
                             self.auxViewType.showPaymentMethodSelectionView = true
-                            self.notificationCenter.payload = nil
                         }
                     }
                 }
+                
+                self.notificationCenter.payload = nil
+                
             }
         }
         
