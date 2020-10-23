@@ -14,7 +14,7 @@ public let GOOGLE_PLACES_API_KEY = "AIzaSyDFTi7tbp7f_hKLx5piWY3ybYNaIJoQo2I"
 public let KAKAO_API_KEY = "e0da816370091f321c148544edf371c2"
 public let SERVER_PORT = "49090"
 
-public let SERVER_IP = "10.8.1.189" + ":" + SERVER_PORT
+public let SERVER_IP = "10.8.3.131" + ":" + SERVER_PORT
 //public let SERVER_IP = "ninetysystem.cafe24.com"
 
 public let APP_TITLE = "나인티 파킹"
@@ -48,6 +48,10 @@ struct REST_API {
     struct MENU {
         public static let PAYMENT_HISTORY = APP_SERVER.HOST + "/api/menu/paymentHistory"
     }
+    
+    
+    public static let PAY_NEXT_URL = APP_SERVER.HOST + "/api/pay/next"
+    public static let PAY_VBANK_URL = APP_SERVER.HOST + "/api/pay/vbank"
     
     struct PAY {
         public static let REQUEST = "https://mobile.inicis.com/smart/payment/"

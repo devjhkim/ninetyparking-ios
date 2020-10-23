@@ -47,8 +47,8 @@ struct PaymentWebView: UIViewRepresentable {
             "P_AMT=" + self.amount + "&" +
             "P_UNAME=" + self.store.user.name + "&" +
             "P_EMAIL=" + self.store.user.email + "&" +
-            "P_NEXT_URL=https://ninetysystem.cafe24.com&" +
-            "P_NOTI_URL=https://ninetysystem.cafe24.com"
+            "P_NEXT_URL=" + REST_API.PAY_NEXT_URL + "&" +
+            "P_NOTI_URL=" + REST_API.PAY_VBANK_URL
         
         
         if let url = URL(string: REST_API.PAY.REQUEST) {
