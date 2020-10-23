@@ -18,9 +18,12 @@ struct ParkingSpaceInfoView: View {
         ZStack{
             GeometryReader(){ proxy in
                 EmptyView()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.gray.opacity(0.5))
+            .edgesIgnoringSafeArea(.all)
             
             
             .onTapGesture {
@@ -33,34 +36,43 @@ struct ParkingSpaceInfoView: View {
                 Spacer()
                 
                 GeometryReader() { proxy in
-                    VStack{
-                        
-                        
-                        VStack(alignment: .leading){
+                    
+                    HStack{
+                        Spacer()
+                        VStack{
                             
-                            self.Address
-                                .padding([.top, .leading], 10)
-                            self.Price
-                                .padding([.top, .leading], 10)
-                            self.OpenHours
-                                .padding([.top, .leading], 10)
-                            self.Buttons
-                                .padding(.top, 20)
                             Spacer()
                             
+                            VStack(alignment: .center){
+                                Spacer()
+                                
+                                self.Address
+                                    .padding([.top, .leading], 10)
+                                self.Price
+                                    .padding([.top, .leading], 10)
+                                self.OpenHours
+                                    .padding([.top, .leading], 10)
+                                self.Buttons
+                                    .padding(.top, 20)
+                                Spacer()
+                                
+                            }
+                            .background(Color.white)
+                            .frame(height: 200)
+                            .frame(width: proxy.size.width * 0.9, alignment: .leading)
+                            .cornerRadius(20)
+                            .padding(.bottom, 20)
+                            
+                            
+                            
                         }
-                        .frame(height: 180)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        
+                        Spacer()
                     }
                     
                     
+                    
                 }
-                .background(Color.white)
-                .edgesIgnoringSafeArea(.all)
-                .frame(maxWidth:.infinity)
-                .frame(height: 200)
+
                 
             }
         }
