@@ -14,7 +14,7 @@ public let GOOGLE_PLACES_API_KEY = "AIzaSyDFTi7tbp7f_hKLx5piWY3ybYNaIJoQo2I"
 public let KAKAO_API_KEY = "e0da816370091f321c148544edf371c2"
 public let SERVER_PORT = "49090"
 
-public let SERVER_IP = "10.8.3.131" + ":" + SERVER_PORT
+public let SERVER_IP = "10.8.6.229" + ":" + SERVER_PORT
 //public let SERVER_IP = "ninetysystem.cafe24.com"
 
 public let APP_TITLE = "나인티 파킹"

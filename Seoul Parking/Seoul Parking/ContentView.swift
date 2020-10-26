@@ -40,6 +40,7 @@ struct ContentView: View {
         if self.ld.isLoggedIn {
             return AnyView(
                 MainView()
+                    .preferredColorScheme(.light)
                     .onAppear(perform: {
                         
                         if let loggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
@@ -60,6 +61,7 @@ struct ContentView: View {
         } else {
             return AnyView(
                 LoginView()
+                    .preferredColorScheme(.light)
                     .onAppear(perform: {
                         if let loggedIn = UserDefaults.standard.value(forKey: "isLoggedIn") as? Bool {
                             self.ld.isLoggedIn = loggedIn

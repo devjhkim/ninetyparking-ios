@@ -16,7 +16,7 @@ struct GoogleMapsView: UIViewRepresentable {
     @Binding var auxViewType: AuxViewType
     private let zoom: Float = 15.0
     
-    
+    @State var currParkingLot: ParkingLot = ParkingLot()
     @EnvironmentObject var lot: ParkingLot
     @EnvironmentObject var centerLocation: CenterLocation
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
@@ -27,6 +27,12 @@ struct GoogleMapsView: UIViewRepresentable {
     }
     
     func makeUIView(context: Self.Context) -> GMSMapView {
+        
+        DispatchQueue.main.async {
+            self.currParkingLot = self.lot
+        }
+        
+        
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 15.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.delegate = context.coordinator
@@ -68,14 +74,74 @@ struct GoogleMapsView: UIViewRepresentable {
         settingsButton.layer.shadowOpacity = 0.5
         settingsButton.layer.shadowRadius = 5
         settingsButton.layer.masksToBounds = false
-
-        
         mapView.addSubview(settingsButton)
         settingsButton.topAnchor.constraint(equalTo: searchHistoryButton.bottomAnchor, constant: 10).isActive = true
         settingsButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
         settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let showAllButton = UIButton()
+        showAllButton.setTitle("전체", for: .normal)
+        showAllButton.setTitleColor(.black, for: .normal)
+        showAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        showAllButton.addTarget(context.coordinator, action: #selector(context.coordinator.showAllParkingLots(_:)), for: .touchUpInside)
+        showAllButton.backgroundColor = .white
+        showAllButton.clipsToBounds = true
+        showAllButton.layer.cornerRadius = 25
+        showAllButton.layer.shadowColor = UIColor.black.cgColor
+        showAllButton.layer.shadowOffset = .zero
+        showAllButton.layer.shadowOpacity = 0.5
+        showAllButton.layer.shadowRadius = 5
+        showAllButton.layer.masksToBounds = false
+        mapView.addSubview(showAllButton)
+        showAllButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -50).isActive = true
+        showAllButton.leftAnchor.constraint(equalTo: mapView.leftAnchor, constant: 80).isActive = true
+        showAllButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        showAllButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        showAllButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let showAvailableButton = UIButton()
+        showAvailableButton.setTitle("주차가능", for: .normal)
+        showAvailableButton.setTitleColor(.black, for: .normal)
+        showAvailableButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        showAvailableButton.addTarget(context.coordinator, action: #selector(context.coordinator.showAvailableParkingLots(_:)), for: .touchUpInside)
+        showAvailableButton.backgroundColor = .white
+        showAvailableButton.clipsToBounds = true
+        showAvailableButton.layer.cornerRadius = 25
+        showAvailableButton.layer.shadowColor = UIColor.black.cgColor
+        showAvailableButton.layer.shadowOffset = .zero
+        showAvailableButton.layer.shadowOpacity = 0.5
+        showAvailableButton.layer.shadowRadius = 5
+        showAvailableButton.layer.masksToBounds = false
+        mapView.addSubview(showAvailableButton)
+        showAvailableButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -50).isActive = true
+        showAvailableButton.leftAnchor.constraint(equalTo: showAllButton.rightAnchor, constant: 20).isActive = true
+        showAvailableButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        showAvailableButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        showAvailableButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let showUnavailableButton = UIButton()
+        showUnavailableButton.setTitle("주차불가", for: .normal)
+        showUnavailableButton.setTitleColor(.black, for: .normal)
+        showUnavailableButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        showUnavailableButton.addTarget(context.coordinator, action: #selector(context.coordinator.showUnavailableParkingLots(_:)), for: .touchUpInside)
+        showUnavailableButton.backgroundColor = .white
+        showUnavailableButton.clipsToBounds = true
+        showUnavailableButton.layer.cornerRadius = 25
+        showUnavailableButton.layer.shadowColor = UIColor.black.cgColor
+        showUnavailableButton.layer.shadowOffset = .zero
+        showUnavailableButton.layer.shadowOpacity = 0.5
+        showUnavailableButton.layer.shadowRadius = 5
+        showUnavailableButton.layer.masksToBounds = false
+        mapView.addSubview(showUnavailableButton)
+        showUnavailableButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -50).isActive = true
+        showUnavailableButton.leftAnchor.constraint(equalTo: showAvailableButton.rightAnchor, constant: 20).isActive = true
+        showUnavailableButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        showUnavailableButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        showUnavailableButton.translatesAutoresizingMaskIntoConstraints = false
         
         return mapView
     }
@@ -90,14 +156,20 @@ struct GoogleMapsView: UIViewRepresentable {
         marker.position = CLLocationCoordinate2D(latitude: self.centerLocation.location.latitude, longitude: self.centerLocation.location.longitude)
         marker.map = mapView
         
-        lot.spaces.forEach { space in
+        currParkingLot.spaces.forEach { space in
             let latitude = space.latitude
             let longitude = space.longitude
             
             let pin = GMSMarker()
             pin.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
-            pin.icon = GMSMarker.markerImage(with: .blue)
+            if space.availability == "1"{
+                pin.icon = GMSMarker.markerImage(with: .blue)
+            }else{
+                pin.icon = GMSMarker.markerImage(with: .lightGray)
+            }
+            
+            
             pin.userData = space
             pin.title = space.spaceName
             pin.snippet = "10분당 " + space.chargePerTenMinute + "원"
@@ -139,6 +211,33 @@ struct GoogleMapsView: UIViewRepresentable {
             
             
         }
+        
+        @objc func showAllParkingLots(_ sender: UIButton){
+            self.mapView.currParkingLot = self.mapView.lot
+        }
+        
+        @objc func showAvailableParkingLots(_ sender: UIButton){
+            let availableParkingLots = ParkingLot()
+            self.mapView.lot.spaces.forEach{ space in
+                if space.availability == "1"{
+                    availableParkingLots.spaces.append(space)
+                }
+            }
+            
+            self.mapView.currParkingLot = availableParkingLots
+        }
+        
+        @objc func showUnavailableParkingLots(_ sender: UIButton){
+            let availableParkingLots = ParkingLot()
+            self.mapView.lot.spaces.forEach{ space in
+                if space.availability == "0"{
+                    availableParkingLots.spaces.append(space)
+                }
+            }
+            
+            self.mapView.currParkingLot = availableParkingLots
+        }
+        
         
     }
     
