@@ -9,6 +9,7 @@
 import Combine
 
 struct SearchHistory: Hashable, Codable {
+    var historyUniqueId: String
     var address: String
     var longitude: Double
     var latitude: Double

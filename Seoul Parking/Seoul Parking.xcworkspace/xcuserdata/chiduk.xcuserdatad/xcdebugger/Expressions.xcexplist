@@ -137,5 +137,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in SearchHistoryView.body.getter:SearchHistoryView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "offsets">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

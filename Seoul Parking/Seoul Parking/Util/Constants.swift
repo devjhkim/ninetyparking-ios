@@ -28,6 +28,7 @@ struct REST_API {
     struct SPACE {
         public static let FETCH = APP_SERVER.HOST + "/api/space/fetch"
         public static let SEARCH_HISTORY = APP_SERVER.HOST + "/api/space/search/history"
+        public static let DELETE_HISTORY = APP_SERVER.HOST + "/api/space/delete/history"
     }
     
     struct USER {
