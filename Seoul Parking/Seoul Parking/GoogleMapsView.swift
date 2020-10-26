@@ -82,6 +82,49 @@ struct GoogleMapsView: UIViewRepresentable {
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         
         
+        let paymentHistoryButton = UIButton()
+        paymentHistoryButton.setTitle("결제내역", for: .normal)
+        paymentHistoryButton.setTitleColor(.black, for: .normal)
+        paymentHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        paymentHistoryButton.addTarget(context.coordinator, action: #selector(context.coordinator.paymentHistoryButtonPressed(_:)), for: .touchUpInside)
+        paymentHistoryButton.backgroundColor = .white
+        paymentHistoryButton.tintColor = .black
+        paymentHistoryButton.clipsToBounds = true
+        paymentHistoryButton.layer.cornerRadius = 25
+        paymentHistoryButton.layer.shadowColor = UIColor.black.cgColor
+        paymentHistoryButton.layer.shadowOffset = .zero
+        paymentHistoryButton.layer.shadowOpacity = 0.5
+        paymentHistoryButton.layer.shadowRadius = 5
+        paymentHistoryButton.layer.masksToBounds = false
+        mapView.addSubview(paymentHistoryButton)
+        paymentHistoryButton.topAnchor.constraint(equalTo: settingsButton.bottomAnchor, constant: 10).isActive = true
+        paymentHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        paymentHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        paymentHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        paymentHistoryButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let unpaidPaymentHistoryButton = UIButton()
+        unpaidPaymentHistoryButton.setTitle("미결제", for: .normal)
+        unpaidPaymentHistoryButton.setTitleColor(.black, for: .normal)
+        unpaidPaymentHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        unpaidPaymentHistoryButton.addTarget(context.coordinator, action: #selector(context.coordinator.unpaidPaymentHistoryButtonPressed(_:)), for: .touchUpInside)
+        unpaidPaymentHistoryButton.backgroundColor = .white
+        unpaidPaymentHistoryButton.tintColor = .black
+        unpaidPaymentHistoryButton.clipsToBounds = true
+        unpaidPaymentHistoryButton.layer.cornerRadius = 25
+        unpaidPaymentHistoryButton.layer.shadowColor = UIColor.black.cgColor
+        unpaidPaymentHistoryButton.layer.shadowOffset = .zero
+        unpaidPaymentHistoryButton.layer.shadowOpacity = 0.5
+        unpaidPaymentHistoryButton.layer.shadowRadius = 5
+        unpaidPaymentHistoryButton.layer.masksToBounds = false
+        mapView.addSubview(unpaidPaymentHistoryButton)
+        unpaidPaymentHistoryButton.topAnchor.constraint(equalTo: paymentHistoryButton.bottomAnchor, constant: 10).isActive = true
+        unpaidPaymentHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        unpaidPaymentHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        unpaidPaymentHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        unpaidPaymentHistoryButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         let showAllButton = UIButton()
         showAllButton.setTitle("전체", for: .normal)
         showAllButton.setTitleColor(.black, for: .normal)
@@ -211,6 +254,16 @@ struct GoogleMapsView: UIViewRepresentable {
             
             
         }
+        
+        
+        @objc func paymentHistoryButtonPressed(_ sender: UIButton){
+            self.mapView.auxViewType.showPaymentHistoryView = true
+        }
+        
+        @objc func unpaidPaymentHistoryButtonPressed(_ sender: UIButton){
+            
+        }
+        
         
         @objc func showAllParkingLots(_ sender: UIButton){
             self.mapView.currParkingLot = self.mapView.lot

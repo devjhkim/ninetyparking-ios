@@ -112,6 +112,8 @@ struct MainView: View {
                         if self.auxViewType.showPasswordCheckAlert {
                             PasswordCheckView(auxViewType: self.$auxViewType)
                         }
+                        
+                        
 
                     }
                     .gesture(drag)

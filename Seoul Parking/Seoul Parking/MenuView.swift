@@ -80,7 +80,7 @@ struct MenuView: View {
                     
                     
                     HStack {
-                        Image(systemName: "wonsign.square")
+                        Image(systemName: "wonsign.circle")
                             .foregroundColor(.gray)
                             .imageScale(.large)
                         Text("결제내역")
@@ -94,6 +94,51 @@ struct MenuView: View {
                         self.auxView.showPaymentHistoryView = true
                     }
                     
+                    
+                    HStack {
+                        Image(systemName: "wonsign.square")
+                            .foregroundColor(.gray)
+                            .imageScale(.large)
+                        Text("미결제내역")
+                            .foregroundColor(.gray)
+                            .font(.headline)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 30)
+                    .onTapGesture {
+                        self.auxView.showPaymentHistoryView = true
+                    }
+                    
+                    HStack {
+                        Image(systemName: "gearshape")
+                            .foregroundColor(.gray)
+                            .imageScale(.large)
+                        Text("환경설정")
+                            .foregroundColor(.gray)
+                            .font(.headline)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 30)
+                    .onTapGesture {
+                        
+                    }
+                    
+                    HStack {
+                        Image(systemName: "newspaper")
+                            .foregroundColor(.gray)
+                            .imageScale(.large)
+                        Text("공지사항")
+                            .foregroundColor(.gray)
+                            .font(.headline)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 30)
+                    .onTapGesture {
+                        
+                    }
                     
                     Spacer()
                     Spacer()
