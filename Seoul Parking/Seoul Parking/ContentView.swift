@@ -13,11 +13,14 @@ struct AuxViewType {
     
     var showLoginView: Bool = false
     var showPaymentHistoryView: Bool = false
+    var showUnpaidPaymentHistoryView: Bool = false
     var showSearchHistoryView: Bool = false
     var showSettingsView: Bool = false
     var showPasswordCheckAlert: Bool = false
     var showWrongPasswordAlert: Bool = false
     var showPaymentMethodSelectionView: Bool = false
+    var showAnnouncementsView: Bool = false
+    var showMyInfoView: Bool = false
 }
 
 struct ContentView: View {

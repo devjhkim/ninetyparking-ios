@@ -73,27 +73,43 @@ struct MainView: View {
                     
                     
                     ZStack(alignment: .leading) {
+                        Group{
+                            NavigationLink(destination: AvailableHoursView().environment(\.selectedParkingSpace, self.$selectedParkingSpace), isActive: self.$showAvailableTimeView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            NavigationLink(destination: PaymentHistoryView(), isActive: self.$auxViewType.showPaymentHistoryView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            NavigationLink(destination: UnpaidPaymentHistoryView(), isActive: self.$auxViewType.showUnpaidPaymentHistoryView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            NavigationLink(destination: PaymentMethodSelectionView(amount: self.amount, oid: self.oid), isActive: self.$auxViewType.showPaymentMethodSelectionView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            
+                            NavigationLink(destination: SearchHistoryView(), isActive: self.$auxViewType.showSearchHistoryView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            NavigationLink(destination: SettingsView(), isActive: self.$auxViewType.showSettingsView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            NavigationLink(destination: AnnouncementsView(), isActive: self.$auxViewType.showAnnouncementsView){
+                                EmptyView()
+                            }.hidden()
+                            
+                            NavigationLink(destination: MyInfoView(), isActive: self.$auxViewType.showMyInfoView){
+                                EmptyView()
+                            }.hidden()
+                        }
+                    
                         
-                        NavigationLink(destination: AvailableHoursView().environment(\.selectedParkingSpace, self.$selectedParkingSpace), isActive: self.$showAvailableTimeView){
-                            EmptyView()
-                        }.hidden()
                         
-                        NavigationLink(destination: PaymentHistoryView(), isActive: self.$auxViewType.showPaymentHistoryView){
-                            EmptyView()
-                        }.hidden()
-                        
-                        NavigationLink(destination: PaymentMethodSelectionView(amount: self.amount, oid: self.oid), isActive: self.$auxViewType.showPaymentMethodSelectionView){
-                            EmptyView()
-                        }.hidden()
-                        
-                        
-                        NavigationLink(destination: SearchHistoryView(), isActive: self.$auxViewType.showSearchHistoryView){
-                            EmptyView()
-                        }.hidden()
-                        
-                        NavigationLink(destination: SettingsView(), isActive: self.$auxViewType.showSettingsView){
-                            EmptyView()
-                        }.hidden()
                         
                         GoogleMapsView(auxViewType: self.$auxViewType)
                             .edgesIgnoringSafeArea(.bottom)
@@ -183,12 +199,9 @@ struct MainView: View {
         }
         .onAppear(perform: fetchParkingSpaces)
         .onAppear(perform: updateDeviceToken)
-        .onAppear(perform: {
-            
-        })
+
         
     }
-    
     
     
     func fetchParkingSpaces() {

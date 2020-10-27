@@ -14,6 +14,10 @@
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
 		162F24B82547B748003F10C3 /* UnpaidPaymentHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */; };
 		1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164322092539688600CF7A3E /* AlertWithTextField.swift */; };
+		164EF5EB2547C4DF00E9E79F /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5EA2547C4DF00E9E79F /* AnnouncementsView.swift */; };
+		164EF5F12547D67600E9E79F /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5F02547D67600E9E79F /* Announcement.swift */; };
+		164EF5F52547DA2100E9E79F /* AnnoucementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */; };
+		164EF5FB2547F50C00E9E79F /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5FA2547F50C00E9E79F /* MyInfoView.swift */; };
 		1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D66324FE3F3700AF56E7 /* SignupView.swift */; };
 		166D045624FCBE99009373E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166D045524FCBE99009373E8 /* MainView.swift */; };
 		16725AB5254150920086DC3C /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16725AB4254150920086DC3C /* Payment.swift */; };
@@ -102,6 +106,10 @@
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidPaymentHistoryView.swift; sourceTree = "<group>"; };
 		164322092539688600CF7A3E /* AlertWithTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextField.swift; sourceTree = "<group>"; };
+		164EF5EA2547C4DF00E9E79F /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
+		164EF5F02547D67600E9E79F /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucementDetailView.swift; sourceTree = "<group>"; };
+		164EF5FA2547F50C00E9E79F /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		1661D66324FE3F3700AF56E7 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		166D045524FCBE99009373E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		16725AB4254150920086DC3C /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
@@ -224,34 +232,35 @@
 			isa = PBXGroup;
 			children = (
 				16A0C50624E627B40015DCAC /* 나인티 파킹.entitlements */,
+				164322092539688600CF7A3E /* AlertWithTextField.swift */,
+				164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */,
+				164EF5EA2547C4DF00E9E79F /* AnnouncementsView.swift */,
 				16AF295D24B6E47100836C81 /* AppDelegate.swift */,
 				16AF296324B6E47400836C81 /* Assets.xcassets */,
 				16E8980A24DD3179001907A0 /* AvailableHoursView.swift */,
 				16DC742F24C004380036734F /* Bridge-Header.h */,
 				16A0C54724F501590015DCAC /* CenterLocation.swift */,
-				16118F2F253EB0D600E5F868 /* PaymentMethodSelectionView.swift */,
 				16AF296124B6E47100836C81 /* ContentView.swift */,
 				161CB84324CEA1A70006DC0D /* CustomViews */,
 				16FB34B224C6C5E9007A05F9 /* EmailLoginView.swift */,
 				16926FB025120A420007E4F8 /* EmailModificationView.swift */,
 				16FB34B424C6C868007A05F9 /* EmailSignupView.swift */,
-				164322092539688600CF7A3E /* AlertWithTextField.swift */,
 				16AF299624B8319400836C81 /* GeometryGetter.swift */,
 				16AF299024B6F39800836C81 /* GoogleMapsView.swift */,
 				16AF296B24B6E47400836C81 /* Info.plist */,
 				16AF296824B6E47400836C81 /* LaunchScreen.storyboard */,
-				162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */,
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16DC743024C004AE0036734F /* LoginView.swift */,
 				166D045524FCBE99009373E8 /* MainView.swift */,
-				16118F2B253D94A000E5F868 /* PasswordCheckView.swift */,
 				16AF299424B8236400836C81 /* MenuView.swift */,
 				16DC741724BD67570036734F /* Models */,
 				16926FAC2511EE1F0007E4F8 /* NameModificationView.swift */,
 				16ECAE1D250B55EF008C7AD5 /* NotificationCenter.swift */,
 				16E8980824DBF327001907A0 /* ParkingSpaceInfoView.swift */,
+				16118F2B253D94A000E5F868 /* PasswordCheckView.swift */,
 				16122FC8251354C000CD9662 /* PasswordModificationView.swift */,
 				16BE9F1925076045009A61BD /* PaymentHistoryView.swift */,
+				16118F2F253EB0D600E5F868 /* PaymentMethodSelectionView.swift */,
 				16BE9F1B25076059009A61BD /* PayView.swift */,
 				16A0C54924F51E5B0015DCAC /* PlaceAutocompleteSearch.swift */,
 				16926FB2251211EE0007E4F8 /* PlateNumberModificationView.swift */,
@@ -261,7 +270,9 @@
 				169429732508BD5D006AF973 /* SearchHistoryView.swift */,
 				16ECAE1F250CAF20008C7AD5 /* SettingsView.swift */,
 				1661D66324FE3F3700AF56E7 /* SignupView.swift */,
+				162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */,
 				16AF298D24B6F19D00836C81 /* Util */,
+				164EF5FA2547F50C00E9E79F /* MyInfoView.swift */,
 			);
 			path = "Seoul Parking";
 			sourceTree = "<group>";
@@ -310,6 +321,7 @@
 				16926FAE2511EEC40007E4F8 /* Store.swift */,
 				16725AB4254150920086DC3C /* Payment.swift */,
 				16725AB825415F570086DC3C /* SearchHistory.swift */,
+				164EF5F02547D67600E9E79F /* Announcement.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -630,12 +642,15 @@
 				16ECAE1E250B55EF008C7AD5 /* NotificationCenter.swift in Sources */,
 				16118F2C253D94A000E5F868 /* PasswordCheckView.swift in Sources */,
 				16AF295E24B6E47100836C81 /* AppDelegate.swift in Sources */,
+				164EF5F12547D67600E9E79F /* Announcement.swift in Sources */,
 				16A0C54824F501590015DCAC /* CenterLocation.swift in Sources */,
 				166D045624FCBE99009373E8 /* MainView.swift in Sources */,
 				16E8980924DBF327001907A0 /* ParkingSpaceInfoView.swift in Sources */,
 				16AF299124B6F39800836C81 /* GoogleMapsView.swift in Sources */,
+				164EF5FB2547F50C00E9E79F /* MyInfoView.swift in Sources */,
 				16AF299324B7FAAC00836C81 /* LocationManager.swift in Sources */,
 				16926FAF2511EEC40007E4F8 /* Store.swift in Sources */,
+				164EF5EB2547C4DF00E9E79F /* AnnouncementsView.swift in Sources */,
 				16AF296024B6E47100836C81 /* SceneDelegate.swift in Sources */,
 				16725AB925415F570086DC3C /* SearchHistory.swift in Sources */,
 				16FB34B324C6C5E9007A05F9 /* EmailLoginView.swift in Sources */,
@@ -650,6 +665,7 @@
 				16DC741B24BD67970036734F /* ParkingSpace.swift in Sources */,
 				16ECAE20250CAF20008C7AD5 /* SettingsView.swift in Sources */,
 				16DC743124C004AE0036734F /* LoginView.swift in Sources */,
+				164EF5F52547DA2100E9E79F /* AnnoucementDetailView.swift in Sources */,
 				161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */,
 				161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */,
 				16AF298F24B6F1C000836C81 /* Constants.swift in Sources */,

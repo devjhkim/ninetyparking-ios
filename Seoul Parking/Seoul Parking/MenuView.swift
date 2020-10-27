@@ -49,6 +49,10 @@ struct MenuView: View {
                                 Text(UserInfo.getInstance.name)
                                     .foregroundColor(Color.gray)
                                     .font(.headline)
+                                    .onTapGesture {
+                                        self.auxView.showMyInfoView = true
+                                        
+                                    }
                                 
                                 Text("로그아웃")
                                     .foregroundColor(Color.gray)
@@ -107,7 +111,7 @@ struct MenuView: View {
                     }
                     .padding(.top, 30)
                     .onTapGesture {
-                        self.auxView.showPaymentHistoryView = true
+                        self.auxView.showUnpaidPaymentHistoryView = true
                     }
                     
                     HStack {

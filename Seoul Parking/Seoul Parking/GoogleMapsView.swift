@@ -186,6 +186,26 @@ struct GoogleMapsView: UIViewRepresentable {
         showUnavailableButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         showUnavailableButton.translatesAutoresizingMaskIntoConstraints = false
         
+        let announcementsButton = UIButton()
+        announcementsButton.setTitle("공지사항", for: .normal)
+        announcementsButton.setTitleColor(.black, for: .normal)
+        announcementsButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        announcementsButton.addTarget(context.coordinator, action: #selector(context.coordinator.annoucementsButtonPressed(_:)), for: .touchUpInside)
+        announcementsButton.backgroundColor = .white
+        announcementsButton.clipsToBounds = true
+        announcementsButton.layer.cornerRadius = 25
+        announcementsButton.layer.shadowColor = UIColor.black.cgColor
+        announcementsButton.layer.shadowOffset = .zero
+        announcementsButton.layer.shadowOpacity = 0.5
+        announcementsButton.layer.shadowRadius = 5
+        announcementsButton.layer.masksToBounds = false
+        mapView.addSubview(announcementsButton)
+        announcementsButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -110).isActive = true
+        announcementsButton.leftAnchor.constraint(equalTo: mapView.leftAnchor, constant: 20).isActive = true
+        announcementsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        announcementsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        announcementsButton.translatesAutoresizingMaskIntoConstraints = false
+        
         return mapView
     }
     
@@ -261,7 +281,7 @@ struct GoogleMapsView: UIViewRepresentable {
         }
         
         @objc func unpaidPaymentHistoryButtonPressed(_ sender: UIButton){
-            
+            self.mapView.auxViewType.showUnpaidPaymentHistoryView = true
         }
         
         
@@ -291,6 +311,9 @@ struct GoogleMapsView: UIViewRepresentable {
             self.mapView.currParkingLot = availableParkingLots
         }
         
+        @objc func annoucementsButtonPressed(_ sender: UIButton){
+            self.mapView.auxViewType.showAnnouncementsView = true
+        }
         
     }
     

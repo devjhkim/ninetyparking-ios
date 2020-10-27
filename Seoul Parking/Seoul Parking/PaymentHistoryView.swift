@@ -96,7 +96,16 @@ struct PaymentHistoryView: View {
                         let history = try JSONDecoder().decode([Payment].self, from: rawData)
                         
                         DispatchQueue.main.async {
-                            self.history = history
+                            
+                            var paidHistory = [Payment]()
+                            
+                            history.forEach{elem in
+                                if elem.isPaid {
+                                    paidHistory.append(elem)
+                                }
+                            }
+                            
+                            self.history = paidHistory
                         }
                     }
                 }catch{
