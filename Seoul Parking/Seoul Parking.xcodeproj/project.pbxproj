@@ -12,6 +12,7 @@
 		16122FC9251354C000CD9662 /* PasswordModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16122FC8251354C000CD9662 /* PasswordModificationView.swift */; };
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
+		162F24B82547B748003F10C3 /* UnpaidPaymentHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */; };
 		1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164322092539688600CF7A3E /* AlertWithTextField.swift */; };
 		1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D66324FE3F3700AF56E7 /* SignupView.swift */; };
 		166D045624FCBE99009373E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166D045524FCBE99009373E8 /* MainView.swift */; };
@@ -99,6 +100,7 @@
 		16122FC8251354C000CD9662 /* PasswordModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModificationView.swift; sourceTree = "<group>"; };
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidPaymentHistoryView.swift; sourceTree = "<group>"; };
 		164322092539688600CF7A3E /* AlertWithTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextField.swift; sourceTree = "<group>"; };
 		1661D66324FE3F3700AF56E7 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		166D045524FCBE99009373E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				16AF299024B6F39800836C81 /* GoogleMapsView.swift */,
 				16AF296B24B6E47400836C81 /* Info.plist */,
 				16AF296824B6E47400836C81 /* LaunchScreen.storyboard */,
+				162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */,
 				16AF299224B7FAAC00836C81 /* LocationManager.swift */,
 				16DC743024C004AE0036734F /* LoginView.swift */,
 				166D045524FCBE99009373E8 /* MainView.swift */,
@@ -639,6 +642,7 @@
 				16725AB5254150920086DC3C /* Payment.swift in Sources */,
 				1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */,
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,
+				162F24B82547B748003F10C3 /* UnpaidPaymentHistoryView.swift in Sources */,
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,
 				16BE9F1C25076059009A61BD /* PayView.swift in Sources */,
 				16A0C50824EB84A50015DCAC /* Extension.swift in Sources */,
