@@ -95,7 +95,7 @@ struct MainView: View {
                                 EmptyView()
                             }.hidden()
                             
-                            NavigationLink(destination: SettingsView(), isActive: self.$auxViewType.showSettingsView){
+                            NavigationLink(destination: SettingsView(auxViewType: self.$auxViewType), isActive: self.$auxViewType.showSettingsView){
                                 EmptyView()
                             }.hidden()
                             
@@ -199,6 +199,29 @@ struct MainView: View {
         }
         .onAppear(perform: fetchParkingSpaces)
         .onAppear(perform: updateDeviceToken)
+        .onAppear(){
+            let showAnnouncementsButton = UserDefaults.standard.object(forKey: "showAnnouncementsButton") as? Bool
+            
+            if showAnnouncementsButton == nil {
+                self.auxViewType.showAnnoucementsButton = true
+                UserDefaults.standard.setValue(true, forKey: "showAnnouncementsButton")
+            }else{
+                if let isOn = showAnnouncementsButton {
+                    self.auxViewType.showAnnoucementsButton = isOn
+                }
+            }
+            
+            let showPaymentHistoryButtons = UserDefaults.standard.object(forKey: "showPaymentHistoryButtons") as? Bool
+            
+            if showPaymentHistoryButtons == nil {
+                self.auxViewType.showPaymentHistoryButtons = true
+                UserDefaults.standard.setValue(true, forKey: "showPaymentHistoryButtons")
+            }else{
+                if let isOn = showPaymentHistoryButtons {
+                    self.auxViewType.showPaymentHistoryButtons = isOn
+                }
+            }
+        }
 
         
     }

@@ -13,7 +13,6 @@
 		161CB84224CE8AE50006DC0D /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */; };
 		161CB84724CFC06D0006DC0D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CB84624CFC06D0006DC0D /* UserInfo.swift */; };
 		162F24B82547B748003F10C3 /* UnpaidPaymentHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */; };
-		1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164322092539688600CF7A3E /* AlertWithTextField.swift */; };
 		164EF5EB2547C4DF00E9E79F /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5EA2547C4DF00E9E79F /* AnnouncementsView.swift */; };
 		164EF5F12547D67600E9E79F /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5F02547D67600E9E79F /* Announcement.swift */; };
 		164EF5F52547DA2100E9E79F /* AnnoucementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */; };
@@ -105,7 +104,6 @@
 		161CB84124CE8AE50006DC0D /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		161CB84624CFC06D0006DC0D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		162F24B72547B748003F10C3 /* UnpaidPaymentHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidPaymentHistoryView.swift; sourceTree = "<group>"; };
-		164322092539688600CF7A3E /* AlertWithTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextField.swift; sourceTree = "<group>"; };
 		164EF5EA2547C4DF00E9E79F /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
 		164EF5F02547D67600E9E79F /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucementDetailView.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				16A0C50624E627B40015DCAC /* 나인티 파킹.entitlements */,
-				164322092539688600CF7A3E /* AlertWithTextField.swift */,
 				164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */,
 				164EF5EA2547C4DF00E9E79F /* AnnouncementsView.swift */,
 				16AF295D24B6E47100836C81 /* AppDelegate.swift */,
@@ -655,7 +652,6 @@
 				16725AB925415F570086DC3C /* SearchHistory.swift in Sources */,
 				16FB34B324C6C5E9007A05F9 /* EmailLoginView.swift in Sources */,
 				16725AB5254150920086DC3C /* Payment.swift in Sources */,
-				1643220A2539688600CF7A3E /* AlertWithTextField.swift in Sources */,
 				16AF296224B6E47100836C81 /* ContentView.swift in Sources */,
 				162F24B82547B748003F10C3 /* UnpaidPaymentHistoryView.swift in Sources */,
 				16AF299724B8319400836C81 /* GeometryGetter.swift in Sources */,

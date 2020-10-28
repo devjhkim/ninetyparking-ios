@@ -50,7 +50,7 @@ struct MenuView: View {
                                     .foregroundColor(Color.gray)
                                     .font(.headline)
                                     .onTapGesture {
-                                        self.auxView.showMyInfoView = true
+                                        self.auxView.showPasswordCheckAlert = true
                                         
                                     }
                                 
@@ -141,7 +141,7 @@ struct MenuView: View {
                     }
                     .padding(.top, 30)
                     .onTapGesture {
-                        
+                        self.auxView.showAnnouncementsView = true
                     }
                     
                     Spacer()
