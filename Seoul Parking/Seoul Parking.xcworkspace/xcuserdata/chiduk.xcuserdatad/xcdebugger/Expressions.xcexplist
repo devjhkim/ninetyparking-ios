@@ -43,6 +43,9 @@
             <PersistentString
                value = "self.centerLocation.location.latitude">
             </PersistentString>
+            <PersistentString
+               value = "paymentHistoryButton">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState

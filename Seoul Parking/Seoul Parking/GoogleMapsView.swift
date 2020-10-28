@@ -22,6 +22,11 @@ struct GoogleMapsView: UIViewRepresentable {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
     
+    let settingsButton = UIButton()
+    @State var paymentHistoryButton : UIButton
+    @State var unpaidPaymentHistoryButton : UIButton
+    let announcementsButton = UIButton()
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -60,7 +65,7 @@ struct GoogleMapsView: UIViewRepresentable {
         searchHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         searchHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
-        let settingsButton = UIButton()
+        
         let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         settingsButtonImage?.withRenderingMode(.alwaysTemplate)
         settingsButton.setImage(settingsButtonImage, for: .normal)
@@ -82,7 +87,9 @@ struct GoogleMapsView: UIViewRepresentable {
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let paymentHistoryButton = UIButton()
+        paymentHistoryButton = UIButton()
+        unpaidPaymentHistoryButton = UIButton()
+        
         paymentHistoryButton.setTitle("결제내역", for: .normal)
         paymentHistoryButton.setTitleColor(.black, for: .normal)
         paymentHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -103,7 +110,10 @@ struct GoogleMapsView: UIViewRepresentable {
         paymentHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         paymentHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
-        let unpaidPaymentHistoryButton = UIButton()
+        
+
+        
+        
         unpaidPaymentHistoryButton.setTitle("미결제", for: .normal)
         unpaidPaymentHistoryButton.setTitleColor(.black, for: .normal)
         unpaidPaymentHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -124,6 +134,9 @@ struct GoogleMapsView: UIViewRepresentable {
         unpaidPaymentHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         unpaidPaymentHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
+        
+       
+
         
         let showAllButton = UIButton()
         showAllButton.setTitle("전체", for: .normal)
@@ -186,7 +199,7 @@ struct GoogleMapsView: UIViewRepresentable {
         showUnavailableButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         showUnavailableButton.translatesAutoresizingMaskIntoConstraints = false
         
-        let announcementsButton = UIButton()
+        
         announcementsButton.setTitle("공지사항", for: .normal)
         announcementsButton.setTitleColor(.black, for: .normal)
         announcementsButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -238,6 +251,16 @@ struct GoogleMapsView: UIViewRepresentable {
             pin.snippet = "10분당 " + space.chargePerTenMinute + "원"
             pin.map = mapView
         }
+        
+        if self.auxViewType.showPaymentHistoryButtons{
+           
+            paymentHistoryButton.isHidden = false
+        }else{
+            paymentHistoryButton.removeFromSuperview()
+            unpaidPaymentHistoryButton.removeFromSuperview()
+        }
+        
+
         
     }
     
