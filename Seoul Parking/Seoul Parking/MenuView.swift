@@ -126,7 +126,7 @@ struct MenuView: View {
                     }
                     .padding(.top, 30)
                     .onTapGesture {
-                        
+                        self.auxView.showSettingsView = true
                     }
                     
                     HStack {

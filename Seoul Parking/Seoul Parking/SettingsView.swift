@@ -29,6 +29,13 @@ struct SettingsView: View {
                     
                     Slider(value: self.$radius, in: 1...5, step: 1)
                         .padding(.leading, 5)
+                        .onChange(of: self.radius, perform: {_ in
+                            UserDefaults.standard.setValue(self.radius, forKey: "searchRadius")
+                            self.store.searchRadius = Int(self.radius)
+                        })
+                        .onAppear(){
+                            self.radius = Double(self.store.searchRadius)
+                        }
                     
                     Text(String(format: "%dkm", Int(self.radius)))
                         .foregroundColor(Color.black)

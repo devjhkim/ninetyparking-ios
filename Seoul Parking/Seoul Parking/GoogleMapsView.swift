@@ -22,10 +22,10 @@ struct GoogleMapsView: UIViewRepresentable {
     @Environment(\.showParkingSpaceInfoView) var showParkingSpaceInfoView
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
     
-    let settingsButton = UIButton()
-    @State var paymentHistoryButton : UIButton
-    @State var unpaidPaymentHistoryButton : UIButton
-    let announcementsButton = UIButton()
+    
+    @State var paymentHistoryButton : UIButton? = UIButton()
+    @State var unpaidPaymentHistoryButton : UIButton? = UIButton()
+    @State var announcementsButton = UIButton()
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -44,6 +44,28 @@ struct GoogleMapsView: UIViewRepresentable {
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
+        let settingsButton = UIButton()
+        let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        settingsButtonImage?.withRenderingMode(.alwaysTemplate)
+        settingsButton.setImage(settingsButtonImage, for: .normal)
+        settingsButton.addTarget(context.coordinator, action: #selector(context.coordinator.settingsButtonPressed(_:)), for: .touchUpInside)
+        settingsButton.backgroundColor = .white
+        settingsButton.tintColor = .black
+        settingsButton.clipsToBounds = true
+        settingsButton.layer.cornerRadius = 25
+        settingsButton.layer.shadowColor = UIColor.black.cgColor
+        settingsButton.layer.shadowOffset = .zero
+        settingsButton.layer.shadowOpacity = 0.5
+        settingsButton.layer.shadowRadius = 5
+        settingsButton.layer.masksToBounds = false
+        mapView.addSubview(settingsButton)
+        settingsButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 10).isActive = true
+        settingsButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         let searchHistoryButton = UIButton()
         let buttonImage = UIImage(systemName: "list.dash", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         buttonImage?.withRenderingMode(.alwaysTemplate)
@@ -59,80 +81,62 @@ struct GoogleMapsView: UIViewRepresentable {
         searchHistoryButton.layer.shadowRadius = 5
         searchHistoryButton.layer.masksToBounds = false
         mapView.addSubview(searchHistoryButton)
-        searchHistoryButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 10).isActive = true
+        searchHistoryButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 70).isActive = true
         searchHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
         searchHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         searchHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         searchHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
-        settingsButtonImage?.withRenderingMode(.alwaysTemplate)
-        settingsButton.setImage(settingsButtonImage, for: .normal)
-        settingsButton.addTarget(context.coordinator, action: #selector(context.coordinator.settingsButtonPressed(_:)), for: .touchUpInside)
-        settingsButton.backgroundColor = .white
-        settingsButton.tintColor = .black
-        settingsButton.clipsToBounds = true
-        settingsButton.layer.cornerRadius = 25
-        settingsButton.layer.shadowColor = UIColor.black.cgColor
-        settingsButton.layer.shadowOffset = .zero
-        settingsButton.layer.shadowOpacity = 0.5
-        settingsButton.layer.shadowRadius = 5
-        settingsButton.layer.masksToBounds = false
-        mapView.addSubview(settingsButton)
-        settingsButton.topAnchor.constraint(equalTo: searchHistoryButton.bottomAnchor, constant: 10).isActive = true
-        settingsButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
-        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
         
         
-        paymentHistoryButton = UIButton()
-        unpaidPaymentHistoryButton = UIButton()
         
-        paymentHistoryButton.setTitle("결제내역", for: .normal)
-        paymentHistoryButton.setTitleColor(.black, for: .normal)
-        paymentHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        paymentHistoryButton.addTarget(context.coordinator, action: #selector(context.coordinator.paymentHistoryButtonPressed(_:)), for: .touchUpInside)
-        paymentHistoryButton.backgroundColor = .white
-        paymentHistoryButton.tintColor = .black
-        paymentHistoryButton.clipsToBounds = true
-        paymentHistoryButton.layer.cornerRadius = 25
-        paymentHistoryButton.layer.shadowColor = UIColor.black.cgColor
-        paymentHistoryButton.layer.shadowOffset = .zero
-        paymentHistoryButton.layer.shadowOpacity = 0.5
-        paymentHistoryButton.layer.shadowRadius = 5
-        paymentHistoryButton.layer.masksToBounds = false
-        mapView.addSubview(paymentHistoryButton)
-        paymentHistoryButton.topAnchor.constraint(equalTo: settingsButton.bottomAnchor, constant: 10).isActive = true
-        paymentHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
-        paymentHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        paymentHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        paymentHistoryButton.translatesAutoresizingMaskIntoConstraints = false
+//        paymentHistoryButton = UIButton()
+//        unpaidPaymentHistoryButton = UIButton()
+        
+        paymentHistoryButton?.setTitle("결제내역", for: .normal)
+        paymentHistoryButton?.setTitleColor(.black, for: .normal)
+        paymentHistoryButton?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        paymentHistoryButton?.addTarget(context.coordinator, action: #selector(context.coordinator.paymentHistoryButtonPressed(_:)), for: .touchUpInside)
+        paymentHistoryButton?.backgroundColor = .white
+        paymentHistoryButton?.tintColor = .black
+        paymentHistoryButton?.clipsToBounds = true
+        paymentHistoryButton?.layer.cornerRadius = 25
+        paymentHistoryButton?.layer.shadowColor = UIColor.black.cgColor
+        paymentHistoryButton?.layer.shadowOffset = .zero
+        paymentHistoryButton?.layer.shadowOpacity = 0.5
+        paymentHistoryButton?.layer.shadowRadius = 5
+        paymentHistoryButton?.layer.masksToBounds = false
+        mapView.addSubview(paymentHistoryButton!)
+        paymentHistoryButton?.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 130).isActive = true
+        paymentHistoryButton?.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        paymentHistoryButton?.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        paymentHistoryButton?.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        paymentHistoryButton?.translatesAutoresizingMaskIntoConstraints = false
         
         
 
         
         
-        unpaidPaymentHistoryButton.setTitle("미결제", for: .normal)
-        unpaidPaymentHistoryButton.setTitleColor(.black, for: .normal)
-        unpaidPaymentHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        unpaidPaymentHistoryButton.addTarget(context.coordinator, action: #selector(context.coordinator.unpaidPaymentHistoryButtonPressed(_:)), for: .touchUpInside)
-        unpaidPaymentHistoryButton.backgroundColor = .white
-        unpaidPaymentHistoryButton.tintColor = .black
-        unpaidPaymentHistoryButton.clipsToBounds = true
-        unpaidPaymentHistoryButton.layer.cornerRadius = 25
-        unpaidPaymentHistoryButton.layer.shadowColor = UIColor.black.cgColor
-        unpaidPaymentHistoryButton.layer.shadowOffset = .zero
-        unpaidPaymentHistoryButton.layer.shadowOpacity = 0.5
-        unpaidPaymentHistoryButton.layer.shadowRadius = 5
-        unpaidPaymentHistoryButton.layer.masksToBounds = false
-        mapView.addSubview(unpaidPaymentHistoryButton)
-        unpaidPaymentHistoryButton.topAnchor.constraint(equalTo: paymentHistoryButton.bottomAnchor, constant: 10).isActive = true
-        unpaidPaymentHistoryButton.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
-        unpaidPaymentHistoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        unpaidPaymentHistoryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        unpaidPaymentHistoryButton.translatesAutoresizingMaskIntoConstraints = false
+        unpaidPaymentHistoryButton?.setTitle("미결제", for: .normal)
+        unpaidPaymentHistoryButton?.setTitleColor(.black, for: .normal)
+        unpaidPaymentHistoryButton?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        unpaidPaymentHistoryButton?.addTarget(context.coordinator, action: #selector(context.coordinator.unpaidPaymentHistoryButtonPressed(_:)), for: .touchUpInside)
+        unpaidPaymentHistoryButton?.backgroundColor = .white
+        unpaidPaymentHistoryButton?.tintColor = .black
+        unpaidPaymentHistoryButton?.clipsToBounds = true
+        unpaidPaymentHistoryButton?.layer.cornerRadius = 25
+        unpaidPaymentHistoryButton?.layer.shadowColor = UIColor.black.cgColor
+        unpaidPaymentHistoryButton?.layer.shadowOffset = .zero
+        unpaidPaymentHistoryButton?.layer.shadowOpacity = 0.5
+        unpaidPaymentHistoryButton?.layer.shadowRadius = 5
+        unpaidPaymentHistoryButton?.layer.masksToBounds = false
+        mapView.addSubview(unpaidPaymentHistoryButton!)
+        unpaidPaymentHistoryButton?.topAnchor.constraint(equalTo: paymentHistoryButton!.bottomAnchor, constant: 10).isActive = true
+        unpaidPaymentHistoryButton?.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+        unpaidPaymentHistoryButton?.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        unpaidPaymentHistoryButton?.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        unpaidPaymentHistoryButton?.translatesAutoresizingMaskIntoConstraints = false
         
         
        
@@ -254,13 +258,35 @@ struct GoogleMapsView: UIViewRepresentable {
         
         if self.auxViewType.showPaymentHistoryButtons{
            
-            paymentHistoryButton.isHidden = false
+            mapView.addSubview(paymentHistoryButton!)
+            paymentHistoryButton?.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 130).isActive = true
+            paymentHistoryButton?.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+            paymentHistoryButton?.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            paymentHistoryButton?.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            paymentHistoryButton?.translatesAutoresizingMaskIntoConstraints = false
+            
+            mapView.addSubview(unpaidPaymentHistoryButton!)
+            unpaidPaymentHistoryButton?.topAnchor.constraint(equalTo: paymentHistoryButton!.bottomAnchor, constant: 10).isActive = true
+            unpaidPaymentHistoryButton?.rightAnchor.constraint(equalTo: mapView.rightAnchor, constant: -10).isActive = true
+            unpaidPaymentHistoryButton?.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            unpaidPaymentHistoryButton?.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            unpaidPaymentHistoryButton?.translatesAutoresizingMaskIntoConstraints = false
         }else{
-            paymentHistoryButton.removeFromSuperview()
-            unpaidPaymentHistoryButton.removeFromSuperview()
+            paymentHistoryButton?.removeFromSuperview()
+            unpaidPaymentHistoryButton?.removeFromSuperview()
         }
         
 
+        if self.auxViewType.showAnnoucementsButton {
+            mapView.addSubview(announcementsButton)
+            announcementsButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -110).isActive = true
+            announcementsButton.leftAnchor.constraint(equalTo: mapView.leftAnchor, constant: 20).isActive = true
+            announcementsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            announcementsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            announcementsButton.translatesAutoresizingMaskIntoConstraints = false
+        }else{
+            announcementsButton.removeFromSuperview()
+        }
         
     }
     

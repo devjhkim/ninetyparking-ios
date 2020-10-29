@@ -12,6 +12,7 @@ struct MainView: View {
     @EnvironmentObject var centerLocation : CenterLocation
     @EnvironmentObject var lot: ParkingLot
     @EnvironmentObject var notificationCenter: NotificationCenter
+    @EnvironmentObject var store: Store
     
     @State var showMenu = false
     @State var auxViewType = AuxViewType()
@@ -221,6 +222,17 @@ struct MainView: View {
                     self.auxViewType.showPaymentHistoryButtons = isOn
                 }
             }
+            
+            let searchRadius = UserDefaults.standard.object(forKey: "searchRadius") as? Int
+            
+            if searchRadius == nil {
+                self.store.searchRadius = 1
+                UserDefaults.standard.setValue(1, forKey: "searchRadius")
+            }else{
+                if let value = searchRadius {
+                    self.store.searchRadius = value
+                }
+            }
         }
 
         
@@ -233,12 +245,14 @@ struct MainView: View {
             return
         }
         
+        let searchRadius = self.store.searchRadius * 1000
+        
         let params = [
             "userUniqueId": "35FC80DC-CB6B-40E0-89A1-7F0DEABDCE7D",
             "latitude" :"37.47846906924382",
             "longitude": "126.95208443935626",
             "address" :  "대한민국 서울특별시 관악구 봉천동 1570-1",
-            "radiusArea":"1000"
+            "radiusArea": searchRadius.description
             //"latitude" : self.centerLocation.location.latitude,
             //"longitude" : self.centerLocation.location.longitude
         ]

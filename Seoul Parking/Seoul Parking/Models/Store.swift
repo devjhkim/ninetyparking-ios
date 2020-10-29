@@ -11,6 +11,7 @@ import SwiftUI
 
 final class Store: ObservableObject {
     @Published var user = User()
+    @Published var searchRadius: Int = 1
 }
 
 struct User: Hashable, Codable {
@@ -19,4 +20,5 @@ struct User: Hashable, Codable {
     var email: String = ""
     var plateNumbers: [String] = [String]()
     var password: String = ""
+   
 }
