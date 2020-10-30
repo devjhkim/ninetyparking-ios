@@ -23,6 +23,7 @@ struct MainView: View {
     @State var showSearchHistoryView = false
     @State var showSettingsView = false
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
+    @State var navigationBarTitle = APP_TITLE
     
     @State var amount = ""
     @State var oid = ""
@@ -158,7 +159,7 @@ struct MainView: View {
             
                     
                 }
-                .navigationBarTitle(Text(APP_TITLE), displayMode: .inline)
+                .navigationBarTitle(Text(self.centerLocation.place?.name ?? APP_TITLE), displayMode: .inline)
                 .navigationBarItems(leading:
                     Button(action: {
                         withAnimation {
@@ -223,16 +224,11 @@ struct MainView: View {
                 }
             }
             
-            let searchRadius = UserDefaults.standard.object(forKey: "searchRadius") as? Int
             
-            if searchRadius == nil {
-                self.store.searchRadius = 1
-                UserDefaults.standard.setValue(1, forKey: "searchRadius")
-            }else{
-                if let value = searchRadius {
-                    self.store.searchRadius = value
-                }
-            }
+            
+            
+            
+            
         }
 
         
@@ -245,14 +241,25 @@ struct MainView: View {
             return
         }
         
-        let searchRadius = self.store.searchRadius * 1000
+        let searchRadius = UserDefaults.standard.object(forKey: "searchRadius") as? Int
+        
+        if searchRadius == nil {
+            self.store.searchRadius = 1
+            UserDefaults.standard.setValue(1, forKey: "searchRadius")
+        }else{
+            if let value = searchRadius {
+                self.store.searchRadius = value
+            }
+        }
+        
+        let raidus = self.store.searchRadius * 1000
         
         let params = [
             "userUniqueId": "35FC80DC-CB6B-40E0-89A1-7F0DEABDCE7D",
             "latitude" :"37.47846906924382",
             "longitude": "126.95208443935626",
             "address" :  "대한민국 서울특별시 관악구 봉천동 1570-1",
-            "radiusArea": searchRadius.description
+            "radiusArea": raidus.description
             //"latitude" : self.centerLocation.location.latitude,
             //"longitude" : self.centerLocation.location.longitude
         ]

@@ -9,12 +9,14 @@
 import Foundation
 import CoreLocation
 import Combine
+import GooglePlaces
 
 class CenterLocation: NSObject, ObservableObject {
     
     private let locationManager = CLLocationManager()
     
     @Published var location = CLLocation()
+    @Published var place: GMSPlace? = nil
     
     override init() {
         super.init()
@@ -22,6 +24,8 @@ class CenterLocation: NSObject, ObservableObject {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+        
+        
     }
 }
 

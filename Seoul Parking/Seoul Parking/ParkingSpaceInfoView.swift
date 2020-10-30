@@ -13,6 +13,8 @@ struct ParkingSpaceInfoView: View {
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
     @Environment(\.showAvailableTimeView) var showAvailableTimeView
      
+    @State var showNavigationSelectionModal = false
+    
     var body: some View {
         
         ZStack{
@@ -39,21 +41,39 @@ struct ParkingSpaceInfoView: View {
                     
                     HStack{
                         Spacer()
+                        
                         VStack{
                             
                             Spacer()
                             
-                            VStack(alignment: .center){
+                            VStack(alignment: .leading){
                                 Spacer()
                                 
-                                self.Address
-                                    .padding([.top, .leading], 10)
+                                HStack{
+                                    self.Address
+                                    
+                                    Button(action: {self.showNavigationSelectionModal.toggle()}){
+                                        Image("navigationButton")
+                                    }
+                                    .padding(.leading, 20)
+                                }
+                                .padding([.top], 10)
+                                .padding(.leading, 20)
+                                .sheet(isPresented: self.$showNavigationSelectionModal){
+                                    CustomAlert(message: "This is Modal view",
+                                              titlesAndActions: [("OK", {print(0)}),
+                                                                 ("Increase", { print(1) }),
+                                                                 ("Cancel", {print(2)})])
+                                }
+                                
                                 self.Price
-                                    .padding([.top, .leading], 10)
+                                    .padding([.top], 10)
+                                    .padding(.leading, 20)
                                 self.OpenHours
-                                    .padding([.top, .leading], 10)
+                                    .padding([.top], 10)
+                                    .padding(.leading, 20)
                                 self.Buttons
-                                    .padding(.top, 20)
+                                    .padding([.top, .leading, .bottom], 20)
                                 Spacer()
                                 
                             }
@@ -61,7 +81,8 @@ struct ParkingSpaceInfoView: View {
                             .frame(height: 200)
                             .frame(width: proxy.size.width * 0.9, alignment: .leading)
                             .cornerRadius(20)
-                            .padding(.bottom, 20)
+                            .padding( 20)
+                            
                             
                             
                             
@@ -133,7 +154,7 @@ struct ParkingSpaceInfoView: View {
                     self.showAvailableTimeView?.wrappedValue = true
                 }){
                     
-                    Image("reserveButton")
+                    Image("timeCheckButton")
 
                 }
                
@@ -150,5 +171,27 @@ struct ParkingSpaceInfoView: View {
 struct ParkingSpaceInfoView_Previews: PreviewProvider {
     static var previews: some View {
         ParkingSpaceInfoView()
+    }
+}
+
+struct CustomAlert: View {
+    @Environment(\.presentationMode) var presentation
+    let message: String
+    let titlesAndActions: [(title: String, action: (() -> Void)?)] // = [.default(Text("OK"))]
+    
+    var body: some View {
+        VStack {
+            Text(message)
+            Divider().padding([.leading, .trailing], 40)
+            HStack {
+                ForEach(titlesAndActions.indices, id: \.self) { i in
+                    Button(self.titlesAndActions[i].title) {
+                        (self.titlesAndActions[i].action ?? {})()
+                        self.presentation.wrappedValue.dismiss()
+                    }
+                    .padding()
+                }
+            }
+        }
     }
 }

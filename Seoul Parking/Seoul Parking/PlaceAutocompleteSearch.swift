@@ -47,6 +47,8 @@ struct PlaceAutocompleteSearch: UIViewControllerRepresentable {
             self.controller.presentationMode.wrappedValue.dismiss()
             print(place)
             
+            self.controller.centerLocation.place = place
+            
             let params = [
                 "latitude" : place.coordinate.latitude,
                 "longitude" : place.coordinate.longitude
