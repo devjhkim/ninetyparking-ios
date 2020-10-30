@@ -52,19 +52,16 @@ struct ParkingSpaceInfoView: View {
                                 HStack{
                                     self.Address
                                     
+                                    Spacer()
+                                    
                                     Button(action: {self.showNavigationSelectionModal.toggle()}){
                                         Image("navigationButton")
                                     }
-                                    .padding(.leading, 20)
+                                    .padding(.trailing, 20)
                                 }
                                 .padding([.top], 10)
                                 .padding(.leading, 20)
-                                .sheet(isPresented: self.$showNavigationSelectionModal){
-                                    CustomAlert(message: "This is Modal view",
-                                              titlesAndActions: [("OK", {print(0)}),
-                                                                 ("Increase", { print(1) }),
-                                                                 ("Cancel", {print(2)})])
-                                }
+                                
                                 
                                 self.Price
                                     .padding([.top], 10)
@@ -174,24 +171,3 @@ struct ParkingSpaceInfoView_Previews: PreviewProvider {
     }
 }
 
-struct CustomAlert: View {
-    @Environment(\.presentationMode) var presentation
-    let message: String
-    let titlesAndActions: [(title: String, action: (() -> Void)?)] // = [.default(Text("OK"))]
-    
-    var body: some View {
-        VStack {
-            Text(message)
-            Divider().padding([.leading, .trailing], 40)
-            HStack {
-                ForEach(titlesAndActions.indices, id: \.self) { i in
-                    Button(self.titlesAndActions[i].title) {
-                        (self.titlesAndActions[i].action ?? {})()
-                        self.presentation.wrappedValue.dismiss()
-                    }
-                    .padding()
-                }
-            }
-        }
-    }
-}
