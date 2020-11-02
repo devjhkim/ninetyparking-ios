@@ -41,6 +41,9 @@
          contextName = "GoogleMapsView.updateUIView(_:context:):GoogleMapsView.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.centerLocation.location.longitude">
+            </PersistentString>
+            <PersistentString
                value = "self.centerLocation.location.latitude">
             </PersistentString>
             <PersistentString

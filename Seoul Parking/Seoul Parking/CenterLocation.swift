@@ -17,6 +17,8 @@ class CenterLocation: NSObject, ObservableObject {
     
     @Published var location = CLLocation()
     @Published var place: GMSPlace? = nil
+    @Published var zoomLevel: Float = 15.0
+    
     
     override init() {
         super.init()

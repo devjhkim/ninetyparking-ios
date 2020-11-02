@@ -32,14 +32,14 @@ struct MainView: View {
         let drag = DragGesture()
             .onEnded { _ in
                 self.showMenu = false
-        }
+            }
         
         let tap = TapGesture()
             .onEnded { _ in
                 self.showMenu = false
                 
-        }
-
+            }
+        
         DispatchQueue.main.async {
             if let payload = self.notificationCenter.payload {
                 
@@ -109,7 +109,7 @@ struct MainView: View {
                                 EmptyView()
                             }.hidden()
                         }
-                    
+                        
                         
                         
                         
@@ -119,7 +119,7 @@ struct MainView: View {
                             .environmentObject(self.centerLocation)
                             .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                             .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
-
+                        
                         if self.showMenu {
                             
                             MenuView(showMenu: self.$showMenu, auxView: self.$auxViewType, size: CGSize(width: reader.size.width * 0.7, height: reader.size.height))
@@ -132,7 +132,7 @@ struct MainView: View {
                         }
                         
                         
-
+                        
                     }
                     .gesture(drag)
                     .sheet(isPresented:self.$showLoginView){
@@ -145,6 +145,7 @@ struct MainView: View {
                     }
                     .sheet(isPresented: self.$showPlaceSearchView){
                         PlaceAutocompleteSearch()
+                            .preferredColorScheme(.light)
                             .environmentObject(self.centerLocation)
                             .environmentObject(self.lot)
                     }
@@ -156,22 +157,22 @@ struct MainView: View {
                         Alert(title: Text(""), message: Text("잘못된 비밀번호입니다."), dismissButton: .default(Text("확인"), action: {}))
                     })
                     
-            
+                    
                     
                 }
                 .navigationBarTitle(Text(self.centerLocation.place?.name ?? APP_TITLE), displayMode: .inline)
                 .navigationBarItems(leading:
-                    Button(action: {
-                        withAnimation {
-                            self.showMenu.toggle()
-                        }
-                    }){
-                        Image(systemName: "line.horizontal.3")
-                            .renderingMode(.template)
-                            .foregroundColor(.black)
-                            .imageScale(.large)
-                            .padding()
-                    },
+                                        Button(action: {
+                                            withAnimation {
+                                                self.showMenu.toggle()
+                                            }
+                                        }){
+                                            Image(systemName: "line.horizontal.3")
+                                                .renderingMode(.template)
+                                                .foregroundColor(.black)
+                                                .imageScale(.large)
+                                                .padding()
+                                        },
                                     
                                     trailing: Button(action: {self.showPlaceSearchView = true}){
                                         Image(systemName: "magnifyingglass")
@@ -180,9 +181,9 @@ struct MainView: View {
                                             .imageScale(.large)
                                             .padding()
                                         
-                    }
+                                    }
                 )
-
+                
             }
             .navigationViewStyle(StackNavigationViewStyle())
             
@@ -230,7 +231,7 @@ struct MainView: View {
             
             
         }
-
+        
         
     }
     

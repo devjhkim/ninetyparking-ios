@@ -44,6 +44,51 @@ struct GoogleMapsView: UIViewRepresentable {
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
+        
+        let gwanAkGuShortcutButton = UIButton()
+        gwanAkGuShortcutButton.addTarget(context.coordinator, action: #selector(context.coordinator.gwanAkGuButtonPressed(_:)), for: .touchUpInside)
+        gwanAkGuShortcutButton.setTitle("관악구", for: .normal)
+        gwanAkGuShortcutButton.setTitleColor(.black, for: .normal)
+        gwanAkGuShortcutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        gwanAkGuShortcutButton.backgroundColor = .white
+        gwanAkGuShortcutButton.tintColor = .black
+        gwanAkGuShortcutButton.clipsToBounds = true
+        gwanAkGuShortcutButton.layer.cornerRadius = 10
+        gwanAkGuShortcutButton.layer.shadowColor = UIColor.black.cgColor
+        gwanAkGuShortcutButton.layer.shadowOffset = .zero
+        gwanAkGuShortcutButton.layer.shadowOpacity = 0.5
+        gwanAkGuShortcutButton.layer.shadowRadius = 5
+        gwanAkGuShortcutButton.layer.masksToBounds = false
+        mapView.addSubview(gwanAkGuShortcutButton)
+        gwanAkGuShortcutButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 10).isActive = true
+        gwanAkGuShortcutButton.leftAnchor.constraint(equalTo: mapView.leftAnchor, constant: 10).isActive = true
+        gwanAkGuShortcutButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        gwanAkGuShortcutButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        gwanAkGuShortcutButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let mapoGuShortcutButton = UIButton()
+        mapoGuShortcutButton.addTarget(context.coordinator, action: #selector(context.coordinator.mapoGuButtonPressed(_:)), for: .touchUpInside)
+        mapoGuShortcutButton.setTitle("마포구", for: .normal)
+        mapoGuShortcutButton.setTitleColor(.black, for: .normal)
+        mapoGuShortcutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        mapoGuShortcutButton.backgroundColor = .white
+        mapoGuShortcutButton.tintColor = .black
+        mapoGuShortcutButton.clipsToBounds = true
+        mapoGuShortcutButton.layer.cornerRadius = 10
+        mapoGuShortcutButton.layer.shadowColor = UIColor.black.cgColor
+        mapoGuShortcutButton.layer.shadowOffset = .zero
+        mapoGuShortcutButton.layer.shadowOpacity = 0.5
+        mapoGuShortcutButton.layer.shadowRadius = 5
+        mapoGuShortcutButton.layer.masksToBounds = false
+        mapView.addSubview(mapoGuShortcutButton)
+        mapoGuShortcutButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 10).isActive = true
+        mapoGuShortcutButton.leftAnchor.constraint(equalTo: mapView.leftAnchor, constant: 90).isActive = true
+        mapoGuShortcutButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        mapoGuShortcutButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        mapoGuShortcutButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         let settingsButton = UIButton()
         let settingsButtonImage = UIImage(systemName: "gearshape", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         settingsButtonImage?.withRenderingMode(.alwaysTemplate)
@@ -91,8 +136,6 @@ struct GoogleMapsView: UIViewRepresentable {
         
         
         
-//        paymentHistoryButton = UIButton()
-//        unpaidPaymentHistoryButton = UIButton()
         
         paymentHistoryButton?.setTitle("결제내역", for: .normal)
         paymentHistoryButton?.setTitleColor(.black, for: .normal)
@@ -227,8 +270,9 @@ struct GoogleMapsView: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
-        let camera = GMSCameraPosition.camera(withLatitude: self.centerLocation.location.latitude, longitude: self.centerLocation.location.longitude, zoom: 15.0)
+        let camera = GMSCameraPosition.camera(withLatitude: self.centerLocation.location.latitude, longitude: self.centerLocation.location.longitude, zoom: self.centerLocation.zoomLevel)
         
+ 
         mapView.animate(to: camera)
         mapView.clear()
         
@@ -311,6 +355,30 @@ struct GoogleMapsView: UIViewRepresentable {
             }
             
             return false
+        }
+        
+        
+        func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+            print(position)
+            
+            self.mapView.centerLocation.location = CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)
+            self.mapView.centerLocation.zoomLevel = position.zoom
+        }
+        
+        
+        @objc func gwanAkGuButtonPressed(_ sender: UIButton){
+            //37.49540317431152 lat
+            //126.8873691558838 lng
+            self.mapView.centerLocation.location = CLLocation(latitude: 37.49540317431152, longitude: 126.8873691558838)
+        }
+        
+        
+        @objc func mapoGuButtonPressed(_ sender: UIButton){
+            /*
+             37.563756073466635
+             126.90842114388943
+             */
+            self.mapView.centerLocation.location = CLLocation(latitude: 37.563756073466635, longitude: 126.90842114388943)
         }
         
         @objc func searchHistoryButtonPressed(_ sender: UIButton){
