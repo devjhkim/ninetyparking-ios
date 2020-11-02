@@ -23,6 +23,8 @@ struct AuxViewType {
     var showMyInfoView: Bool = false
     var showAnnoucementsButton: Bool = true
     var showPaymentHistoryButtons: Bool = true
+    var showNavigationSelectionView: Bool = false
+    
 }
 
 struct ContentView: View {

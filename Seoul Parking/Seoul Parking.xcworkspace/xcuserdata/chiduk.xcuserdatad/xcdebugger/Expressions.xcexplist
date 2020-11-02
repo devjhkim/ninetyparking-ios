@@ -3,6 +3,31 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "NavigationSelectionView.openKakaoNavi():NavigationSelectionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.selectedParkingSpace.spaceName">
+            </PersistentString>
+            <PersistentString
+               value = "self.selectedParkingSpace.longitude.description">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NavigationSelectionView.openNaverNavi():NavigationSelectionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " self.selectedParkingSpace.latitude.description">
+            </PersistentString>
+            <PersistentString
+               value = "self.selectedParkingSpace.spaceName">
+            </PersistentString>
+            <PersistentString
+               value = "self.selectedParkingSpace.longitude.description">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #3 in AlertWithTextField.updateUIViewController(_:context:):AlertWithTextField.swift">
          <PersistentStrings>
             <PersistentString

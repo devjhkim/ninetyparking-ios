@@ -108,6 +108,8 @@ struct MainView: View {
                             NavigationLink(destination: MyInfoView(), isActive: self.$auxViewType.showMyInfoView){
                                 EmptyView()
                             }.hidden()
+                            
+                            
                         }
                         
                         
@@ -191,11 +193,15 @@ struct MainView: View {
             
             
             if self.showParkingSpaceInfoView {
-                ParkingSpaceInfoView()
+                ParkingSpaceInfoView(auxViewType: self.$auxViewType)
                     .environment(\.showParkingSpaceInfoView, self.$showParkingSpaceInfoView)
                     .environment(\.selectedParkingSpace, self.$selectedParkingSpace)
                     .environment(\.showAvailableTimeView, self.$showAvailableTimeView)
                 
+            }
+            
+            if self.auxViewType.showNavigationSelectionView {
+                NavigationSelectionView(auxViewType: self.$auxViewType, selectedParkingSpace: self.$selectedParkingSpace)
             }
             
             

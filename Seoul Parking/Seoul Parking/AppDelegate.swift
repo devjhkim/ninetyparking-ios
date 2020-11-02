@@ -11,6 +11,7 @@ import GoogleMaps
 import GooglePlaces
 import NaverThirdPartyLogin
 import KakaoOpenSDK
+import KakaoSDKCommon
 import FBSDKCoreKit
 import UserNotifications
 
@@ -35,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //Facebook Login
         ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions )
         
+        //Kakako SDK init
+        KakaoSDKCommon.initSDK(appKey: KAKAO_API_KEY)
         
         self.registerForPushNotifications()
         

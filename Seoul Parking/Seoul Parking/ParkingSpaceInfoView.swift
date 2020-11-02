@@ -13,7 +13,7 @@ struct ParkingSpaceInfoView: View {
     @Environment(\.selectedParkingSpace) var selectedParkingSpace
     @Environment(\.showAvailableTimeView) var showAvailableTimeView
      
-    @State var showNavigationSelectionModal = false
+    @Binding var auxViewType: AuxViewType
     
     var body: some View {
         
@@ -54,7 +54,10 @@ struct ParkingSpaceInfoView: View {
                                     
                                     Spacer()
                                     
-                                    Button(action: {self.showNavigationSelectionModal.toggle()}){
+                                    Button(action: {
+                                        self.showParkingSpaceInfoView?.wrappedValue = false
+                                        self.auxViewType.showNavigationSelectionView.toggle()
+                                    }){
                                         Image("navigationButton")
                                     }
                                     .padding(.trailing, 20)
@@ -167,7 +170,7 @@ struct ParkingSpaceInfoView: View {
 
 struct ParkingSpaceInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        ParkingSpaceInfoView()
+        ParkingSpaceInfoView(auxViewType: .constant(AuxViewType()))
     }
 }
 

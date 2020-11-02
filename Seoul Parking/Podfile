@@ -18,6 +18,8 @@ target 'Seoul Parking' do
   
   #Kakao Login
   
+  #Kakao Navi
+  pod 'KakaoSDK'
   
   #Facebook Login
   pod 'FBSDKLoginKit'
