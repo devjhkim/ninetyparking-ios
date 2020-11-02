@@ -27,11 +27,19 @@ struct SearchHistoryView: View {
                         
                         Spacer()
 
+                        
+                        Button(action:{}){
+                            Image("navigationButton")
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        
                         Button(action: {self.delete(index: index)}){
                             Image(systemName: "xmark.circle")
                                 .renderingMode(.template)
                                 .foregroundColor(Color.gray)
                         }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .frame(width: 10, height: 10)
                         .padding()
                     }
                     
