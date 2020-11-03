@@ -18,6 +18,8 @@
 		164EF5F52547DA2100E9E79F /* AnnoucementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */; };
 		164EF5FB2547F50C00E9E79F /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF5FA2547F50C00E9E79F /* MyInfoView.swift */; };
 		164EF60B254BFFE300E9E79F /* NavigationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EF60A254BFFE300E9E79F /* NavigationSelectionView.swift */; };
+		164EF6452551206700E9E79F /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164EF639255117D400E9E79F /* TMapSDK.framework */; };
+		164EF6462551206700E9E79F /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 164EF639255117D400E9E79F /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1661D66424FE3F3700AF56E7 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D66324FE3F3700AF56E7 /* SignupView.swift */; };
 		166D045624FCBE99009373E8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166D045524FCBE99009373E8 /* MainView.swift */; };
 		16725AB5254150920086DC3C /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16725AB4254150920086DC3C /* Payment.swift */; };
@@ -91,6 +93,7 @@
 			files = (
 				16FB34AD24C54C3F007A05F9 /* KakaoOpenSDK.framework in Embed Frameworks */,
 				16FB34B124C54C43007A05F9 /* KakaoCommon.framework in Embed Frameworks */,
+				164EF6462551206700E9E79F /* TMapSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +113,7 @@
 		164EF5F42547DA2100E9E79F /* AnnoucementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucementDetailView.swift; sourceTree = "<group>"; };
 		164EF5FA2547F50C00E9E79F /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		164EF60A254BFFE300E9E79F /* NavigationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSelectionView.swift; sourceTree = "<group>"; };
+		164EF639255117D400E9E79F /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		1661D66324FE3F3700AF56E7 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		166D045524FCBE99009373E8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		16725AB4254150920086DC3C /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFBE4732AFC3DCC5B54841BB /* Pods_Seoul_Parking.framework in Frameworks */,
+				164EF6452551206700E9E79F /* TMapSDK.framework in Frameworks */,
 				16FB34B024C54C43007A05F9 /* KakaoCommon.framework in Frameworks */,
 				16FB34AC24C54C3F007A05F9 /* KakaoOpenSDK.framework in Frameworks */,
 			);
@@ -209,6 +214,7 @@
 		16AF295124B6E47100836C81 = {
 			isa = PBXGroup;
 			children = (
+				164EF639255117D400E9E79F /* TMapSDK.framework */,
 				16AF295C24B6E47100836C81 /* Seoul Parking */,
 				16AF297324B6E47400836C81 /* Seoul ParkingTests */,
 				16AF297E24B6E47500836C81 /* Seoul ParkingUITests */,
@@ -845,6 +851,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KakaoOpenSDK-1.23.3",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Seoul Parking/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -924,6 +931,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KakaoOpenSDK-1.23.3",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Seoul Parking/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

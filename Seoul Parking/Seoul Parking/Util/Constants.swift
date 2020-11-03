@@ -12,9 +12,11 @@ public let KG_INICIS_MID = "INIpayTest"
 public let GOOGLE_MAPS_API_KEY = "AIzaSyBs3cfv9i6RszPn5N2Cjg3tPAEW_s5e_rQ"
 public let GOOGLE_PLACES_API_KEY = "AIzaSyDFTi7tbp7f_hKLx5piWY3ybYNaIJoQo2I"
 public let KAKAO_API_KEY = "e0da816370091f321c148544edf371c2"
+public let TMAP_API_KEY = "l7xxd0cafeae85ca47de983bd3a96e17d3e9" // "l7xx40ffcbbeca0d4d46915537979af41f51"
+
 public let SERVER_PORT = "49090"
 
-public let SERVER_IP = "10.8.2.242" + ":" + SERVER_PORT
+public let SERVER_IP = "10.8.5.128" + ":" + SERVER_PORT
 //public let SERVER_IP = "ninetysystem.cafe24.com"
 
 public let APP_TITLE = "나인티 파킹"
