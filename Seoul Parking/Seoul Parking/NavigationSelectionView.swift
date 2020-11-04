@@ -34,7 +34,7 @@ struct NavigationSelectionView: View {
             
             ZStack{
                 Color.init( red: 229, green: 229, blue: 234)
-                    .frame(width: 300, height: 200, alignment: Alignment.center)
+                    .frame(width: 300, height: 300, alignment: Alignment.center)
                     .cornerRadius(10)
                 
                 VStack{
@@ -43,44 +43,72 @@ struct NavigationSelectionView: View {
                     Text("내비게이션 선택")
                         .bold()
                         .foregroundColor(Color.black)
-                        .padding()
-                    
-                    Button(action: {
-                        self.auxViewType.showNavigationSelectionView.toggle()
-                        self.openTMapNavi()
-                    }){
-                        Text("티맵")
-                            .foregroundColor(Color.black)
+                        .padding(.top, 10)
+                    HStack{
+                        Image("tmap")
+                        
+                        
+                        
+                        Button(action: {
+                            self.auxViewType.showNavigationSelectionView.toggle()
+                            self.openTMapNavi()
+                        }){
+                            Text("티맵")
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 20))
+                        }
+                        
+                        Spacer()
+                        
                     }
+                    .padding(.top, 10)
                     
+                  
+                        
+                    HStack{
+                        Image("kakaoNavi")
+                        
+                        Button(action: {
+                            self.auxViewType.showNavigationSelectionView.toggle()
+                            self.openKakaoNavi()
+                        }){
+                            Text("카카오")
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 20))
+                        }
+                        
 
-                    Button(action: {
-                        self.auxViewType.showNavigationSelectionView.toggle()
-                        self.openKakaoNavi()
-                    }){
-                        Text("카카오")
-                            .foregroundColor(Color.black)
+                        Spacer()
                     }
                     .padding(.top, 10)
 
-                    Button(action: {
-                        self.auxViewType.showNavigationSelectionView.toggle()
-                        self.openNaverNavi()
-                    }){
-                        Text("네이버")
-                            .foregroundColor(Color.black)
+                    HStack{
+                        Image("naverMap")
+                        
+                        Button(action: {
+                            self.auxViewType.showNavigationSelectionView.toggle()
+                            self.openNaverNavi()
+                        }){
+                            Text("네이버")
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 20))
+                        }
+                        
+
+                        Spacer()
                     }
                     .padding(.top, 10)
 
                     Button(action: {self.auxViewType.showNavigationSelectionView.toggle()}){
                         Text("닫기")
                             .foregroundColor(Color.red)
+                            .font(.system(size: 20))
                     }
                     .padding(.top, 10)
                     
                     Spacer()
                 }
-                .frame(width: 290, height: 190, alignment: Alignment.center)
+                .frame(width: 290, height: 800, alignment: Alignment.center)
                 
             }
             

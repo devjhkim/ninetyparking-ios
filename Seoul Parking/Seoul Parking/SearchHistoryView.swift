@@ -10,50 +10,63 @@ import SwiftUI
 
 struct SearchHistoryView: View {
     @State var searchHistory = [SearchHistory]()
+    @State var showNaviSelectionView = false
+    
     
     init() {
         UITableView.appearance().separatorStyle = .none
     }
     
     var body: some View {
-        List{
-            ForEach(Array(zip(self.searchHistory.indices, self.searchHistory)), id: \.0){ index, elem in
-                VStack{
-                    
-                    HStack{
-                        Text(elem.address)
-                            .foregroundColor(Color.black)
-                            .padding()
+        ZStack{
+            List{
+                ForEach(Array(zip(self.searchHistory.indices, self.searchHistory)), id: \.0){ index, elem in
+                    VStack{
                         
-                        Spacer()
+                        HStack{
+                            Text(elem.address)
+                                .foregroundColor(Color.black)
+                                .padding()
+                            
+                            Spacer()
 
-                        
-                        Button(action:{}){
-                            Image("navigationButton")
+                            
+                            Button(action:{
+                                self.showNaviSelectionView.toggle()
+                                
+                            }){
+                                Image("navigationButton")
+                            }
+                            .buttonStyle(BorderlessButtonStyle())
+                            
+                            
+                            Button(action: {self.delete(index: index)}){
+                                Image(systemName: "xmark.circle")
+                                    .renderingMode(.template)
+                                    .foregroundColor(Color.gray)
+                            }
+                            .buttonStyle(BorderlessButtonStyle())
+                            .frame(width: 10, height: 10)
+                            .padding()
                         }
-                        .buttonStyle(BorderlessButtonStyle())
                         
-                        Button(action: {self.delete(index: index)}){
-                            Image(systemName: "xmark.circle")
-                                .renderingMode(.template)
-                                .foregroundColor(Color.gray)
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-                        .frame(width: 10, height: 10)
-                        .padding()
                     }
-                    
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .listRowInsets(EdgeInsets())
+                    .background(Color.white)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .listRowInsets(EdgeInsets())
-                .background(Color.white)
+                
             }
+            .onAppear(perform: fetch)
+            .navigationBarTitle("검색내역")
+            
             
         }
-
-        .onAppear(perform: fetch)
         
-        .navigationBarTitle("검색내역")
+        if self.showNaviSelectionView {
+            NavigationSelectionView(auxViewType: .constant(AuxViewType()) , selectedParkingSpace: .constant(ParkingSpace()))
+        }
+        
     
     }
     

@@ -79,9 +79,9 @@ struct ParkingSpaceInfoView: View {
                             }
                             .background(Color.white)
                             .frame(height: 200)
-                            .frame(width: proxy.size.width * 0.9, alignment: .leading)
+                            .frame(width: proxy.size.width * 0.9)
                             .cornerRadius(20)
-                            .padding( 20)
+                            .padding(10)
                             
                             
                             
@@ -157,10 +157,6 @@ struct ParkingSpaceInfoView: View {
                     Image("timeCheckButton")
 
                 }
-               
-                
-                
-                
                 
                 Spacer()
             }

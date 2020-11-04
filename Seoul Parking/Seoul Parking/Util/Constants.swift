@@ -16,7 +16,7 @@ public let TMAP_API_KEY = "l7xxd0cafeae85ca47de983bd3a96e17d3e9" // "l7xx40ffcbb
 
 public let SERVER_PORT = "49090"
 
-public let SERVER_IP = "10.8.5.128" + ":" + SERVER_PORT
+public let SERVER_IP = "10.8.7.117" + ":" + SERVER_PORT
 //public let SERVER_IP = "ninetysystem.cafe24.com"
 
 public let APP_TITLE = "나인티 파킹"
