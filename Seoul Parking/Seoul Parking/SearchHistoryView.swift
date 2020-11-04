@@ -11,7 +11,7 @@ import SwiftUI
 struct SearchHistoryView: View {
     @State var searchHistory = [SearchHistory]()
     @State var showNaviSelectionView = false
-    
+    @State var selectedHistory: SearchHistory?
     
     init() {
         UITableView.appearance().separatorStyle = .none
@@ -33,11 +33,15 @@ struct SearchHistoryView: View {
                             
                             Button(action:{
                                 self.showNaviSelectionView.toggle()
+                                self.selectedHistory = self.searchHistory[index]
                                 
                             }){
                                 Image("navigationButton")
                             }
                             .buttonStyle(BorderlessButtonStyle())
+                            .sheet(isPresented: self.$showNaviSelectionView){
+                                NavigationSelectionView( selectedParkingSpace: ParkingSpace(latitude:self.selectedHistory?.latitude, longitude: self.selectedHistory?.longitude))
+                            }
                             
                             
                             Button(action: {self.delete(index: index)}){
@@ -63,11 +67,6 @@ struct SearchHistoryView: View {
             
         }
         
-        if self.showNaviSelectionView {
-            NavigationSelectionView(auxViewType: .constant(AuxViewType()) , selectedParkingSpace: .constant(ParkingSpace()))
-        }
-        
-    
     }
     
     func delete(index: Int) {

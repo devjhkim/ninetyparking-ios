@@ -11,108 +11,99 @@ import KakaoSDKNavi
 import TMapSDK
 
 struct NavigationSelectionView: View {
-    @Binding var auxViewType: AuxViewType
-    @Binding var selectedParkingSpace: ParkingSpace
+    //@Binding var auxViewType: AuxViewType
+    @State var selectedParkingSpace: ParkingSpace
     
     @State var tmap: TMapView?
     @State var frame: CGRect?
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-
         
-        ZStack{
-            GeometryReader(){ reader in
-                
-                EmptyView()
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.gray.opacity(0.3))
-            .edgesIgnoringSafeArea(.all)
+        
+        VStack{
             
-            TNaviView()
-                .hidden()
             
-            ZStack{
-                Color.init( red: 229, green: 229, blue: 234)
-                    .frame(width: 300, height: 300, alignment: Alignment.center)
-                    .cornerRadius(10)
+            Text("내비게이션 선택")
+                .bold()
+                .foregroundColor(Color.black)
+                .font(.system(size: 18))
+                .padding(.top, 30)
+            
+            
+            HStack{
+                Image("tmap")
                 
-                VStack{
-                    Spacer()
-                    
-                    Text("내비게이션 선택")
-                        .bold()
+                
+                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                    self.openTMapNavi()
+                }){
+                    Text("티맵")
                         .foregroundColor(Color.black)
-                        .padding(.top, 10)
-                    HStack{
-                        Image("tmap")
-                        
-                        
-                        
-                        Button(action: {
-                            self.auxViewType.showNavigationSelectionView.toggle()
-                            self.openTMapNavi()
-                        }){
-                            Text("티맵")
-                                .foregroundColor(Color.black)
-                                .font(.system(size: 20))
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                    .padding(.top, 10)
-                    
-                  
-                        
-                    HStack{
-                        Image("kakaoNavi")
-                        
-                        Button(action: {
-                            self.auxViewType.showNavigationSelectionView.toggle()
-                            self.openKakaoNavi()
-                        }){
-                            Text("카카오")
-                                .foregroundColor(Color.black)
-                                .font(.system(size: 20))
-                        }
-                        
-
-                        Spacer()
-                    }
-                    .padding(.top, 10)
-
-                    HStack{
-                        Image("naverMap")
-                        
-                        Button(action: {
-                            self.auxViewType.showNavigationSelectionView.toggle()
-                            self.openNaverNavi()
-                        }){
-                            Text("네이버")
-                                .foregroundColor(Color.black)
-                                .font(.system(size: 20))
-                        }
-                        
-
-                        Spacer()
-                    }
-                    .padding(.top, 10)
-
-                    Button(action: {self.auxViewType.showNavigationSelectionView.toggle()}){
-                        Text("닫기")
-                            .foregroundColor(Color.red)
-                            .font(.system(size: 20))
-                    }
-                    .padding(.top, 10)
-                    
-                    Spacer()
+                        .font(.system(size: 20))
                 }
-                .frame(width: 290, height: 800, alignment: Alignment.center)
+                
+                Spacer()
                 
             }
+            .padding(.top, 10)
+            .padding(.leading, 20)
             
+          
+                
+            HStack{
+                Image("kakaoNavi")
+                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                    self.openKakaoNavi()
+                }){
+                    Text("카카오")
+                        .foregroundColor(Color.black)
+                        .font(.system(size: 20))
+                }
+                
+
+                Spacer()
+            }
+            .padding(.top, 10)
+            .padding(.leading, 20)
+            
+            HStack{
+                Image("naverMap")
+                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                    self.openNaverNavi()
+                }){
+                    Text("네이버")
+                        .foregroundColor(Color.black)
+                        .font(.system(size: 20))
+                }
+                
+
+                Spacer()
+            }
+            .padding(.top, 10)
+            .padding(.leading, 20)
+
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+                
+            }){
+                Text("닫기")
+                    .foregroundColor(Color.red)
+                    .font(.system(size: 20))
+            }
+            .padding(.top, 10)
+            
+            Spacer()
         }
+        .background(Color.white)
+        
         
     }
     
@@ -179,7 +170,7 @@ struct NavigationSelectionView: View {
 
 struct NavigationSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationSelectionView(auxViewType: .constant(AuxViewType()), selectedParkingSpace: .constant(ParkingSpace()))
+        NavigationSelectionView(selectedParkingSpace: ParkingSpace())
     }
 }
 

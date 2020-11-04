@@ -25,6 +25,7 @@ struct MainView: View {
     @State var selectedParkingSpace: ParkingSpace = ParkingSpace()
     @State var navigationBarTitle = APP_TITLE
     
+    
     @State var amount = ""
     @State var oid = ""
     
@@ -142,25 +143,31 @@ struct MainView: View {
                             .environment(\.showLoginView, self.$showLoginView)
                     }
                     
-                    ZStack{
-                        EmptyView()
+                    Group{
+                        ZStack{
+                            EmptyView()
+                        }
+                        .sheet(isPresented: self.$showPlaceSearchView){
+                            PlaceAutocompleteSearch()
+                                .preferredColorScheme(.light)
+                                .environmentObject(self.centerLocation)
+                                .environmentObject(self.lot)
+                        }
+                        
+                        ZStack{
+                            EmptyView()
+                        }
+                        .alert(isPresented: self.$auxViewType.showWrongPasswordAlert, content: {
+                            Alert(title: Text(""), message: Text("잘못된 비밀번호입니다."), dismissButton: .default(Text("확인"), action: {}))
+                        })
+                        
+                        ZStack{
+                            EmptyView()
+                        }
+                        .sheet(isPresented: self.$auxViewType.showNavigationSelectionView){
+                            NavigationSelectionView(selectedParkingSpace: self.selectedParkingSpace)
+                        }
                     }
-                    .sheet(isPresented: self.$showPlaceSearchView){
-                        PlaceAutocompleteSearch()
-                            .preferredColorScheme(.light)
-                            .environmentObject(self.centerLocation)
-                            .environmentObject(self.lot)
-                    }
-                    
-                    ZStack{
-                        EmptyView()
-                    }
-                    .alert(isPresented: self.$auxViewType.showWrongPasswordAlert, content: {
-                        Alert(title: Text(""), message: Text("잘못된 비밀번호입니다."), dismissButton: .default(Text("확인"), action: {}))
-                    })
-                    
-                    
-                    
                 }
                 .navigationBarTitle(Text(self.centerLocation.place?.name ?? APP_TITLE), displayMode: .inline)
                 .navigationBarItems(leading:
@@ -200,9 +207,7 @@ struct MainView: View {
                 
             }
             
-            if self.auxViewType.showNavigationSelectionView {
-                NavigationSelectionView(auxViewType: self.$auxViewType, selectedParkingSpace: self.$selectedParkingSpace)
-            }
+
             
             
         }
