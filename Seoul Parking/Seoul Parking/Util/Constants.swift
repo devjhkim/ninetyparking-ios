@@ -22,7 +22,7 @@ public let SERVER_IP = "ninetysystem.cafe24.com"
 public let APP_TITLE = "나인티 파킹"
 
 
-
+//Commit Test to master
 
 struct APP_SERVER {
     
