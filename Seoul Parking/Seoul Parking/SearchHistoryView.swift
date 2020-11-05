@@ -11,7 +11,7 @@ import SwiftUI
 struct SearchHistoryView: View {
     @State var searchHistory = [SearchHistory]()
     @State var showNaviSelectionView = false
-    @State var selectedHistory: SearchHistory?
+    @State var selectedHistory: ParkingSpace?
     
     init() {
         UITableView.appearance().separatorStyle = .none
@@ -33,15 +33,13 @@ struct SearchHistoryView: View {
                             
                             Button(action:{
                                 self.showNaviSelectionView.toggle()
-                                self.selectedHistory = self.searchHistory[index]
+                                self.selectedHistory = ParkingSpace(latitude:elem.latitude, longitude: elem.latitude)
                                 
                             }){
                                 Image("navigationButton")
                             }
                             .buttonStyle(BorderlessButtonStyle())
-                            .sheet(isPresented: self.$showNaviSelectionView){
-                                NavigationSelectionView( selectedParkingSpace: ParkingSpace(latitude:self.selectedHistory?.latitude, longitude: self.selectedHistory?.longitude))
-                            }
+                            
                             
                             
                             Button(action: {self.delete(index: index)}){
@@ -54,6 +52,15 @@ struct SearchHistoryView: View {
                             .padding()
                         }
                         
+                        ZStack{
+                            EmptyView()
+                        }
+                        .sheet(isPresented: self.$showNaviSelectionView){
+                            if let history = self.selectedHistory{
+                                NavigationSelectionView( selectedParkingSpace: history)
+                            }
+                    
+                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .listRowInsets(EdgeInsets())
