@@ -22,6 +22,8 @@ public let SERVER_IP = "ninetysystem.cafe24.com"
 public let APP_TITLE = "나인티 파킹"
 
 
+
+
 struct APP_SERVER {
     
     public static let HOST = "https://" + SERVER_IP
