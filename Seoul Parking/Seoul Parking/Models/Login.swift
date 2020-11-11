@@ -16,6 +16,7 @@ class LogIn: ObservableObject {
     @Published var facebookId = ""
     @Published var showEmailSignupView = false
     @Published var showLoginAlert = false
+    
 }
 
 struct LoginData: Hashable, Codable {

@@ -95,8 +95,8 @@ struct EmailLoginView: View {
                         let params = [
                             "id" : nil,
                             "idType" : "EMAIL",
-                            "email": nil,
-                            "password": nil
+                            "email": self.email,
+                            "password": self.password
                         ]
                         
                         requestLogIn(params: params, finished: { result in
